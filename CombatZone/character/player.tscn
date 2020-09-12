@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://character/player.gd" type="Script" id=3]
+
+[node name="player" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+speed = 200
+friction = 0.3
+acceleration = 0.5
+
+[node name="upperbody_sprite" parent="." index="0"]
+rotation = 1.5708
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="weapon" type="Sprite" parent="weapon" index="0"]
+position = Vector2( 27.8758, 20.9462 )
+scale = Vector2( 1, 0.1 )
+texture = ExtResource( 2 )
+
+[node name="muzzle" type="Position2D" parent="weapon/weapon" index="0"]
+position = Vector2( 35, 0 )
