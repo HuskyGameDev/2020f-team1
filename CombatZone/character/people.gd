@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed: = 0   # character speed
+export var speed: = 100   # character speed
 export var friction: = 0.01
 export var acceleration: = 0.1
 
