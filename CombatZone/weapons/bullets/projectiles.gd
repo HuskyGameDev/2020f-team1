@@ -7,7 +7,6 @@ var velocity:= Vector2.ZERO
 #var speed: = 0
 var rng: = RandomNumberGenerator.new()
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     rng.randomize()
@@ -24,8 +23,6 @@ func random_float(spread) -> float:
     
 func _physics_process(delta: float) -> void:
     position += transform.x * speed * delta
-
-
 
 func _on_projectiles_body_entered(body: Node) -> void:
     if body.get_groups().has("flesh_damageable"):

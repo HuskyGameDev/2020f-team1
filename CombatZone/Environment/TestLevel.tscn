@@ -1,20 +1,16 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://character/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://character/DamagableDummy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons/Melee/Sword.tscn" type="PackedScene" id=3]
 
 [node name="TestLevel" type="Node2D"]
 position = Vector2( -9.4494, 4.40972 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 185.516, 183.732 )
 
-[node name="Weapon" parent="player" instance=ExtResource( 3 )]
-position = Vector2( -50.9692, 8.49486 )
+[node name="Area2D" parent="player" instance=ExtResource( 3 )]
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 394.302, 14.6835 )
-[connection signal="body_entered" from="player/Weapon" to="player/Weapon" method="_on_Weapon_body_entered"]
+[node name="DamageableDummy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 837.533, 242.178 )
