@@ -14,3 +14,15 @@ script = ExtResource( 1 )
 [node name="muzzle" type="Position2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="reload_timer" type="Timer" parent="."]
+
+[node name="rate_of_fire" type="Timer" parent="."]
+
+[node name="trigger_pull" type="AudioStreamPlayer2D" parent="."]
+
+[node name="fire" type="AudioStreamPlayer2D" parent="."]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="."]
+
+[node name="bullet_container" type="Node2D" parent="."]
