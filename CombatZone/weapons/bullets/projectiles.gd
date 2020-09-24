@@ -2,6 +2,7 @@ extends Area2D
 
 export var speed = 100
 export var damage = 50
+export var lifetime = 2.0
 
 var velocity:= Vector2()
 #var speed: = 0
@@ -12,18 +13,21 @@ func _ready() -> void:
     rng.randomize()
     set_physics_process(true)
 
-func start_at(dir, pos) -> void:
-    rotation = dir
+func start_at(pos, dir) -> void:
+    rotation = dir.angle()
     position = pos
-    velocity = Vector2(speed,0).rotated(dir - PI / 2)
+    $life_time.wait_time = lifetime
+    #velocity = Vector2(speed,0).rotated(dir - PI / 2)
+    velocity = dir * speed
     
 func random_float(spread) -> float:
     var my_random_num = rng.randf_range(-spread, spread)
     return my_random_num
     
 func _physics_process(delta: float) -> void:
-    position += transform.x * speed * delta
-    #position = get_global_position() + velocity * delta
+    #position += transform.x * speed * delta
+    position = get_global_position() + velocity * delta
+    #position += velocity * delta
 
 
 func _on_projectiles_body_entered(body: Node) -> void:

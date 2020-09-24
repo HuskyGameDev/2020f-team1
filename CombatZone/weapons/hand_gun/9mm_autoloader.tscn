@@ -9,7 +9,6 @@
 extents = Vector2( 12.6471, 6.89271 )
 
 [node name="9mm_autoloader" instance=ExtResource( 1 )]
-position = Vector2( 61.4652, 53.1218 )
 script = ExtResource( 3 )
 bullet = ExtResource( 4 )
 

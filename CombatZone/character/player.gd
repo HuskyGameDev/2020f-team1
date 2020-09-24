@@ -1,6 +1,7 @@
 extends "res://character/people.gd"
 
 
+export (PackedScene) var default_weapon
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
@@ -8,7 +9,11 @@ extends "res://character/people.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    pass # Replace with function body.
+    var weapon = default_weapon.instance()
+    print($holsters.get_child_count())
+    if default_weapon != null:
+        $holsters.add_child(weapon)
+        print($holsters.get_child_count())
 
 func get_input():
     look_at(get_global_mouse_position())
@@ -23,8 +28,7 @@ func get_input():
     return input
 
 func attack1() -> void:
-#     if timer <= 0:
-        pass
+    pass
     
 func attack2() -> void:
     pass

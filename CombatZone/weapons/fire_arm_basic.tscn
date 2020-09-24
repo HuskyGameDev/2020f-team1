@@ -26,3 +26,4 @@ script = ExtResource( 1 )
 [node name="reload" type="AudioStreamPlayer2D" parent="."]
 
 [node name="bullet_container" type="Node2D" parent="."]
+[connection signal="timeout" from="rate_of_fire" to="." method="_on_rate_of_fire_timeout"]

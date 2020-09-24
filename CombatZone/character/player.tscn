@@ -9,28 +9,24 @@
 extents = Vector2( 15.8344, 31.3715 )
 
 [node name="player" instance=ExtResource( 1 )]
+collision_layer = 2147483650
+collision_mask = 5
 script = ExtResource( 3 )
 speed = 300
 friction = 0.3
 acceleration = 0.5
+default_weapon = ExtResource( 4 )
 
 [node name="upperbody_sprite" parent="." index="0"]
 rotation = 1.5708
 scale = Vector2( 1, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="weapon" type="Sprite" parent="weapon" index="0"]
-position = Vector2( 27.8758, 20.9462 )
-scale = Vector2( 1, 0.1 )
-texture = ExtResource( 2 )
-
-[node name="muzzle" type="Position2D" parent="weapon/weapon" index="0"]
-position = Vector2( 35, 0 )
-
-[node name="9mm_autoloader" parent="weapon" index="1" instance=ExtResource( 4 )]
-
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 1 )
+
+[node name="holsters" parent="." index="3"]
+position = Vector2( 20, 25 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="4"]
 current = true

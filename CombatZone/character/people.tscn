@@ -7,8 +7,8 @@ script = ExtResource( 1 )
 
 [node name="upperbody_sprite" type="Sprite" parent="."]
 
-[node name="weapon" type="Sprite" parent="."]
-
 [node name="foot" type="Sprite" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="holsters" type="Node2D" parent="."]
