@@ -14,12 +14,12 @@ func _ready() -> void:
     if default_weapon != null:
         $holsters.add_child(weapon)
         print($holsters.get_child_count())
+        
 
 func get_input():
     look_at(get_global_mouse_position())
     if Input.is_action_pressed("player_attack_1"):
         attack1()
-        
     if Input.is_action_pressed("player_attach_2"):
         attack2()
     var input = Vector2()
@@ -28,7 +28,8 @@ func get_input():
     return input
 
 func attack1() -> void:
-    pass
+    if $holsters.get_child_count()>0:
+        $holsters.get_child(0).shoot()
     
 func attack2() -> void:
     pass

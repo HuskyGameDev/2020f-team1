@@ -21,6 +21,7 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func shoot() -> void:
+    print("shoot")
     if can_shoot:
         can_shoot = false
         $rate_of_fire.start()

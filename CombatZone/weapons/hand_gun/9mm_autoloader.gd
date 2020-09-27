@@ -10,6 +10,3 @@ extends "res://weapons/fire_arm_basic.gd"
 func _ready() -> void:
     pass # Replace with function body.
 
-
-func _on_player_attack() -> void:
-    shoot()

@@ -10,7 +10,7 @@ extends Node2D
 func _ready() -> void:
     pass # Replace with function body.
 
-func on_weapon_shoot(bullet, pos, dir):
+func _on_weapon_shoot(bullet, pos, dir):
     var b = bullet.instance()
     add_child(b)
     b.start(pos,dir)
