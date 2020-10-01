@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -7,6 +7,29 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 156, 146 )
 
+[sub_resource type="CurveTexture" id=2]
+
+[sub_resource type="CurveTexture" id=3]
+
+[sub_resource type="ParticlesMaterial" id=4]
+trail_size_modifier = SubResource( 3 )
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 170.85
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 500.0
+initial_velocity_random = 0.89
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+linear_accel_random = 1.0
+linear_accel_curve = SubResource( 2 )
+damping = 500.0
+scale = 11.64
+color = Color( 0.662745, 0.0823529, 0.0823529, 1 )
+
 [node name="DamageableDummy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
@@ -14,5 +37,14 @@ script = ExtResource( 3 )
 scale = Vector2( 4.84375, 4.59375 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource( 1 )
+
+[node name="hit_spot" type="Particles2D" parent="." index="4"]
+emitting = false
+amount = 50
+lifetime = 4.24
+one_shot = true
+explosiveness = 1.0
+randomness = 0.27
+process_material = SubResource( 4 )

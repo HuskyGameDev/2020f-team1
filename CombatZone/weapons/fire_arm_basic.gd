@@ -4,7 +4,7 @@ signal shoot
 
 export var spread: = 1.0
 export var clip_size = 10
-export var fire_rate = 1
+export var fire_rate = 1.0
 
 export (PackedScene) var bullet
 
@@ -21,12 +21,12 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func shoot() -> void:
-    print("shoot")
     if can_shoot:
         can_shoot = false
         $rate_of_fire.start()
         var dir = Vector2(1,0).rotated(global_rotation)
-        Global.shoot_bullet(caliber, $muzzle.global_position, rotation)
+        Global.shoot_bullet(caliber, $muzzle.global_position, global_rotation)
+        print("shooting ", caliber)
         # emit_signal('shoot', bullet, caliber, $muzzle.global_position, dir)
     
 func reload() -> int:   # reload would probably return the number of bullets in the clip

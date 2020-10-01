@@ -8,8 +8,9 @@
 extents = Vector2( 29, 30 )
 
 [node name="9mm_ammo" instance=ExtResource( 1 )]
+collision_mask = 6
 script = ExtResource( 3 )
-speed = 20
+speed = 2000
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 1, 0.5 )

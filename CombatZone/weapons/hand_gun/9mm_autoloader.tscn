@@ -27,3 +27,6 @@ shape = SubResource( 1 )
 
 [node name="reload_timer" parent="." index="5"]
 autostart = true
+
+[node name="rate_of_fire" parent="." index="6"]
+wait_time = 0.5

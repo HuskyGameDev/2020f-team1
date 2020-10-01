@@ -22,6 +22,6 @@ func register_player(game_player):
     player = game_player
     
 func shoot_bullet(caliber, pos, rot):
-    var b = bullet_caliber[caliber].instance()
+    var b = b_9mm.instance()
     b.start_at(pos, rot)
-    #$bullet_container.add_child(b)
+    get_parent().add_child(b)

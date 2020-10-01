@@ -11,11 +11,12 @@ var rng: = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     rng.randomize()
-    set_physics_process(true)
+    print("bullet readied")
 
 func start_at(pos, dir) -> void:
     # rotation = dir.angle()
     print("bullet starts")
+    print(pos)
     rotation = dir
     position = pos
     $life_time.wait_time = lifetime
@@ -28,15 +29,16 @@ func random_float(spread) -> float:
     
 func _physics_process(delta: float) -> void:
     #position += transform.x * speed * delta
-    print(position)
-    position = get_global_position() + velocity * delta
-    #position += velocity * delta
+    #position = get_global_position() + velocity * delta
+    position += velocity * delta
 
 
 func _on_projectiles_body_entered(body: Node) -> void:
+    print("bullet hit")
     if body.get_groups().has("flesh_damageable"):
         queue_free()
         print(body.get_name())
+        body.get_hit(global_position, damage)
 
 
 func _on_life_time_timeout() -> void:
