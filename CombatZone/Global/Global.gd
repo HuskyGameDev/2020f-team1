@@ -10,6 +10,8 @@ var new_scene = null
 var level: = 0
 var player
 
+# effects
+var blood = preload("res://Environment/Effects/blood_splater.tscn")
 # weapon Settings
 
 # projectiles
@@ -25,3 +27,8 @@ func shoot_bullet(caliber, pos, rot):
     var b = b_9mm.instance()
     b.start_at(pos, rot)
     get_parent().add_child(b)
+
+func spill_blood(pos):
+    var bl = blood.instance()
+    bl.start_at(pos)
+    get_parent().add_child(bl)
