@@ -16,8 +16,9 @@ func take_damage(damage_amount) -> void:
     print("Damage, remaining health: %d" % health)
     
 func get_hit(pos, damag_amount):
-    $hit_spot.position = pos
+    $hit_spot.global_position = pos
     print($hit_spot.position)
+    $hit_spot.restart()
     $hit_spot.emitting = true
     
 # Called every frame. 'delta' is the elapsed time since the previous frame.
