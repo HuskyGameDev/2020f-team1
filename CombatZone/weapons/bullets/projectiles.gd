@@ -38,7 +38,7 @@ func _on_projectiles_body_entered(body: Node) -> void:
     if body.get_groups().has("flesh_damageable"):
         queue_free()
         print(body.get_name())
-        body.get_hit(global_position, damage)
+        body.take_damage(global_position, damage)
 
 
 func _on_life_time_timeout() -> void:

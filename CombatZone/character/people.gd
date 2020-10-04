@@ -28,7 +28,7 @@ func get_input():
 func update_health():
     pass
     
-func take_damage(damage_amount) -> void:
+func take_damage(pos, damage_amount) -> void:
     #$Health.show()
     #$healthG.show()
     health -= damage_amount

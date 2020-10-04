@@ -11,20 +11,14 @@ func _ready() -> void:
     $Health.hide()
     $HealthG.hide()
 
-func take_damage(damage_amount) -> void:
+func take_damage(pos, damage_amount) -> void:
     $Health.show()
     $HealthG.show()
     health -= damage_amount
     $HealthG.scale.x = (health / totalHealth)
+    Global.spill_blood(pos)
     print("HP percent: %f" % ((health / 100)))
     print("Damage, remaining health: %d" % health)
-
-func get_hit(pos, damage_amount):
-    $Health.show()
-    $HealthG.show()
-    Global.spill_blood(pos)
-    #$hit_spot.global_position = pos
-    #print($hit_spot.position)
 
     
 # Called every frame. 'delta' is the elapsed time since the previous frame.
