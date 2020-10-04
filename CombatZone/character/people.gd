@@ -4,7 +4,9 @@ export var speed: = 100   # character speed
 export var friction: = 0.01
 export var acceleration: = 0.1
 
-export var health: = 100
+export var health: = 100.0
+export var totalHealth = 100.0
+export var healthPercent = 100.0
 
 var velocity: = Vector2.ZERO
 
@@ -27,7 +29,10 @@ func update_health():
     pass
     
 func take_damage(damage_amount) -> void:
-    pass
+    #$Health.show()
+    #$healthG.show()
+    health -= damage_amount
+    update_health()
 
 func _physics_process(delta: float) -> void:
     var direction = get_input()
