@@ -32,7 +32,8 @@ func take_damage(pos, damage_amount) -> void:
     #$Health.show()
     #$healthG.show()
     health -= damage_amount
-    update_health()
+    if(health < 0):
+        health = 0
 
 func _physics_process(delta: float) -> void:
     var direction = get_input()

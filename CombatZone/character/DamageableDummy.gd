@@ -15,6 +15,8 @@ func take_damage(pos, damage_amount) -> void:
     $Health.show()
     $HealthG.show()
     health -= damage_amount
+    if(health < 0):
+        health = 0
     $HealthG.scale.x = (health / totalHealth)
     Global.spill_blood(pos)
     print("HP percent: %f" % ((health / 100)))

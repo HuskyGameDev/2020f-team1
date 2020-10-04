@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RevolverTop.png-3538c7b34574343dcf5bc8243fa514d7.stex"
+path="res://.import/RevolverTop.png-63a8fd9590ecb6ae3318e1ca3177a147.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/RevolverTop.png"
-dest_files=[ "res://.import/RevolverTop.png-3538c7b34574343dcf5bc8243fa514d7.stex" ]
+source_file="res://Assets/RevolverTop.png"
+dest_files=[ "res://.import/RevolverTop.png-63a8fd9590ecb6ae3318e1ca3177a147.stex" ]
 
 [params]
 
