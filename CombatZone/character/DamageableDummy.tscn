@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/HPRed.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 156, 146 )
+extents = Vector2( 38.5598, 34.4414 )
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -36,10 +36,12 @@ color = Color( 0.662745, 0.0823529, 0.0823529, 1 )
 script = ExtResource( 3 )
 
 [node name="upperbody_sprite" parent="." index="0"]
-scale = Vector2( 4.84375, 4.59375 )
+position = Vector2( -18.0683, -9.76434 )
+scale = Vector2( 1.20005, 1.07712 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="2"]
+position = Vector2( -18.8988, -9.44942 )
 shape = SubResource( 1 )
 
 [node name="hit_spot" type="Particles2D" parent="." index="4"]
@@ -54,3 +56,5 @@ process_material = SubResource( 4 )
 [node name="Health" parent="." index="5"]
 position = Vector2( 0, -162 )
 texture = ExtResource( 4 )
+
+[node name="enemy_navigation" type="Navigation2D" parent="." index="6"]
