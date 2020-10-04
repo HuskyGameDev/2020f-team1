@@ -13,6 +13,7 @@ func get_input() -> void:
 	var turn = 0
 	var defultFri = friction
 	var defultDrag = drag
+
 	# Turning
 	turn = Input.get_action_strength("vehicle_turn_right") - Input.get_action_strength("vehicle_turn_left")
 	steer_angle = turn * deg2rad(steering_angle)
@@ -22,6 +23,15 @@ func get_input() -> void:
 	#resets values
 	friction = defultFri
 	drag = defultDrag
+	print(result)
+	# Braking
+	if Input.is_action_pressed("vehicle_brake"):
+		if result < 100:
+			velocity.x = 0
+			velocity.y = 0
+			acceleration = transform.x * braking * Input.get_action_strength("vehicle_brake") *.5
+		if result > 200:
+			acceleration = transform.x * braking * Input.get_action_strength("vehicle_brake")
 	#checks if floating 
 	if result >= 100:
 		friction = 0 #no ground friction in air
@@ -31,9 +41,7 @@ func get_input() -> void:
 	if result <=100:
 		scale.x = 1
 		scale.y = scale.x
-	# Braking
-	#if Input.is_action_pressed("vehicle_brake"):
-		#acceleration = transform.x * braking * Input.get_action_strength("vehicle_brake")
+	
 		
 func calculate_steering(delta):
 	var rear_wheel = position - transform.x * wheel_base / 2.0
