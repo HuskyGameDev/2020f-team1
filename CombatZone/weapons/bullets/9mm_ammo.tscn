@@ -5,15 +5,15 @@
 [ext_resource path="res://weapons/bullets/9mm_ammo.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 29, 30 )
+extents = Vector2( 15.8599, 16.2808 )
 
 [node name="9mm_ammo" instance=ExtResource( 1 )]
 collision_mask = 6
 script = ExtResource( 3 )
-speed = 2000
+speed = 3000
 
 [node name="Sprite" parent="." index="0"]
-scale = Vector2( 1, 0.5 )
+scale = Vector2( 0.5, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
