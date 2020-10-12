@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://character/player.gd" type="Script" id=3]
 [ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Dodge.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.8344, 31.3715 )
@@ -29,19 +28,13 @@ shape = SubResource( 1 )
 [node name="holsters" parent="." index="3"]
 position = Vector2( 20, 25 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
+[node name="Camera2D" type="Camera2D" parent="." index="5"]
 current = true
 zoom = Vector2( 2, 2 )
 
-[node name="Dodge" parent="." index="6"]
-light_mask = 2
-position = Vector2( 0, -64 )
-scale = Vector2( 2, 1 )
-texture = ExtResource( 5 )
-
-[node name="RollTimer" type="Timer" parent="." index="7"]
+[node name="RollTimer" type="Timer" parent="." index="6"]
 one_shot = true
 
-[node name="RollTimer2" type="Timer" parent="." index="8"]
+[node name="RollTimer2" type="Timer" parent="." index="7"]
 wait_time = 0.25
 [connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]

@@ -1,6 +1,7 @@
 extends "res://vehicle/base_vehicle.gd"
 
 
+
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
@@ -12,6 +13,7 @@ func _ready() -> void:
 
 func get_input() -> void:
     var turn = 0
+    $tank_turret.look_at(get_global_mouse_position())
     
     # Turning
     turn = Input.get_action_strength("vehicle_turn_right") - Input.get_action_strength("vehicle_turn_left")

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://vehicle/car_1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/TankHullA.png" type="Texture" id=2]
+[ext_resource path="res://weapons/Vehicle Weapon/tank_turret.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 35.165, 47.7639 )
+
+[node name="car_1" instance=ExtResource( 1 )]
+engine_power = 300
+wheel_base = 40
+steering_angle = 7
+max_speed_reverse = 100
+traction_fast = 0.3
+traction_slow = 0.7
+friction = -0.2
+
+[node name="vehicle_sprite" parent="." index="0"]
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -10.1083, 0 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="tank_turret" parent="." index="3" instance=ExtResource( 3 )]
+position = Vector2( -7, 0 )
