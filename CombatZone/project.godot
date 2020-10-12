@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Global/Global.gd"
+BulletFactory="*res://weapons/bullet_factory.gd"
 
 [display]
 

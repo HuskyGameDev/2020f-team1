@@ -42,6 +42,9 @@ func take_damage(pos, damage_amount) -> void:
     if(health < 0):
         health = 0
 
+func reload():
+    pass
+
 func _physics_process(delta: float) -> void:
     var direction = get_input()
     if direction.length() > 0:

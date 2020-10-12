@@ -2,6 +2,7 @@ extends "res://character/people.gd"
 
 var canShoot = true
 var canRoll = true
+var input = Vector2()
 
 export (PackedScene) var default_weapon
 # Declare member variables here. Examples:
@@ -28,7 +29,6 @@ func get_input():
         attack2()
     if Input.is_action_pressed("player_dodge"): #LEFT SHIFT TO ROLL
         dodge_roll()
-    var input = Vector2()
     input.x = Input.get_action_strength("player_move_right") - Input.get_action_strength("player_move_left")
     input.y = Input.get_action_strength("player_move_down") - Input.get_action_strength("player_move_up")
     return input
@@ -57,7 +57,7 @@ func dodge_roll():
         print("dodge roll begins")
         $RollTimer.start()
         counter = 100.0 
-        dodge = Vector2(5000, 0).rotated(global_rotation)
+        dodge = Vector2(input.x, input.y) * 5000
         #while(counter > 0):
         #    $RollTimer2.start()
         #    counter = counter - 1
