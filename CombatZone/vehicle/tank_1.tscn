@@ -8,13 +8,12 @@
 extents = Vector2( 35.165, 47.7639 )
 
 [node name="car_1" instance=ExtResource( 1 )]
-engine_power = 300
+engine_power = 350
 wheel_base = 40
 steering_angle = 7
 max_speed_reverse = 100
 traction_fast = 0.3
-traction_slow = 0.7
-friction = -0.2
+friction = -0.9
 
 [node name="vehicle_sprite" parent="." index="0"]
 rotation = 1.5708
