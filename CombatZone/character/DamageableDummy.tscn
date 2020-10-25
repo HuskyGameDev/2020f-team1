@@ -35,15 +35,12 @@ color = Color( 0.662745, 0.0823529, 0.0823529, 1 )
 
 [node name="DamageableDummy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-speed = 300
-friction = 0.08
 
 [node name="upperbody_sprite" parent="." index="0"]
 scale = Vector2( 1.20005, 1.07712 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-position = Vector2( -0.445435, 0.44545 )
 shape = SubResource( 1 )
 
 [node name="hit_spot" type="Particles2D" parent="." index="4"]

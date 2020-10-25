@@ -21,27 +21,27 @@ var steer_angle
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+    pass # Replace with function body.
 
 func get_input() -> void:
-	pass
-	
+    pass
+    
 func calculate_steering(delta) -> void:
-	pass
+    pass
 
 func apply_friction() -> void:
-	if velocity.length() < 5:
-		velocity = Vector2.ZERO
-	var friction_force = velocity * friction
-	var drag_force = velocity * velocity.length() * drag
-	if velocity.length() < 100:
-		friction_force *= 3
-	acceleration += drag_force + friction_force
-	
+    if velocity.length() < 5:
+        velocity = Vector2.ZERO
+    var friction_force = velocity * friction
+    var drag_force = velocity * velocity.length() * drag
+    if velocity.length() < 100:
+        friction_force *= 3
+    acceleration += drag_force + friction_force
+    
 func _physics_process(delta: float) -> void:
-	acceleration = Vector2.ZERO
-	get_input()
-	apply_friction()
-	calculate_steering(delta)
-	velocity += acceleration * delta
-	velocity = move_and_slide(velocity)
+    acceleration = Vector2.ZERO
+    get_input()
+    apply_friction()
+    calculate_steering(delta)
+    velocity += acceleration * delta
+    velocity = move_and_slide(velocity)

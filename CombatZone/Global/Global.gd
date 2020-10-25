@@ -21,15 +21,15 @@ var bullet_caliber = {"9mm": b_9mm}
 
 
 func register_player(game_player):
-	player = game_player
-	
+    player = game_player
+    
 func shoot_bullet(caliber, pos, rot):
-	#var b = bullet_caliber[caliber].instance()
-	var b = BulletFactory.get_bullet(caliber)
-	b.start_at(pos, rot)
-	get_parent().add_child(b)
+    #var b = bullet_caliber[caliber].instance()
+    var b = BulletFactory.get_bullet(caliber)
+    b.start_at(pos, rot)
+    get_parent().add_child(b)
 
 func spill_blood(pos):
-	var bl = blood.instance()
-	bl.start_at(pos)
-	get_parent().add_child(bl)
+    var bl = blood.instance()
+    bl.start_at(pos)
+    get_parent().add_child(bl)
