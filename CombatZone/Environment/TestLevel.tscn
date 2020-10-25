@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://character/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
@@ -38,7 +38,11 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 vertices = PoolVector2Array( 64, 48.858, 0, 48.858, 0, 0, 64, 0 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
-[sub_resource type="NavigationPolygon" id=9]
+[sub_resource type="NavigationPolygon" id=29]
+vertices = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=30]
 vertices = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
@@ -113,7 +117,7 @@ points = PoolVector2Array( 49.339, 0.0717773, 64, 0.0717773, 64, 64, 49.339, 64 
 0/autotile/tile_size = Vector2( 64, 64 )
 0/autotile/spacing = 10
 0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 1 ), Vector2( 1, 0 ), SubResource( 2 ), Vector2( 2, 0 ), SubResource( 3 ), Vector2( 2, 1 ), SubResource( 4 ), Vector2( 4, 2 ), SubResource( 5 ), Vector2( 4, 3 ), SubResource( 6 ), Vector2( 5, 2 ), SubResource( 7 ), Vector2( 5, 3 ), SubResource( 8 ), Vector2( 6, 2 ), SubResource( 9 ), Vector2( 7, 0 ), SubResource( 10 ), Vector2( 7, 1 ), SubResource( 11 ), Vector2( 8, 0 ), SubResource( 12 ), Vector2( 8, 1 ), SubResource( 13 ) ]
+0/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 1 ), Vector2( 1, 0 ), SubResource( 2 ), Vector2( 2, 0 ), SubResource( 3 ), Vector2( 2, 1 ), SubResource( 4 ), Vector2( 4, 2 ), SubResource( 5 ), Vector2( 4, 3 ), SubResource( 6 ), Vector2( 5, 2 ), SubResource( 7 ), Vector2( 5, 3 ), SubResource( 8 ), Vector2( 6, 1 ), SubResource( 29 ), Vector2( 6, 2 ), SubResource( 30 ), Vector2( 7, 0 ), SubResource( 10 ), Vector2( 7, 1 ), SubResource( 11 ), Vector2( 8, 0 ), SubResource( 12 ), Vector2( 8, 1 ), SubResource( 13 ) ]
 0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
@@ -214,9 +218,12 @@ points = PoolVector2Array( 49.339, 0.0717773, 64, 0.0717773, 64, 64, 49.339, 64 
 position = Vector2( 28.3056, 30.8383 )
 script = ExtResource( 4 )
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Navigation2D"]
 position = Vector2( -41.5304, 1227.04 )
 tile_set = SubResource( 28 )
+compatibility_mode = true
 collision_layer = 33
 collision_mask = 6
 format = 1
@@ -229,3 +236,7 @@ position = Vector2( -406.829, 1382.75 )
 
 [node name="DamageableDummy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1184.57, 1472.44 )
+
+[node name="Node2D" type="Node2D" parent="DamageableDummy"]
+
+[node name="Line2D" type="Line2D" parent="."]
