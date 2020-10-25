@@ -28,7 +28,6 @@ shape = SubResource( 1 )
 
 [node name="Camera2D" parent="." index="2"]
 current = true
-zoom = Vector2( 2, 2 )
 
 [node name="Weapon_group" type="Node2D" parent="." index="3"]
 script = ExtResource( 5 )
