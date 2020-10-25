@@ -8,7 +8,7 @@ export var fire_rate = 1.0
 
 export (PackedScene) var bullet
 
-onready var b_container = get_node("bullet_container")
+#onready var b_container = get_node("bullet_container")
 
 var can_shoot: = true
 # Declare member variables here. Examples:
@@ -21,6 +21,7 @@ func _ready() -> void:
     pass # Replace with function body.
 
 func shoot() -> void:
+    #print("Called")
     if can_shoot and remain_in_mag:
         can_shoot = false
         $rate_of_fire.start()

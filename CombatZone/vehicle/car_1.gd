@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func get_input() -> void:
     var turn = 0
-    $tank_turret.look_at(get_global_mouse_position())
+    #$tank_turret.look_at(get_global_mouse_position())
     
     # Turning
     turn = Input.get_action_strength("vehicle_turn_right") - Input.get_action_strength("vehicle_turn_left")
