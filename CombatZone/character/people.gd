@@ -20,35 +20,35 @@ var velocity: = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    add_to_group("flesh_damageable")
-    $Health.hide()
-    $Dodge.hide()
+	add_to_group("flesh_damageable")
+	$Health.hide()
+	$Dodge.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 func get_input():
-    return Vector2.ZERO
+	return Vector2.ZERO
 
 func dodge_roll():
-    pass
+	pass
 
 func update_health():
-    pass
-    
+	pass
+	
 func take_damage(pos, damage_amount) -> void:
-    #$Health.show()
-    #$healthG.show()
-    health -= damage_amount
-    if(health < 0):
-        health = 0
+	#$Health.show()
+	#$healthG.show()
+	health -= damage_amount
+	if(health < 0):
+		health = 0
 
 func reload():
-    pass
+	pass
 
 func _physics_process(delta: float) -> void:
-    var direction = get_input()
-    if direction.length() > 0:
-        velocity = lerp(velocity, direction.normalized() * speed, acceleration)
-    else:
-        velocity = lerp(velocity, Vector2.ZERO, friction)
-    velocity =  move_and_slide(velocity + dodge)
+	var direction = get_input()
+	if direction.length() > 0:
+		velocity = lerp(velocity, direction.normalized() * speed, acceleration)
+	else:
+		velocity = lerp(velocity, Vector2.ZERO, friction)
+	velocity =  move_and_slide(velocity + dodge)
