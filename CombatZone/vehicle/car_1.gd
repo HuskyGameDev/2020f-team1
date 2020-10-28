@@ -14,15 +14,15 @@ func _ready() -> void:
 func get_input() -> void:
     var turn = 0
     #$tank_turret.look_at(get_global_mouse_position())
-    
-    # Turning
-    turn = Input.get_action_strength("vehicle_turn_right") - Input.get_action_strength("vehicle_turn_left")
-    steer_angle = turn * deg2rad(steering_angle)
-    # Acceleration
-    acceleration = transform.x * engine_power * Input.get_action_strength("vehicle_accelerate")
-    # Braking
-    if Input.is_action_pressed("vehicle_brake"):
-        acceleration = transform.x * braking * Input.get_action_strength("vehicle_brake")
+    if manned:  # will move only when it is occupied
+        # Turning
+        turn = Input.get_action_strength("vehicle_turn_right") - Input.get_action_strength("vehicle_turn_left")
+        steer_angle = turn * deg2rad(steering_angle)
+        # Acceleration
+        acceleration = transform.x * engine_power * Input.get_action_strength("vehicle_accelerate")
+        # Braking
+        if Input.is_action_pressed("vehicle_brake"):
+            acceleration = transform.x * braking * Input.get_action_strength("vehicle_brake")
     # Embark
     if not manned:
         if can_embark && Input.is_action_just_released("player_interact"):

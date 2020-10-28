@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://vehicle/base_vehicle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -8,15 +8,25 @@
 radius = 35.1651
 height = 0.0
 
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 39.3321
+height = 115.597
+
 [node name="car_1" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+engine_power = 2000
+max_speed_reverse = 500
 friction = -0.5
 
 [node name="vehicle_sprite" parent="." index="0"]
+scale = Vector2( 3, 2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
 [node name="Camera2D" parent="." index="2"]
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 3, 3 )
+
+[node name="embark_Colli2D" parent="embark_Area2D" index="0"]
+shape = SubResource( 2 )

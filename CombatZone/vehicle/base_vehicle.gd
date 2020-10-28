@@ -17,7 +17,7 @@ export var drag: = -0.0015  # wind resistance
 
 var acceleration = Vector2.ZERO
 var velocity = Vector2.ZERO
-var steer_angle
+var steer_angle = 0.0
 var can_embark = false
 var manned = false
 var passenger_tobe: KinematicBody2D
@@ -46,10 +46,9 @@ func _physics_process(delta: float) -> void:
     acceleration = Vector2.ZERO
     get_input()
     apply_friction()
-    if manned:  # will move only when it is occupied
-        calculate_steering(delta)
-        velocity += acceleration * delta
-        velocity = move_and_slide(velocity)
+    calculate_steering(delta)
+    velocity += acceleration * delta
+    velocity = move_and_slide(velocity)
 
 
 func _on_embark_Area2D_body_entered(body: Node) -> void:
