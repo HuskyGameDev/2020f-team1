@@ -18,6 +18,10 @@ export var drag: = -0.0015  # wind resistance
 var acceleration = Vector2.ZERO
 var velocity = Vector2.ZERO
 var steer_angle
+var can_embark = false
+var manned = false
+var passenger_tobe: KinematicBody2D
+var passenger = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,6 +46,23 @@ func _physics_process(delta: float) -> void:
     acceleration = Vector2.ZERO
     get_input()
     apply_friction()
-    calculate_steering(delta)
-    velocity += acceleration * delta
-    velocity = move_and_slide(velocity)
+    if manned:  # will move only when it is occupied
+        calculate_steering(delta)
+        velocity += acceleration * delta
+        velocity = move_and_slide(velocity)
+
+
+func _on_embark_Area2D_body_entered(body: Node) -> void:
+    print('Object entered', body)
+    if(body.get_groups().has('player')):
+        print('player entered')
+        can_embark = true
+        passenger_tobe = body
+
+
+func _on_embark_Area2D_body_exited(body: Node) -> void:
+    if body.get_groups().has('player'):
+        print('player existed embark area')
+        can_embark = false
+        passenger_tobe = null
+        

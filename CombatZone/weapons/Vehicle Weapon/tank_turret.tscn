@@ -7,13 +7,14 @@
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
 [node name="ejection_port" parent="." index="2"]
 position = Vector2( -21.9803, -7.31902 )
 
 [node name="muzzle" parent="." index="3"]
-position = Vector2( 62.9288, 0 )
+position = Vector2( 140, 0 )
 
 [node name="reload_timer" parent="." index="5"]
 wait_time = 5.0

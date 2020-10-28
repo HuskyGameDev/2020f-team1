@@ -13,7 +13,7 @@ export var counter: = 100.0
 export var countertotal: = 100.0
 
 var velocity: = Vector2.ZERO
-
+var piloting = false
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
@@ -44,11 +44,14 @@ func take_damage(pos, damage_amount) -> void:
 
 func reload():
     pass
-
+func set_position(pos: Vector2):
+    position = pos
+    
 func _physics_process(delta: float) -> void:
-    var direction = get_input()
-    if direction.length() > 0:
-        velocity = lerp(velocity, direction.normalized() * speed, acceleration)
-    else:
-        velocity = lerp(velocity, Vector2.ZERO, friction)
-    velocity =  move_and_slide(velocity + dodge)
+    if not piloting:
+        var direction = get_input()
+        if direction.length() > 0:
+            velocity = lerp(velocity, direction.normalized() * speed, acceleration)
+        else:
+            velocity = lerp(velocity, Vector2.ZERO, friction)
+        velocity =  move_and_slide(velocity + dodge)

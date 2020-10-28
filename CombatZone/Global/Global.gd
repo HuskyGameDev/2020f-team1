@@ -19,7 +19,9 @@ var b_9mm = preload("res://weapons/bullets/9mm_ammo.tscn")
 #export (PackedScene) var b_9mm
 var bullet_caliber = {"9mm": b_9mm}
 
-
+func _ready() -> void:
+    if player == null:
+        print('player not set...')
 func register_player(game_player):
     player = game_player
     
@@ -33,3 +35,31 @@ func spill_blood(pos):
     var bl = blood.instance()
     bl.start_at(pos)
     get_parent().add_child(bl)
+
+func embark(people: Node2D, vehicle):
+    if vehicle.manned:  #if vehicle is occupied, can't get in
+        pass
+    else:
+        switch_camera2D(people,vehicle)
+        vehicle.manned = true
+        vehicle.passenger = people
+        vehicle.can_embark = false
+        people.piloting = true
+        people.position = Vector2(-1000,-1000)
+        people.hide()
+
+func disembark(people: Node2D,vehicle: Node):
+    #if vehicle.is_a_parent_of(people):
+        #print('is parent')
+    #vehicle.remove_child(people)
+    switch_camera2D(vehicle,people)
+    people.show()
+    people.set_process(true)
+    people.piloting = false
+    print(people.position)
+    people.set("position", vehicle.get_node('disembark_Position2D').get_global_position())
+    vehicle.manned = false
+
+func switch_camera2D(old_node,new_node):
+    old_node.get_node('Camera2D').current = false
+    new_node.get_node('Camera2D').current = true

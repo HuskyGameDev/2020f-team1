@@ -11,3 +11,11 @@ script = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2( 2, 2 )
+
+[node name="embark_Area2D" type="Area2D" parent="."]
+
+[node name="embark_Colli2D" type="CollisionShape2D" parent="embark_Area2D"]
+
+[node name="disembark_Position2D" type="Position2D" parent="."]
+[connection signal="body_entered" from="embark_Area2D" to="." method="_on_embark_Area2D_body_entered"]
+[connection signal="body_exited" from="embark_Area2D" to="." method="_on_embark_Area2D_body_exited"]

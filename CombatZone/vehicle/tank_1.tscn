@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://vehicle/car_1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/TankHullA.png" type="Texture" id=2]
@@ -9,25 +9,30 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 35.165, 47.7639 )
 
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 47.9792
+height = 158.433
+
 [node name="tank_1" instance=ExtResource( 1 )]
 engine_power = 350
 wheel_base = 40
 steering_angle = 7
 max_speed_reverse = 100
 traction_fast = 0.3
-friction = -0.9
 
 [node name="vehicle_sprite" parent="." index="0"]
 rotation = 1.5708
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -10.1083, 0 )
+position = Vector2( -23, 0 )
 rotation = 1.5708
+scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" parent="." index="2"]
-current = true
+zoom = Vector2( 3, 3 )
 
 [node name="Weapon_group" type="Node2D" parent="." index="3"]
 script = ExtResource( 5 )
@@ -35,3 +40,13 @@ script = ExtResource( 5 )
 [node name="tank_turret" parent="Weapon_group" index="0" instance=ExtResource( 3 )]
 position = Vector2( -7, 0 )
 script = ExtResource( 4 )
+
+[node name="embark_Area2D" parent="." index="4"]
+position = Vector2( -18.7289, 0.37458 )
+
+[node name="embark_Colli2D" parent="embark_Area2D" index="0"]
+position = Vector2( -4.00452, -1.33484 )
+shape = SubResource( 2 )
+
+[node name="disembark_Position2D" parent="." index="5"]
+position = Vector2( -20, 110 )
