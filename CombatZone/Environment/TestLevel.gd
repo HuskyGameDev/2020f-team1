@@ -14,6 +14,7 @@ func _on_weapon_shoot(bullet, pos, dir):
     var b = bullet.instance()
     add_child(b)
     b.start(pos,dir)
+    
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #    pass

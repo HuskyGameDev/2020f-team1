@@ -14,7 +14,7 @@ func _ready() -> void:
 func get_input() -> void:
     var turn = 0
     #$tank_turret.look_at(get_global_mouse_position())
-    if manned:  # will move only when it is occupied
+    if manned:  # will change motion only when it is occupied
         # Turning
         turn = Input.get_action_strength("vehicle_turn_right") - Input.get_action_strength("vehicle_turn_left")
         steer_angle = turn * deg2rad(steering_angle)
