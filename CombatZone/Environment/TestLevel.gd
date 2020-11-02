@@ -16,12 +16,12 @@ func _on_weapon_shoot(bullet, pos, dir):
     b.start(pos,dir)
     
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#    pass
-func _unhandled_input(event):
-    if event is InputEventMouseButton:
-            if event.button_index == BUTTON_LEFT and event.pressed:
-                var path = $Navigation2D.get_simple_path($DamageableDummy.position, get_global_mouse_position())
-                $DamageableDummy.path = path
-                $Line2D.points = PoolVector2Array(path)
-                $Line2D.show()
+func _process(delta: float) -> void:
+    pass
+#func _unhandled_input(event):
+#    if event is InputEventMouseButton:
+#            if event.button_index == BUTTON_LEFT and event.pressed:
+#                var path = $Navigation2D.get_simple_path($DamageableDummy.position, $player.position)
+#                $DamageableDummy.path = path
+#                $Line2D.points = PoolVector2Array(path)
+#                $Line2D.show()
