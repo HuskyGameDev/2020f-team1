@@ -1,23 +1,24 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/PlanePlaceholder.png" type="Texture" id=1]
 [ext_resource path="res://vehicle/base_vehicle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons/Vehicle Weapon/PlaneTurret.tscn" type="PackedScene" id=3]
 [ext_resource path="res://vehicle/Plane.gd" type="Script" id=4]
+[ext_resource path="res://weapons/Vehicle Weapon/PlaneTurret.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.6944
 height = 192.072
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 19.6829
+radius = 23.7006
+height = 112.014
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 30.3466
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 21.8596
-height = 140.433
+[sub_resource type="CircleShape2D" id=4]
+radius = 91.1664
 
 [node name="Plane" instance=ExtResource( 2 )]
 script = ExtResource( 4 )
@@ -33,7 +34,7 @@ position = Vector2( 67.4162, 0 )
 shape = SubResource( 1 )
 
 [node name="HeadHitBox" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 85, 0 )
+position = Vector2( 34.9968, -1.19055 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
@@ -42,19 +43,19 @@ position = Vector2( -50, 0 )
 shape = SubResource( 3 )
 
 [node name="Camera2D" parent="." index="4"]
-position = Vector2( 40.4787, -34.1291 )
+position = Vector2( 69.0519, -0.396801 )
 zoom = Vector2( 4, 4 )
 
 [node name="PlaneTurret" parent="." index="5" instance=ExtResource( 3 )]
-position = Vector2( 48.8126, -35.7166 )
-rotation = 1.5708
-clip_size = 50
-fire_rate = 0.05
+position = Vector2( 108.737, -0.793747 )
+script = ExtResource( 5 )
 
 [node name="embark_Area2D" parent="." index="6"]
 position = Vector2( 29.764, 0 )
 
 [node name="embark_Colli2D" parent="embark_Area2D" index="0"]
+position = Vector2( -11.9055, 3.96851 )
+rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="disembark_Position2D" parent="." index="7"]
