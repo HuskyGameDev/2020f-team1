@@ -5,15 +5,17 @@
 
 [sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
-spread = 180.0
+direction = Vector3( 0, 1, 0 )
+spread = 47.05
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
-initial_velocity_random = 1.0
-angular_velocity = 10.0
+initial_velocity = 362.56
+initial_velocity_random = 0.22
+angular_velocity = 173.64
+angular_velocity_random = 0.5
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = -33.0
-linear_accel_random = 0.16
+linear_accel = -700.0
+linear_accel_random = 0.48
 angle = 90.0
 angle_random = 1.0
 scale = 3.0
@@ -30,3 +32,4 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0

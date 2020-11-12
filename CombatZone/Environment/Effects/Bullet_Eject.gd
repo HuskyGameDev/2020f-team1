@@ -11,8 +11,9 @@ func _ready() -> void:
     $Timer.start()
     print($Timer.wait_time)
 
-func start_at(pos):
+func start_at(pos,rot):
     position = pos
+    rotation = rot
     emitting = true
 
 

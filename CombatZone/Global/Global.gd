@@ -39,9 +39,9 @@ func spill_blood(pos):
     bl.start_at(pos)
     get_parent().add_child(bl)
     
-func eject_shell(pos):
+func eject_shell(pos,rot):
     var sh = shell.instance()
-    sh.start_at(pos)
+    sh.start_at(pos,rot)
     get_parent().add_child(sh)
 
 func embark(people: Node2D, vehicle):

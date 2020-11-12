@@ -27,6 +27,7 @@ position = Vector2( 60, 0 )
 [node name="CollisionShape2D" parent="." index="4"]
 position = Vector2( 17.1176, 0 )
 shape = SubResource( 1 )
+script = ExtResource( 3 )
 
 [node name="reload_timer" parent="." index="5"]
 autostart = true
