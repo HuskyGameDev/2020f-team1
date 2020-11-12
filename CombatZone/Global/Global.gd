@@ -12,6 +12,8 @@ var player
 
 # effects
 var blood = preload("res://Environment/Effects/blood_splater.tscn")
+var shell = preload("res://Environment/Effects/Bullet_Eject.tscn")
+#var Tshell = preload("")
 # weapon Settings
 
 # projectiles
@@ -30,11 +32,17 @@ func shoot_bullet(caliber, pos, rot):
     var b = BulletFactory.get_bullet(caliber)
     b.start_at(pos, rot)
     get_parent().add_child(b)
+    eject_shell(pos)
 
 func spill_blood(pos):
     var bl = blood.instance()
     bl.start_at(pos)
     get_parent().add_child(bl)
+    
+func eject_shell(pos):
+    var sh = shell.instance()
+    sh.start_at(pos)
+    get_parent().add_child(sh)
 
 func embark(people: Node2D, vehicle):
     if vehicle.manned:  #if vehicle is occupied, can't get in

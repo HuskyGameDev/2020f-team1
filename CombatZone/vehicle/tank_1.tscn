@@ -31,9 +31,6 @@ rotation = 1.5708
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
-[node name="Camera2D" parent="." index="2"]
-zoom = Vector2( 3, 3 )
-
 [node name="Weapon_group" type="Node2D" parent="." index="3"]
 script = ExtResource( 5 )
 
