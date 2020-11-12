@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Dodge.png-ccc0e407b4c564a26d7e020f2b021a2a.stex"
+path="res://.import/Dodge.png-6d125e1ac4d22d872e38dc3b08bfb561.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Dodge.png"
-dest_files=[ "res://.import/Dodge.png-ccc0e407b4c564a26d7e020f2b021a2a.stex" ]
+source_file="res://assets/Dodge.png"
+dest_files=[ "res://.import/Dodge.png-6d125e1ac4d22d872e38dc3b08bfb561.stex" ]
 
 [params]
 

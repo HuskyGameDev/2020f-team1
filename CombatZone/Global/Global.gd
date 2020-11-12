@@ -32,7 +32,7 @@ func shoot_bullet(caliber, pos, rot):
     var b = BulletFactory.get_bullet(caliber)
     b.start_at(pos, rot)
     get_parent().add_child(b)
-    eject_shell(pos)
+    #eject_shell(pos)
 
 func spill_blood(pos):
     var bl = blood.instance()

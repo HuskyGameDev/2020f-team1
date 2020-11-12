@@ -27,6 +27,7 @@ func shoot() -> void:
         $rate_of_fire.start()
         var dir = Vector2(1,0).rotated(global_rotation)
         Global.shoot_bullet(caliber, $muzzle.global_position, global_rotation)
+        Global.eject_shell($ejection_port.global_position)
         print("shooting ", caliber)
         # emit_signal('shoot', bullet, caliber, $muzzle.global_position, dir)
     

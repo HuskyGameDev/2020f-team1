@@ -13,7 +13,6 @@ func _ready() -> void:
     print($Timer.wait_time)
 
 func start_at(pos):
-    
     position = pos
     emitting = true
 
