@@ -19,7 +19,6 @@ func _ready() -> void:
     if default_weapon != null:
         $holsters.add_child(weapon)
         print($holsters.get_child_count())
-        
 
 func get_input():
     dodge = Vector2.ZERO
@@ -66,3 +65,8 @@ func dodge_roll():
 func _on_RollTimer_timeout():
     canRoll = true
     canShoot = true
+
+# series of methods to check player states
+func has_weapon(weapon_name):
+    for weapon in $holsters.get_children():
+        pass

@@ -18,3 +18,4 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup_Area2D"]
 [connection signal="body_entered" from="Pre_pickup_Area_2D" to="." method="_on_Pre_pickup_Area_2D_body_entered"]
 [connection signal="body_entered" from="Pickup_Area2D" to="." method="_on_Pickup_Area2D_body_entered"]
+[connection signal="body_exited" from="Pickup_Area2D" to="." method="_on_Pickup_Area2D_body_exited"]

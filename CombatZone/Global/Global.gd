@@ -20,28 +20,35 @@ var shell = preload("res://Environment/Effects/Bullet_Eject.tscn")
 func _ready() -> void:
     if player == null:
         print('player not set...')
-
+# UI
+func switch_camera2D(old_node,new_node):
+    old_node.get_node('Camera2D').current = false
+    new_node.get_node('Camera2D').current = true
+    
 # register player as player variable for later referencing by script
 func register_player(game_player):
     player = game_player
     
+# weapon
 func shoot_bullet(caliber, pos, rot):
     #var b = bullet_caliber[caliber].instance()
     var b = BulletFactory.get_bullet(caliber)
     b.start_at(pos, rot)
     get_parent().add_child(b)
     #eject_shell(pos)
-
-func spill_blood(pos):
-    var bl = blood.instance()
-    bl.start_at(pos)
-    get_parent().add_child(bl)
     
 func eject_shell(pos,rot):
     var sh = shell.instance()
     sh.start_at(pos,rot)
     get_parent().add_child(sh)
+    
+# effects
+func spill_blood(pos):
+    var bl = blood.instance()
+    bl.start_at(pos)
+    get_parent().add_child(bl)
 
+# vehicle
 func embark(people: Node2D, vehicle):
     if vehicle.manned:  #if vehicle is occupied, can't get in
         pass
@@ -65,7 +72,7 @@ func disembark(people: Node2D,vehicle: Node):
     print(people.position)
     people.set("position", vehicle.get_node('disembark_Position2D').get_global_position())
     vehicle.manned = false
-
-func switch_camera2D(old_node,new_node):
-    old_node.get_node('Camera2D').current = false
-    new_node.get_node('Camera2D').current = true
+    
+# puck-ups
+func pickup(player,type,number):
+    print("player ",player, "pick up ", type, "quantity of ",number)
