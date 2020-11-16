@@ -13,17 +13,15 @@ var player
 # effects
 var blood = preload("res://Environment/Effects/blood_splater.tscn")
 var shell = preload("res://Environment/Effects/Bullet_Eject.tscn")
-#var Tshell = preload("")
 # weapon Settings
 
 # projectiles
-var b_9mm = preload("res://weapons/bullets/9mm_ammo.tscn")
-#export (PackedScene) var b_9mm
-var bullet_caliber = {"9mm": b_9mm}
 
 func _ready() -> void:
     if player == null:
         print('player not set...')
+
+# register player as player variable for later referencing by script
 func register_player(game_player):
     player = game_player
     

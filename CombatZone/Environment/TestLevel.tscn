@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
+[ext_resource path="res://Pick_ups/9mm_autoloader_pickup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://character/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environment/TestLevel.gd" type="Script" id=4]
@@ -29,3 +30,6 @@ position = Vector2( 1184.57, 1472.44 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
 position = Vector2( -71.5561, 1414.18 )
+
+[node name="9mm_autoloader_pickup" parent="." instance=ExtResource( 1 )]
+position = Vector2( -358.076, 1069.03 )

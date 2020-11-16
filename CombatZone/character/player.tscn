@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -8,9 +8,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.8344, 31.3715 )
 
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 22.475
+height = 52.3612
+
 [node name="player" instance=ExtResource( 1 )]
 collision_layer = 2147483650
-collision_mask = 5
+collision_mask = 21
 script = ExtResource( 3 )
 speed = 300
 friction = 0.3
@@ -37,4 +41,9 @@ one_shot = true
 
 [node name="RollTimer2" type="Timer" parent="." index="7"]
 wait_time = 0.25
+
+[node name="CollisionShape2D" parent="Pre_pickup_Area2D" index="0"]
+position = Vector2( 30, 0 )
+rotation = 1.5708
+shape = SubResource( 2 )
 [connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]

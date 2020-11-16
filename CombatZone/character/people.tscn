@@ -18,3 +18,10 @@ script = ExtResource( 1 )
 
 [node name="Dodge" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="Pre_pickup_Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pre_pickup_Area2D"]
+[connection signal="body_entered" from="Pre_pickup_Area2D" to="." method="_on_Pre_pickup_Area2D_body_entered"]
