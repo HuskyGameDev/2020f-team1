@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TiltleTempBack.jpg-350084ea5fd82b93f4185df00ff9d70d.stex"
+path="res://.import/TiltleTempBack.jpg-c6dfbb2f202cf0bbf2fa2861178e7418.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TiltleTempBack.jpg"
-dest_files=[ "res://.import/TiltleTempBack.jpg-350084ea5fd82b93f4185df00ff9d70d.stex" ]
+source_file="res://assets/TiltleTempBack.jpg"
+dest_files=[ "res://.import/TiltleTempBack.jpg-c6dfbb2f202cf0bbf2fa2861178e7418.stex" ]
 
 [params]
 

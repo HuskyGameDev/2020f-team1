@@ -4,13 +4,14 @@ extends "res://Pick_ups/Proto_pick_up.gd"
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
-export var ammo_type:= 20
+export var ammo_type:= '9mm'
 export var ammo_count:= 20
 var weapon_name # each actual weapon needs to be given names on _ready()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     add_to_group("weapon")
+    
     
 func get_input():
     pass

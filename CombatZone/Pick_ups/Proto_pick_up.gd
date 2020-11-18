@@ -14,6 +14,7 @@ func _ready() -> void:
 func take_effect():
     pass
 
+# each pick up type should have different pick up inputs to check different things
 func get_input():
     pass
     
@@ -21,7 +22,7 @@ func _physics_process(delta: float) -> void:
     get_input()
 
 func _on_Pre_pickup_Area_2D_body_entered(body: Node) -> void:
-    pass # Replace with function body.
+    print('body enter pre_Pickup area')
 
 
 func _on_Pickup_Area2D_body_entered(body: Node) -> void:
