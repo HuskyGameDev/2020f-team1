@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RevolverTop.png-63a8fd9590ecb6ae3318e1ca3177a147.stex"
+path="res://.import/spritesheet_tiles desert.png-63f3464bd68aa789fa6f7ff8f7d73957.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/RevolverTop.png"
-dest_files=[ "res://.import/RevolverTop.png-63a8fd9590ecb6ae3318e1ca3177a147.stex" ]
+source_file="res://Assets/spritesheet_tiles desert.png"
+dest_files=[ "res://.import/spritesheet_tiles desert.png-63f3464bd68aa789fa6f7ff8f7d73957.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Smoke_C.png-d744057d8024fadf60eae89354e82a5c.stex"
+path="res://.import/Smoke_C.png-73f4c14352bdbb2346035e4b7db8f89a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Smoke_C.png"
-dest_files=[ "res://.import/Smoke_C.png-d744057d8024fadf60eae89354e82a5c.stex" ]
+source_file="res://Assets/Smoke_C.png"
+dest_files=[ "res://.import/Smoke_C.png-73f4c14352bdbb2346035e4b7db8f89a.stex" ]
 
 [params]
 
