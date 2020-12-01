@@ -12,7 +12,6 @@ var weapon_name # each actual weapon needs to be given names on _ready()
 func _ready() -> void:
     add_to_group("weapon")
     
-    
 func get_input():
     pass
     
@@ -30,3 +29,15 @@ func die():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #    pass
+
+
+func _weapon_Pre_pickup_Area_2D_body_entered(body: Node) -> void:
+    pass # Replace with function body.
+
+
+func _weapon_Pickup_Area2D_body_entered(body: Node) -> void:
+    pass # Replace with function body.
+
+
+func _weapon_Pickup_Area2D_body_exited(body: Node) -> void:
+    pass # Replace with function body.

@@ -5,3 +5,6 @@
 
 [node name="Proto_Pickup_weapon" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+[connection signal="body_entered" from="Pre_pickup_Area_2D" to="." method="_weapon_Pre_pickup_Area_2D_body_entered"]
+[connection signal="body_entered" from="Pickup_Area2D" to="." method="_weapon_Pickup_Area2D_body_entered"]
+[connection signal="body_exited" from="Pickup_Area2D" to="." method="_weapon_Pickup_Area2D_body_exited"]
