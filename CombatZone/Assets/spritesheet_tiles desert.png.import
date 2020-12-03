@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spritesheet_tiles desert.png-c5989ef8f87310330ebefb41a609888d.stex"
+path="res://.import/spritesheet_tiles desert.png-63f3464bd68aa789fa6f7ff8f7d73957.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spritesheet_tiles desert.png"
-dest_files=[ "res://.import/spritesheet_tiles desert.png-c5989ef8f87310330ebefb41a609888d.stex" ]
+source_file="res://Assets/spritesheet_tiles desert.png"
+dest_files=[ "res://.import/spritesheet_tiles desert.png-63f3464bd68aa789fa6f7ff8f7d73957.stex" ]
 
 [params]
 
