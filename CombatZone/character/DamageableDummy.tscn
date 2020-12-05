@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://character/DamageableDummy.gd" type="Script" id=3]
 [ext_resource path="res://assets/HPRed.png" type="Texture" id=4]
 [ext_resource path="res://Assets/HPGrn.png" type="Texture" id=5]
+[ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 38.5598, 34.4414 )
@@ -40,6 +41,7 @@ radius = 37.8178
 script = ExtResource( 3 )
 speed = 300
 friction = 0.08
+default_weapon = ExtResource( 6 )
 
 [node name="upperbody_sprite" parent="." index="0"]
 scale = Vector2( 1.20005, 1.07712 )
