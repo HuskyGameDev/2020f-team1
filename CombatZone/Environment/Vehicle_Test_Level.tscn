@@ -23,6 +23,8 @@ position = Vector2( 1564, 736 )
 scale = Vector2( 1, 1 )
 default_weapon = ExtResource( 7 )
 
+[node name="Node2D" type="Node2D" parent="DamageableDummy"]
+
 [node name="player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -530.232, 303.193 )
 scale = Vector2( 1, 1 )
@@ -42,3 +44,5 @@ position = Vector2( -911.206, -338.12 )
 [node name="Plane" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2200.1, 1490.57 )
 collision_layer = 2
+
+[node name="Line2D" type="Line2D" parent="."]
