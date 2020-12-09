@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Handgun_Fire_GUN_Moser.wav-3e11085351a591646cd58ecab2d36d78.sample"
+path="res://.import/Handgun_Fire_GUN_Moser.wav-052c52d21e9e20a17aa57c8debfde24d.sample"
 
 [deps]
 
-source_file="res://assets/Audio/Handgun_Fire_GUN_Moser.wav"
-dest_files=[ "res://.import/Handgun_Fire_GUN_Moser.wav-3e11085351a591646cd58ecab2d36d78.sample" ]
+source_file="res://Assets/Audio/Handgun_Fire_GUN_Moser.wav"
+dest_files=[ "res://.import/Handgun_Fire_GUN_Moser.wav-052c52d21e9e20a17aa57c8debfde24d.sample" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Bullet_Shell_falling_GUN_Moser.wav-d76776b7ba725ff77d3fa2143685f0b5.sample"
+path="res://.import/Bullet_Shell_falling_GUN_Moser.wav-8d2036dc176adc09d1426c0ad76a9903.sample"
 
 [deps]
 
-source_file="res://assets/Audio/Bullet_Shell_falling_GUN_Moser.wav"
-dest_files=[ "res://.import/Bullet_Shell_falling_GUN_Moser.wav-d76776b7ba725ff77d3fa2143685f0b5.sample" ]
+source_file="res://Assets/Audio/Bullet_Shell_falling_GUN_Moser.wav"
+dest_files=[ "res://.import/Bullet_Shell_falling_GUN_Moser.wav-8d2036dc176adc09d1426c0ad76a9903.sample" ]
 
 [params]
 

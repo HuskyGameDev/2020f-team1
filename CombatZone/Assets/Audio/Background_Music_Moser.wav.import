@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Background_Music_Moser.wav-c5951476b9e8980a9a157078c6a34e8f.sample"
+path="res://.import/Background_Music_Moser.wav-dd78342397d9425bd76efa6bcbb01919.sample"
 
 [deps]
 
-source_file="res://assets/Audio/Background_Music_Moser.wav"
-dest_files=[ "res://.import/Background_Music_Moser.wav-c5951476b9e8980a9a157078c6a34e8f.sample" ]
+source_file="res://Assets/Audio/Background_Music_Moser.wav"
+dest_files=[ "res://.import/Background_Music_Moser.wav-dd78342397d9425bd76efa6bcbb01919.sample" ]
 
 [params]
 
@@ -17,5 +17,5 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop=true
 compress/mode=0
