@@ -1,6 +1,5 @@
 extends "res://character/people.gd"
 
-var player
 var path := PoolVector2Array()
 #int represents state, 0 = idle, 1 = go after player
 var state = 1
@@ -8,6 +7,8 @@ var player_pos
 export (PackedScene) var default_weapon
 var shoot_count = 0
 var can_shoot = true
+onready var player = get_node('/root/TestLevel/player')
+var player_found = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,7 +26,7 @@ func _process(delta):
     if(health <= 1):
         queue_free()
     go_after_player()
-    if(player!= null):
+    if(player_found):
         if(position.distance_to(player.position) < 500):
             shoot_player()
 
@@ -40,17 +41,18 @@ func shoot_player() -> void:
             $holsters.get_child(0).shoot()
            
 func go_after_player() -> void:
-    if(player != null):
+    if(player_found):
         if(path.size() < 1):
             player_pos = player.position
             path = get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)
             print("path assigned")
-        get_parent().get_node("Line2D").points = PoolVector2Array(path)
+        #get_parent().get_node("Line2D").points = PoolVector2Array(path)
 
 func take_damage(pos, damage_amount) -> void:
     $Health.show()
     $HealthG.show()
     health -= damage_amount
+    player_found = true
     if(health < 0):
         health = 0
     $HealthG.scale.x = (health / totalHealth)
@@ -86,7 +88,7 @@ func get_input():
 func _on_range_body_entered(body):
     print(body.position)
     if(body.get_groups().has("player")):
-        player = body
+        player_found = true
 
 func _on_action_timer_timeout():
     can_shoot = true

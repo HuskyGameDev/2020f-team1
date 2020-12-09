@@ -41,6 +41,7 @@ radius = 37.8178
 script = ExtResource( 3 )
 speed = 300
 friction = 0.08
+health = 300.0
 default_weapon = ExtResource( 6 )
 
 [node name="upperbody_sprite" parent="." index="0"]
