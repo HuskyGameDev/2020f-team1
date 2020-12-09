@@ -89,6 +89,5 @@ func _on_range_body_entered(body):
     if(body.get_groups().has("player")):
         player = body
 
-
 func _on_action_timer_timeout():
     can_shoot = true

@@ -76,3 +76,6 @@ func disembark(people: Node2D,vehicle: Node):
 # puck-ups
 func pickup(player,type,number):
     print("player ",player, "pick up ", type, "quantity of ",number)
+
+func scene_change(path_name):
+    get_tree().change_scene_to(path_name)

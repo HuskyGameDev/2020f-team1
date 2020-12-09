@@ -70,3 +70,20 @@ func _on_RollTimer_timeout():
 func has_weapon(weapon_name):
     for weapon in $holsters.get_children():
         pass
+
+func take_damage(pos, damage_amount) -> void:
+    $Health.show()
+    $HealthG.show()
+    health -= damage_amount
+    if(health <= 0):
+        health = 0
+        die()
+    $HealthG.scale.x = (health / totalHealth)
+    Global.spill_blood(pos)
+    print("Player HP percent: %f" % ((health / 100)))
+    print(" Player Damage, remaining health: %d" % health)
+
+
+func die():
+    get_tree().change_scene("res://assets/TitleScreen.tscn")
+    queue_free()
