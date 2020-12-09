@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CZtitle.png-7aaa22f4efeaaa157491036c940e1c13.stex"
+path="res://.import/CZtitle.png-289546c70fc6ccf87f73a8187fe54008.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CZtitle.png"
-dest_files=[ "res://.import/CZtitle.png-7aaa22f4efeaaa157491036c940e1c13.stex" ]
+source_file="res://assets/CZtitle.png"
+dest_files=[ "res://.import/CZtitle.png-289546c70fc6ccf87f73a8187fe54008.stex" ]
 
 [params]
 

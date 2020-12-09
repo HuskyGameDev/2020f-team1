@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HPRed.png-41e5a2b7839983dc7c029c9f5ce31854.stex"
+path="res://.import/HPRed.png-8c0845ae5219b41307b5b35399d87805.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HPRed.png"
-dest_files=[ "res://.import/HPRed.png-41e5a2b7839983dc7c029c9f5ce31854.stex" ]
+source_file="res://assets/HPRed.png"
+dest_files=[ "res://.import/HPRed.png-8c0845ae5219b41307b5b35399d87805.stex" ]
 
 [params]
 

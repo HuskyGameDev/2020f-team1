@@ -5,8 +5,9 @@
 [ext_resource path="res://character/player.gd" type="Script" id=3]
 [ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.8344, 31.3715 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 15.8975
+height = 36.1017
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 22.475
@@ -27,7 +28,7 @@ scale = Vector2( 1, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="holsters" parent="." index="3"]
 position = Vector2( 20, 25 )

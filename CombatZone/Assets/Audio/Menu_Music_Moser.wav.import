@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Menu_Music_Moser.wav-190bc7b69034c9737193343107957c8f.sample"
+path="res://.import/Menu_Music_Moser.wav-5472b7d97746d49c961ca6b5d964e30e.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/Menu_Music_Moser.wav"
-dest_files=[ "res://.import/Menu_Music_Moser.wav-190bc7b69034c9737193343107957c8f.sample" ]
+source_file="res://assets/Audio/Menu_Music_Moser.wav"
+dest_files=[ "res://.import/Menu_Music_Moser.wav-5472b7d97746d49c961ca6b5d964e30e.sample" ]
 
 [params]
 

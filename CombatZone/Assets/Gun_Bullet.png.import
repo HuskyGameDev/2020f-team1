@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gun_Bullet.png-93c6a70c423b6ba3a4121d07c4c27307.stex"
+path="res://.import/Gun_Bullet.png-890461a21d3b1d20aee491426756415f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Gun_Bullet.png"
-dest_files=[ "res://.import/Gun_Bullet.png-93c6a70c423b6ba3a4121d07c4c27307.stex" ]
+source_file="res://assets/Gun_Bullet.png"
+dest_files=[ "res://.import/Gun_Bullet.png-890461a21d3b1d20aee491426756415f.stex" ]
 
 [params]
 

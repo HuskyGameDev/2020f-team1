@@ -23,7 +23,6 @@ tile_data = PoolIntArray( -655377, 0, 7, -655376, 0, 196612, -655375, 0, 196612,
 
 [node name="DamageableDummy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1184.57, 1472.44 )
-scale = Vector2( 1, 1 )
 default_weapon = ExtResource( 6 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy"]
@@ -32,7 +31,6 @@ default_weapon = ExtResource( 6 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
 position = Vector2( -71.5561, 1414.18 )
-scale = Vector2( 1, 1 )
 
 [node name="9mm_autoloader_pickup" parent="." instance=ExtResource( 1 )]
 position = Vector2( -358.076, 1069.03 )

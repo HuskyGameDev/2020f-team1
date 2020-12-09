@@ -20,26 +20,27 @@ tile_data = PoolIntArray( -3014720, 0, 7, -3014719, 0, 196612, -3014718, 0, 1966
 
 [node name="DamageableDummy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1564, 736 )
-scale = Vector2( 1, 1 )
 default_weapon = ExtResource( 7 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy"]
 
 [node name="player" parent="." instance=ExtResource( 4 )]
 position = Vector2( -530.232, 303.193 )
-scale = Vector2( 1, 1 )
 default_weapon = ExtResource( 8 )
 
 [node name="tank_1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -733.419, 1312.78 )
+collision_layer = 64
 
 [node name="tank_2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2250.9, -77.7831 )
+collision_layer = 64
 engine_power = 1200
 max_speed_reverse = 400
 
 [node name="car_1" parent="." instance=ExtResource( 5 )]
 position = Vector2( -911.206, -338.12 )
+collision_layer = 1
 
 [node name="Plane" parent="." instance=ExtResource( 6 )]
 position = Vector2( 2200.1, 1490.57 )

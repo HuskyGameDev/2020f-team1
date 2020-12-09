@@ -7,8 +7,8 @@
 [ext_resource path="res://Assets/HPGrn.png" type="Texture" id=5]
 [ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 38.5598, 34.4414 )
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 33.0
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -48,7 +48,8 @@ scale = Vector2( 1.20005, 1.07712 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 1 )
+rotation = 1.5708
+shape = SubResource( 6 )
 
 [node name="hit_spot" type="Particles2D" parent="." index="4"]
 emitting = false
