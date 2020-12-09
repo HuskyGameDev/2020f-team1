@@ -23,6 +23,7 @@ func start_at(pos, dir) -> void:
     velocity = Vector2(speed,0).rotated(dir)
     #velocity = dir * speed
     $bullet_firing.play()
+    $shell_droping.play()
     
 func random_float(spread) -> float:
     var my_random_num = rng.randf_range(-spread, spread)
