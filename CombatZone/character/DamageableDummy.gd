@@ -46,7 +46,6 @@ func go_after_player() -> void:
             path = get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)
             print("path assigned")
         get_parent().get_node("Line2D").points = PoolVector2Array(path)
-        get_parent().get_node("Line2D").show()
 
 func take_damage(pos, damage_amount) -> void:
     $Health.show()
