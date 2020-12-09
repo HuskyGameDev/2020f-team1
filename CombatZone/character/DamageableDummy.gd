@@ -27,7 +27,7 @@ func _process(delta):
         queue_free()
     go_after_player()
     if(player_found):
-        if(position.distance_to(player.position) < 500):
+        if(position.distance_to(player.position) < 1000):
             shoot_player()
 
 func shoot_player() -> void:
