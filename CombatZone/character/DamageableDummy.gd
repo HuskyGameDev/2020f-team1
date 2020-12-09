@@ -6,6 +6,8 @@ var path := PoolVector2Array()
 var state = 1
 var player_pos
 export (PackedScene) var default_weapon
+var shoot_count = 0
+var can_shoot = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,21 +30,15 @@ func _process(delta):
             shoot_player()
 
 func shoot_player() -> void:
-    if $holsters.get_child_count()>0:
-        $holsters.get_child(0).shoot()
-    
-#func state_change() -> void:
-#    if(player != null):
-#        print("distance ", position.distance_to(player.position))
-#        if(position.distance_to(player.position) > 100):
-#            print("change state ", state)
-#            state = 1
-#            go_after_player(state)
-#        else:
-#            print("change state ", state)
-#            path.empty()
-#            state = 0
-
+    if $holsters.get_child_count() > 0 && can_shoot:
+        if shoot_count > 100:
+            shoot_count = 0
+            $action_timer.start()
+            can_shoot = false
+        else:
+            shoot_count += 1
+            $holsters.get_child(0).shoot()
+           
 func go_after_player() -> void:
     if(player != null):
         if(path.size() < 1):
@@ -92,3 +88,7 @@ func _on_range_body_entered(body):
     print(body.position)
     if(body.get_groups().has("player")):
         player = body
+
+
+func _on_action_timer_timeout():
+    can_shoot = true
