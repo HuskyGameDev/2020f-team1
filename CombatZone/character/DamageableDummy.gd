@@ -17,8 +17,11 @@ func _ready() -> void:
     if default_weapon != null:
         $holsters.add_child(weapon)
         print($holsters.get_child_count())
-#
+        
+        
 func _process(delta):
+    if(health <= 1):
+        queue_free()
     go_after_player()
     if(player!= null):
         if(position.distance_to(player.position) < 500):
