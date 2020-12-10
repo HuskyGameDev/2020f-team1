@@ -5,6 +5,7 @@ var canRoll = true
 var input = Vector2()
 
 export (PackedScene) var default_weapon
+export (PackedScene) var holstered_weap
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
@@ -17,6 +18,8 @@ func _ready() -> void:
     var weapon = default_weapon.instance()
     if default_weapon != null:
         $hand.add_child(weapon)
+    if holstered_weap != null:
+        $holsters.add_child(holstered_weap.instance())
 
 
 func get_input():
@@ -26,6 +29,8 @@ func get_input():
         attack1()
     if Input.is_action_pressed("player_attach_2"):
         attack2()
+    if Input.is_action_just_pressed("player_switch_weapon"):
+        swap_weap()
     if Input.is_action_pressed("player_dodge"): #LEFT SHIFT TO ROLL
         dodge_roll()
     input.x = Input.get_action_strength("player_move_right") - Input.get_action_strength("player_move_left")
@@ -38,9 +43,17 @@ func attack1() -> void:
     
 func attack2() -> void:
     pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#    pass
+
+func swap_weap():
+    print("switching weapon")
+    if $holsters.get_child_count() > 0:
+        print("I'm switching")
+        var temp_weap = $hand.get_child(0).duplicate()
+        $hand.remove_child($hand.get_child(0))
+        $hand.add_child($holsters.get_child(0).duplicate())
+        $holsters.remove_child($holsters.get_child(0))
+        $holsters.add_child(temp_weap)
+
 
 func _process(delta):
     $Dodge.scale.x = ($RollTimer.time_left / $RollTimer.wait_time)
