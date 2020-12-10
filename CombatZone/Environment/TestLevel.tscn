@@ -5,7 +5,7 @@
 [ext_resource path="res://character/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environment/TestLevel.gd" type="Script" id=4]
 [ext_resource path="res://Environment/TestLevel_Tileset.tres" type="TileSet" id=5]
-[ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=6]
+[ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=6]
 
 [node name="TestLevel" type="Node2D"]
 position = Vector2( 28.3056, 30.8383 )
@@ -23,37 +23,31 @@ tile_data = PoolIntArray( -655377, 0, 7, -655376, 0, 196612, -655375, 0, 196612,
 
 [node name="DamageableDummy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1253.54, 1220.33 )
-default_weapon = ExtResource( 6 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy"]
 
 [node name="DamageableDummy2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 223.69, 2017.1 )
-default_weapon = ExtResource( 6 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy2"]
 
 [node name="DamageableDummy3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 242.718, 944.432 )
-default_weapon = ExtResource( 6 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy3"]
 
 [node name="DamageableDummy4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1893.34, 639.995 )
-default_weapon = ExtResource( 6 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy4"]
 
 [node name="DamageableDummy5" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1912.36, 2321.53 )
-default_weapon = ExtResource( 6 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy5"]
 
 [node name="DamageableDummy6" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1258.3, 1788.77 )
-default_weapon = ExtResource( 6 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy6"]
 
@@ -62,3 +56,5 @@ position = Vector2( -71.5561, 1414.18 )
 
 [node name="9mm_autoloader_pickup" parent="." instance=ExtResource( 1 )]
 position = Vector2( -358.076, 1069.03 )
+
+[node name="PopupMenu" parent="." instance=ExtResource( 6 )]
