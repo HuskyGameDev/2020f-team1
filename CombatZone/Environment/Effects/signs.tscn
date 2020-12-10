@@ -1,0 +1,18 @@
+[gd_scene format=2]
+
+[node name="signs" type="Node2D"]
+position = Vector2( -4007.68, 3878.67 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -142.072
+margin_top = -102.387
+margin_right = -14.072
+margin_bottom = -62.3872
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

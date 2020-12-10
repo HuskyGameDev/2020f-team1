@@ -9,6 +9,7 @@ extents = Vector2( 32.2686, 10 )
 
 [node name="Mac_10" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+weap_name = "mac10"
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708

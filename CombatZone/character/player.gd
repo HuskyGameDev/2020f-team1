@@ -15,10 +15,9 @@ func _ready() -> void:
     add_to_group("player")
     $Dodge.hide()
     var weapon = default_weapon.instance()
-    print($holsters.get_child_count())
     if default_weapon != null:
-        $holsters.add_child(weapon)
-        print($holsters.get_child_count())
+        $hand.add_child(weapon)
+
 
 func get_input():
     dodge = Vector2.ZERO
@@ -34,8 +33,8 @@ func get_input():
     return input
 
 func attack1() -> void:
-    if $holsters.get_child_count()>0:
-        $holsters.get_child(0).shoot()
+    if $hand.get_child_count()>0:
+        $hand.get_child(0).shoot()
     
 func attack2() -> void:
     pass
@@ -68,9 +67,16 @@ func _on_RollTimer_timeout():
 
 # series of methods to check player states
 func has_weapon(weapon_name):
-    for weapon in $holsters.get_children():
-        pass
+    if $hand.get_child(0).get_weap_name == weapon_name:
+        return true
+    elif $holsters.get_child(0).get_weap_name == weapon_name:
+        return true
+    return false
 
+func weapon_full():
+    if $hand.get_child_count()>0 && $holsters.get_child_count()>0:
+        return true
+        
 func take_damage(pos, damage_amount) -> void:
     $Health.show()
     $HealthG.show()

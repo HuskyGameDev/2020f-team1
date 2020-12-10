@@ -3,7 +3,7 @@
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://character/player.gd" type="Script" id=3]
-[ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=4]
+[ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/HPGrn.png" type="Texture" id=5]
 [ext_resource path="res://assets/HPRed.png" type="Texture" id=6]
 
@@ -16,6 +16,7 @@ radius = 22.475
 height = 52.3612
 
 [node name="player" instance=ExtResource( 1 )]
+z_index = 1
 collision_layer = 2147483650
 collision_mask = 21
 script = ExtResource( 3 )
@@ -37,20 +38,23 @@ shape = SubResource( 1 )
 [node name="holsters" parent="." index="3"]
 position = Vector2( 20, 25 )
 
-[node name="Health" parent="." index="4"]
+[node name="hand" type="Node2D" parent="." index="4"]
+position = Vector2( 20, 25 )
+
+[node name="Health" parent="." index="5"]
 texture = ExtResource( 6 )
 
-[node name="HealthG" type="Sprite" parent="." index="5"]
+[node name="HealthG" type="Sprite" parent="." index="6"]
 texture = ExtResource( 5 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="6"]
+[node name="Camera2D" type="Camera2D" parent="." index="7"]
 current = true
 zoom = Vector2( 2, 2 )
 
-[node name="RollTimer" type="Timer" parent="." index="7"]
+[node name="RollTimer" type="Timer" parent="." index="8"]
 one_shot = true
 
-[node name="RollTimer2" type="Timer" parent="." index="8"]
+[node name="RollTimer2" type="Timer" parent="." index="9"]
 wait_time = 0.25
 
 [node name="CollisionShape2D" parent="Pre_pickup_Area2D" index="0"]

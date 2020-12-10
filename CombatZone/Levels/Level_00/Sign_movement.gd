@@ -1,4 +1,4 @@
-extends "res://Pick_ups/Proto_Pickup_weapon.gd"
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -8,10 +8,17 @@ extends "res://Pick_ups/Proto_Pickup_weapon.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    weapon_name='9mmloader'
-    print('weapon name is ',weapon_name)
+    $RichTextLabel.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #    pass
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+    $RichTextLabel.show()
+
+
+func _on_Area2D_body_exited(body: Node) -> void:
+    $RichTextLabel.hide()

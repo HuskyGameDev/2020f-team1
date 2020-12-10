@@ -4,8 +4,9 @@ signal shoot
 
 export var spread: = 1.0
 export var clip_size = 10
+export var ammo = 50    # default ammo count
 export var fire_rate = 1.0
-
+export var weap_name = 'no_name'
 export (PackedScene) var bullet
 
 #onready var b_container = get_node("bullet_container")
@@ -15,6 +16,7 @@ var can_shoot: = true
 # var a: int = 2
 # var b: String = "text"
 var caliber = 'default'
+
 var remain_in_mag = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,10 +36,9 @@ func shoot() -> void:
 func reload() -> int:   # reload would probably return the number of bullets in the clip
     return -1
     
+func get_weap_name():
+    return weap_name
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#    pass
 func on_weapon_shoot():
     shoot()
 

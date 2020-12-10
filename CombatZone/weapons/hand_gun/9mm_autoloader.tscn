@@ -10,6 +10,7 @@ extents = Vector2( 34.3166, 11.3496 )
 
 [node name="9mm_autoloader" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+weap_name = "9mmloader"
 bullet = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="0"]

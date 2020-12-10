@@ -10,6 +10,7 @@ height = 9.37948
 
 [node name="magnum" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
+weap_name = "magnum"
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708

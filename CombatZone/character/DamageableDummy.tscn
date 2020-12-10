@@ -38,6 +38,7 @@ color = Color( 0.662745, 0.0823529, 0.0823529, 1 )
 radius = 37.8178
 
 [node name="DamageableDummy" instance=ExtResource( 1 )]
+z_index = 1
 script = ExtResource( 3 )
 speed = 300
 friction = 0.08

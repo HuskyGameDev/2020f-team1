@@ -21,3 +21,7 @@ func _process(delta: float) -> void:
 #                $DamageableDummy.path = path
 #                $Line2D.points = PoolVector2Array(path)
 #                $Line2D.show()
+
+
+func _on_Area2D_body_exited(body: Node) -> void:
+    pass # Replace with function body.
