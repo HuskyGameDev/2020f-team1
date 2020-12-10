@@ -80,9 +80,9 @@ func _on_RollTimer_timeout():
 
 # series of methods to check player states
 func has_weapon(weapon_name):
-    if $hand.get_child(0).get_weap_name == weapon_name:
+    if $hand.get_child(0).get_weap_name() == weapon_name:
         return true
-    elif $holsters.get_child(0).get_weap_name == weapon_name:
+    elif $holsters.get_child(0).get_weap_name() == weapon_name:
         return true
     return false
 
@@ -99,10 +99,18 @@ func take_damage(pos, damage_amount) -> void:
         die()
     $HealthG.scale.x = (health / totalHealth)
     Global.spill_blood(pos)
-    print("Player HP percent: %f" % ((health / 100)))
-    print(" Player Damage, remaining health: %d" % health)
+    #print("Player HP percent: %f" % ((health / 100)))
+    #print(" Player Damage, remaining health: %d" % health)
 
-
+func injured():
+    return health < totalHealth
+    
+func heal_up(number):
+    health += number
+    if health>totalHealth:
+        health = totalHealth
+    $HealthG.scale.x = (health / totalHealth)
+        
 func die():
     get_tree().change_scene("res://assets/TitleScreen.tscn")
     queue_free()

@@ -14,11 +14,16 @@ weap_name = "magnum"
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
+scale = Vector2( 5, 5 )
 texture = ExtResource( 1 )
 offset = Vector2( 3, 11 )
 
 [node name="ejection_port" parent="." index="2"]
+visible = false
 position = Vector2( 12, 0.5 )
+
+[node name="muzzle" parent="." index="3"]
+position = Vector2( 57.8898, 0.5 )
 
 [node name="CollisionShape2D" parent="." index="4"]
 position = Vector2( 2.70054, 0.501131 )

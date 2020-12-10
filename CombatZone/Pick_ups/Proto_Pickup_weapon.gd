@@ -17,8 +17,12 @@ func _ready() -> void:
     
 func get_input():
     if picker != null && Input.is_action_just_released("player_interact"):
+        var weapon = BulletFactory.get_weapon(weapon_name)
+        weapon.ammo = ammo_count
         if swap_weapon:
-            picker.get
+            picker.find_node('holster').remove_child(picker.find_node('holster').get_node(0))
+            picker.find_node('holster').add_child(weapon)
+            queue_free()
     
 func get_amo_count():
     return ammo_count

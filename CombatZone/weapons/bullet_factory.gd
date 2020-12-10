@@ -7,10 +7,13 @@ var b_9mm = preload("res://weapons/bullets/9mm_ammo.tscn")
 
 var caliber_dict = {'9mm': b_9mm}
 
+
 # weapons
 var w_9mm_autoloader = preload("res://weapons/hand_gun/9mm_autoloader.tscn")
-var weapon_dict = {'9mm_autoloader': w_9mm_autoloader}
-
+var w_magnum = preload("res://weapons/hand_gun/magnum.tscn")
+var weapon_dict = {'9mmloader': w_9mm_autoloader,
+                    'magnum': w_magnum
+                    }
 
 
 
@@ -18,6 +21,9 @@ var weapon_dict = {'9mm_autoloader': w_9mm_autoloader}
 func get_bullet(caliber):
     print("returning bullet")
     return caliber_dict[caliber].instance()
+
+func get_weapon(weapon_name):
+    return weapon_dict[weapon_name].instance()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #    pass
