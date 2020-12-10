@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Environment/TestLevel_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://character/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://vehicle/car_1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://vehicle/Plane.tscn" type="PackedScene" id=6]
-[ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=7]
 [ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=8]
 
 [node name="Vehicle_Test_Level" type="Node2D"]
@@ -20,7 +19,6 @@ tile_data = PoolIntArray( -3014720, 0, 7, -3014719, 0, 196612, -3014718, 0, 1966
 
 [node name="DamageableDummy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1564, 736 )
-default_weapon = ExtResource( 7 )
 
 [node name="Node2D" type="Node2D" parent="DamageableDummy"]
 
@@ -30,11 +28,9 @@ default_weapon = ExtResource( 8 )
 
 [node name="tank_1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -733.419, 1312.78 )
-collision_layer = 64
 
 [node name="tank_2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 2250.9, -77.7831 )
-collision_layer = 64
 engine_power = 1200
 max_speed_reverse = 400
 

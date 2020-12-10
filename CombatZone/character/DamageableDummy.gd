@@ -27,7 +27,7 @@ func _process(delta):
     if(health <= 1):
         queue_free()
     go_after_player()
-    if(player_found):
+    if(player_found && player != null):
         if(position.distance_to(player.position) < 1000):
             shoot_player()
 
@@ -44,7 +44,7 @@ func shoot_player() -> void:
 func go_after_player() -> void:
     if(player_found):
         player = Global.get_player()
-        if(path.size() < 1):
+        if(path.size() < 1 && player != null):
             player_pos = player.position
             path = get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)
             print("path assigned")

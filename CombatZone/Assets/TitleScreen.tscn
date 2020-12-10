@@ -24,7 +24,7 @@ func _on_Quit_pressed():
 
 
 func _on_StartButton_pressed():
-    get_tree().change_scene(\"res://Environment/TestLevel.tscn\")
+    get_tree().change_scene(\"res://Levels/Level_00.tscn\")
 
 
 func _on_Debug_pressed():
