@@ -24,32 +24,20 @@ tile_data = PoolIntArray( -655377, 0, 7, -655376, 0, 196612, -655375, 0, 196612,
 [node name="DamageableDummy" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1253.54, 1220.33 )
 
-[node name="Node2D" type="Node2D" parent="DamageableDummy"]
-
 [node name="DamageableDummy2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 223.69, 2017.1 )
-
-[node name="Node2D" type="Node2D" parent="DamageableDummy2"]
 
 [node name="DamageableDummy3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 242.718, 944.432 )
 
-[node name="Node2D" type="Node2D" parent="DamageableDummy3"]
-
 [node name="DamageableDummy4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1893.34, 639.995 )
-
-[node name="Node2D" type="Node2D" parent="DamageableDummy4"]
 
 [node name="DamageableDummy5" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1912.36, 2321.53 )
 
-[node name="Node2D" type="Node2D" parent="DamageableDummy5"]
-
 [node name="DamageableDummy6" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1258.3, 1788.77 )
-
-[node name="Node2D" type="Node2D" parent="DamageableDummy6"]
 
 [node name="player" parent="." instance=ExtResource( 3 )]
 position = Vector2( -71.5561, 1414.18 )
