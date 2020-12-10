@@ -7,7 +7,7 @@ var player_pos
 export (PackedScene) var default_weapon
 var shoot_count = 0
 var can_shoot = true
-onready var player = get_node('/root/TestLevel/player')
+var player 
 var player_found = false
 
 
@@ -17,6 +17,7 @@ func _ready() -> void:
     $HealthG.hide()
     var weapon = default_weapon.instance()
     print($holsters.get_child_count())
+    player = Global.get_player()
     if default_weapon != null:
         $holsters.add_child(weapon)
         print($holsters.get_child_count())
@@ -42,6 +43,7 @@ func shoot_player() -> void:
            
 func go_after_player() -> void:
     if(player_found):
+        player = Global.get_player()
         if(path.size() < 1):
             player_pos = player.position
             path = get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)

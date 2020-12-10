@@ -28,7 +28,13 @@ func switch_camera2D(old_node,new_node):
 # register player as player variable for later referencing by script
 func register_player(game_player):
     player = game_player
+    print("player set")
     
+func get_player():
+    if player != null:
+        return player
+    else:
+        print("player not set, can return")
 # weapon
 func shoot_bullet(caliber, pos, rot):
     #var b = bullet_caliber[caliber].instance()

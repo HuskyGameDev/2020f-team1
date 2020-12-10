@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Environment/TestLevel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=2]
 
 [node name="Level_00" instance=ExtResource( 1 )]
 
@@ -14,8 +14,9 @@ position = Vector2( -3794.64, 3740.3 )
 [node name="Node2D" parent="DamageableDummy" index="12"]
 position = Vector2( 403.175, 40.3176 )
 
-[node name="DamageableDummy2" parent="." index="2" instance=ExtResource( 2 )]
+[node name="DamageableDummy2" parent="." index="2"]
 position = Vector2( -2958.05, 3468.15 )
+default_weapon = ExtResource( 2 )
 
-[node name="player" parent="." index="4"]
+[node name="player" parent="." index="7"]
 position = Vector2( -4204.1, 3893.7 )

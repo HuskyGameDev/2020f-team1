@@ -22,6 +22,8 @@ script = ExtResource( 3 )
 speed = 300
 friction = 0.3
 acceleration = 0.5
+health = 600.0
+totalHealth = 600.0
 default_weapon = ExtResource( 4 )
 
 [node name="upperbody_sprite" parent="." index="0"]
