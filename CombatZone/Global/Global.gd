@@ -34,7 +34,8 @@ func get_player():
     if player != null:
         return player
     else:
-        print("player not set, can return")
+        print("player not set, can't return")
+        
 # weapon
 func shoot_bullet(caliber, pos, rot):
     #var b = bullet_caliber[caliber].instance()

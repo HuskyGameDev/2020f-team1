@@ -3,6 +3,7 @@ extends Area2D
 signal shoot
 
 export var spread: = 0.05
+export var shot_Per_shell = 1
 export var clip_size = 10
 export var ammo = 50    # default ammo count
 export var fire_rate = 1.0
@@ -27,7 +28,8 @@ func shoot() -> void:
     if can_shoot and remain_in_mag:
         can_shoot = false
         $rate_of_fire.start()
-        Global.shoot_bullet(caliber, $muzzle.global_position, global_rotation + bullet_spread(spread))
+        for n in range(shot_Per_shell):
+            Global.shoot_bullet(caliber, $muzzle.global_position, global_rotation + bullet_spread(spread))
         Global.eject_shell($ejection_port.global_position,global_rotation)
         print("shooting ", caliber)
     
