@@ -25,6 +25,7 @@ func _ready() -> void:
 func get_input():
     dodge = Vector2.ZERO
     look_at(get_global_mouse_position())
+    $hand.look_at(get_global_mouse_position())
     if Input.is_action_pressed("player_attack_1"):
         attack1()
     if Input.is_action_pressed("player_attach_2"):
