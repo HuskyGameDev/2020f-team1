@@ -365,4 +365,4 @@ MigrationBackup/
 
 *Thumbs.db
 *.import
-*.import
+**/*.import
