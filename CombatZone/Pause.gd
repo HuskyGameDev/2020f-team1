@@ -9,19 +9,19 @@ var already_paused
 var player
 
 func _ready():
-    player = get_node("/root/Root/Player")
+	player = get_node("/root/Root/Player")
 func _input(event):
-    if not visible:
-        if Input.is_action_just_pressed("menu"):
-            # Pause game
-            already_paused = get_tree().paused
-            get_tree().paused = true
-            # Reset the popup
-            popup()
-    else:
-         if Input.is_action_just_pressed("menu"):
-            get_tree().paused = false
-            hide()
+	if not visible:
+		if Input.is_action_just_pressed("menu"):
+			# Pause game
+			already_paused = get_tree().paused
+			get_tree().paused = true
+			# Reset the popup
+			popup()
+	else:
+		if Input.is_action_just_pressed("menu"):
+			get_tree().paused = false
+			hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
