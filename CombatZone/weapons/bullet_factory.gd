@@ -11,8 +11,10 @@ var caliber_dict = {'9mm': b_9mm}
 # weapons
 var w_9mm_autoloader = preload("res://weapons/hand_gun/9mm_autoloader.tscn")
 var w_magnum = preload("res://weapons/hand_gun/magnum.tscn")
+var w_sawn_off_b = preload("res://weapons/hand_gun/sawn_off_broomstick.tscn")
 var weapon_dict = {'9mmloader': w_9mm_autoloader,
-                    'magnum': w_magnum
+                    'magnum': w_magnum,
+                    'sawn_off_broom': w_sawn_off_b
                     }
 
 

@@ -12,13 +12,13 @@ var player_found = false
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready() -> void:          # enemy don't  need holster for storing weapons at this stage of development
     var weapon = default_weapon.instance()
-    print($holsters.get_child_count())
+    print($upper_body/hand.get_child_count())
     player = Global.get_player()
     if default_weapon != null:
-        $holsters.add_child(weapon)
-        print($holsters.get_child_count())
+        $upper_body/hand.add_child(weapon)
+        print($upper_body/hand.get_child_count())
         
         
 func _process(delta):
@@ -30,14 +30,14 @@ func _process(delta):
             shoot_player()
 
 func shoot_player() -> void:
-    if $holsters.get_child_count() > 0 && can_shoot:
+    if $upper_body/hand.get_child_count() > 0 && can_shoot:
         if shoot_count > 100:
             shoot_count = 0
             $action_timer.start()
             can_shoot = false
         else:
             shoot_count += 1
-            $holsters.get_child(0).shoot()
+            $upper_body/hand.get_child(0).shoot()
            
 func go_after_player() -> void:
     if(player_found):
@@ -63,7 +63,7 @@ func get_input():
     dodge = Vector2.ZERO
     if(player != null && path.size() > 0):
         $upper_body.look_at(player.position)
-        $holsters.look_at(player.position)
+        $upper_body/hand.look_at(player.position)
         var direction = position.direction_to(path[0])
         if(position.distance_to(player.position) < 250):
             var rand = randi()%100+1

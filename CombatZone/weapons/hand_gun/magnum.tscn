@@ -11,6 +11,8 @@ height = 9.37948
 [node name="magnum" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 spread = 0.0
+clip_size = 6
+fire_rate = 0.5
 weap_name = "magnum"
 
 [node name="Sprite" parent="." index="0"]

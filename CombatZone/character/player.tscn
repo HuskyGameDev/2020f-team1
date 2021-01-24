@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://character/player.gd" type="Script" id=3]
-[ext_resource path="res://weapons/hand_gun/magnum.tscn" type="PackedScene" id=4]
+[ext_resource path="res://weapons/hand_gun/sawn_off_broomstick.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/HPGrn.png" type="Texture" id=5]
 [ext_resource path="res://assets/HPRed.png" type="Texture" id=6]
 [ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/fonts/Robot_Font.otf" type="DynamicFontData" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.8975
@@ -15,6 +16,10 @@ height = 36.1017
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 22.475
 height = 52.3612
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+font_data = ExtResource( 8 )
 
 [node name="player" instance=ExtResource( 1 )]
 z_index = 1
@@ -63,11 +68,29 @@ zoom = Vector2( 2, 2 )
 [node name="RollTimer" type="Timer" parent="." index="7"]
 one_shot = true
 
-[node name="RollTimer2" type="Timer" parent="." index="8"]
+[node name="reload_timer" type="Timer" parent="." index="8"]
 wait_time = 0.25
+one_shot = true
 
 [node name="CollisionShape2D" parent="Pre_pickup_Area2D" index="0"]
 position = Vector2( 30, 0 )
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="ammo_call_out" type="RichTextLabel" parent="." index="10"]
+margin_left = 36.0
+margin_top = -114.0
+margin_right = 410.0
+margin_bottom = 9.0
+custom_fonts/normal_font = SubResource( 3 )
+text = "default font"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="text_box_timer" type="Timer" parent="ammo_call_out" index="1"]
+wait_time = 3.0
+one_shot = true
 [connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]
+[connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="ammo_call_out/text_box_timer" to="." method="_on_text_box_timer_timeout"]

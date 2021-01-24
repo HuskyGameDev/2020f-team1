@@ -11,6 +11,7 @@ extents = Vector2( 32.2686, 10 )
 script = ExtResource( 3 )
 spread = 0.1
 weap_name = "mac10"
+reload_time = 4
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 65.2306, 0.176781 )

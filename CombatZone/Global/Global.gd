@@ -3,6 +3,7 @@ extends Node
 # Global script will be used to store persistent game info
 
 # Game Settings
+export var debug = true
 var game_over: = false
 var game_paused: = false
 var current_scene = null
@@ -19,7 +20,8 @@ var shell = preload("res://Environment/Effects/Bullet_Eject.tscn")
 
 func _ready() -> void:
     if player == null:
-        print('player not set...')
+        if debug:
+            print('player not set...')
 # UI
 func switch_camera2D(old_node,new_node):
     old_node.get_node('Camera2D').current = false
@@ -33,7 +35,7 @@ func register_player(game_player):
 func get_player():
     if player != null:
         return player
-    else:
+    elif debug:
         print("player not set, can't return")
         
 # weapon
@@ -82,7 +84,11 @@ func disembark(people: Node2D,vehicle: Node):
     
 # puck-ups
 func pickup(player,type,number):
-    print("player ",player, "pick up ", type, "quantity of ",number)
+    if debug:
+        print("player ",player, "pick up ", type, "quantity of ",number)
 
 func scene_change(path_name):
     get_tree().change_scene_to(path_name)
+
+func debug_on() -> bool:
+    return debug

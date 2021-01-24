@@ -4,6 +4,9 @@ var canShoot = true
 var canRoll = true
 var input = Vector2()
 
+# check reload
+var start_r = 0 # a counter to keep track how much has past since reload is pressed and held
+
 export (PackedScene) var default_weapon
 export (PackedScene) var holstered_weap
 # Declare member variables here. Examples:
@@ -25,7 +28,7 @@ func _ready() -> void:
 func get_input():
     dodge = Vector2.ZERO
     $upper_body.look_at(get_global_mouse_position())
-    $upper_body/hand.look_at(get_global_mouse_position())
+    $upper_body/hand.look_at(get_global_mouse_position()) # weapon points at mouse pos
     if Input.is_action_pressed("player_attack_1"):
         attack1()
     if Input.is_action_pressed("player_attach_2"):
@@ -34,16 +37,48 @@ func get_input():
         swap_weap()
     if Input.is_action_pressed("player_dodge"): #LEFT SHIFT TO ROLL
         dodge_roll()
+    if Input.is_action_pressed("player_reload"):    # displays round in clip
+        start_r = start_r + 1
+        #print("check ammo ", start_r)
+        print("round in clip: ", $upper_body/hand.get_child(0).bullet_in_mag)
+        if start_r > 30:
+            var words = " %d rounds left" % $upper_body/hand.get_child(0).bullet_in_mag
+            player_speaks(words)
+    if Input.is_action_just_released("player_reload"):
+        if(start_r <= 30):
+            print("reload")
+            reload_weapon()
+        start_r = 0
+                
     input.x = Input.get_action_strength("player_move_right") - Input.get_action_strength("player_move_left")
     input.y = Input.get_action_strength("player_move_down") - Input.get_action_strength("player_move_up")
     return input
 
 func attack1() -> void:
-    if $upper_body/hand.get_child_count()>0:
-        $upper_body/hand.get_child(0).shoot()
+    if $upper_body/hand.get_child_count() > 0 and canShoot:
+        var shot_fired = $upper_body/hand.get_child(0).shoot()
+        if shot_fired == 0:
+            canShoot = false
+            reload_weapon()
     
 func attack2() -> void:
     pass
+
+func reload_weapon() -> void:
+    if $upper_body/hand.get_child(0).clip_full():
+        if Global.debug:
+            print("player weapon: clip full")
+    else:
+        var reload_timr = $upper_body/hand.get_child(0).reload_weap()
+        if reload_timr > 0: # reload occured
+            var words = "reloading"
+            player_speaks(words)
+            $reload_timer.start(reload_timr)
+            if Global.debug:
+                print("player: reloading ", reload_timr)
+        elif reload_timr == -1: # run out of ammo to reload
+            if Global.debug:
+                print("player: out of ammo")
 
 func swap_weap():
     print("switching weapon")
@@ -115,3 +150,18 @@ func heal_up(number):
 func die():
     get_tree().change_scene("res://assets/TitleScreen.tscn")
     queue_free()
+
+func player_speaks(text_input) -> void:
+    $ammo_call_out.set_text(text_input)
+    $ammo_call_out.show()
+    $ammo_call_out/text_box_timer.start()
+    
+
+func _on_reload_timer_timeout() -> void:
+    canShoot = true
+
+
+
+
+func _on_text_box_timer_timeout() -> void:
+    $ammo_call_out.hide()
