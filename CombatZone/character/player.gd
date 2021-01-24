@@ -17,15 +17,15 @@ func _ready() -> void:
     $Dodge.hide()
     var weapon = default_weapon.instance()
     if default_weapon != null:
-        $hand.add_child(weapon)
+        $upper_body/hand.add_child(weapon)
     if holstered_weap != null:
         $holsters.add_child(holstered_weap.instance())
 
 
 func get_input():
     dodge = Vector2.ZERO
-    look_at(get_global_mouse_position())
-    $hand.look_at(get_global_mouse_position())
+    $upper_body.look_at(get_global_mouse_position())
+    $upper_body/hand.look_at(get_global_mouse_position())
     if Input.is_action_pressed("player_attack_1"):
         attack1()
     if Input.is_action_pressed("player_attach_2"):
@@ -39,8 +39,8 @@ func get_input():
     return input
 
 func attack1() -> void:
-    if $hand.get_child_count()>0:
-        $hand.get_child(0).shoot()
+    if $upper_body/hand.get_child_count()>0:
+        $upper_body/hand.get_child(0).shoot()
     
 func attack2() -> void:
     pass
@@ -49,9 +49,9 @@ func swap_weap():
     print("switching weapon")
     if $holsters.get_child_count() > 0:
         print("I'm switching")
-        var temp_weap = $hand.get_child(0).duplicate()
-        $hand.remove_child($hand.get_child(0))
-        $hand.add_child($holsters.get_child(0).duplicate())
+        var temp_weap = $upper_body/hand.get_child(0).duplicate()
+        $upper_body/hand.remove_child($upper_body/hand.get_child(0))
+        $upper_body/hand.add_child($holsters.get_child(0).duplicate())
         $holsters.remove_child($holsters.get_child(0))
         $holsters.add_child(temp_weap)
 
@@ -81,24 +81,24 @@ func _on_RollTimer_timeout():
 
 # series of methods to check player states
 func has_weapon(weapon_name):
-    if $hand.get_child(0).get_weap_name() == weapon_name:
+    if $upper_body/hand.get_child(0).get_weap_name() == weapon_name:
         return true
     elif $holsters.get_child(0).get_weap_name() == weapon_name:
         return true
     return false
 
 func weapon_full():
-    if $hand.get_child_count()>0 && $holsters.get_child_count()>0:
+    if $upper_body/hand.get_child_count()>0 && $holsters.get_child_count()>0:
         return true
         
 func take_damage(pos, damage_amount) -> void:
-    $Health.show()
-    $HealthG.show()
+    $health_bars.show()
+    
     health -= damage_amount
     if(health <= 0):
         health = 0
         die()
-    $HealthG.scale.x = (health / totalHealth)
+    $health_bars/HealthG.scale.x = (health / totalHealth)
     Global.spill_blood(pos)
     #print("Player HP percent: %f" % ((health / 100)))
     #print(" Player Damage, remaining health: %d" % health)
@@ -110,7 +110,7 @@ func heal_up(number):
     health += number
     if health>totalHealth:
         health = totalHealth
-    $HealthG.scale.x = (health / totalHealth)
+    $health_bars/HealthG.scale.x = (health / totalHealth)
         
 func die():
     get_tree().change_scene("res://assets/TitleScreen.tscn")

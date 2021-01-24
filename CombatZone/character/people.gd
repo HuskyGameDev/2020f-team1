@@ -21,7 +21,7 @@ var pickup_ammo   = {'9mm':false}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     add_to_group("flesh_damageable")
-    $Health.hide()
+    $health_bars.hide()
     $Dodge.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,6 +54,9 @@ func _physics_process(delta: float) -> void:
             velocity = lerp(velocity, direction.normalized() * speed, acceleration)
         else:
             velocity = lerp(velocity, Vector2.ZERO, friction)
+        # set collision shape rotations
+        $CollisionShape2D.rotation = $upper_body.rotation
+        $Pre_pickup_Area2D.rotation = $upper_body.rotation
         velocity =  move_and_slide(velocity + dodge)
 
 

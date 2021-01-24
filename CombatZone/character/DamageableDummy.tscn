@@ -4,7 +4,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://character/DamageableDummy.gd" type="Script" id=3]
 [ext_resource path="res://assets/HPRed.png" type="Texture" id=4]
-[ext_resource path="res://Assets/HPGrn.png" type="Texture" id=5]
+[ext_resource path="res://assets/HPGrn.png" type="Texture" id=5]
 [ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -45,13 +45,18 @@ friction = 0.08
 health = 300.0
 default_weapon = ExtResource( 6 )
 
-[node name="upperbody_sprite" parent="." index="0"]
-scale = Vector2( 1.20005, 1.07712 )
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="0"]
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="upperbody_sprite" parent="upper_body" index="0"]
+texture = ExtResource( 2 )
+
+[node name="hand" parent="upper_body" index="1"]
+position = Vector2( 25, 30 )
+
+[node name="holsters" parent="." index="3"]
+position = Vector2( 25, 30 )
 
 [node name="hit_spot" type="Particles2D" parent="." index="4"]
 emitting = false
@@ -62,24 +67,27 @@ explosiveness = 1.0
 randomness = 0.27
 process_material = SubResource( 4 )
 
-[node name="Health" parent="." index="5"]
-position = Vector2( 0, -60 )
+[node name="Dodge" parent="." index="5"]
+offset = Vector2( 0, 45 )
+
+[node name="health_bars" parent="." index="6"]
+position = Vector2( 0, -45 )
+
+[node name="Health" parent="health_bars" index="0"]
 texture = ExtResource( 4 )
 
-[node name="HealthG" type="Sprite" parent="." index="6"]
-position = Vector2( -30, -60 )
+[node name="HealthG" parent="health_bars" index="1"]
 texture = ExtResource( 5 )
-offset = Vector2( 30, 0 )
 
 [node name="enemy_navigation" type="Navigation2D" parent="." index="7"]
 
-[node name="range" type="Area2D" parent="." index="9"]
+[node name="range" type="Area2D" parent="." index="8"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="range" index="0"]
 scale = Vector2( 10, 10 )
 shape = SubResource( 5 )
 
-[node name="action_timer" type="Timer" parent="." index="10"]
+[node name="action_timer" type="Timer" parent="." index="9"]
 wait_time = 1.337
 [connection signal="body_entered" from="range" to="." method="_on_range_body_entered"]
 [connection signal="timeout" from="action_timer" to="." method="_on_action_timer_timeout"]

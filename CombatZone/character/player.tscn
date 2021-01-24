@@ -29,35 +29,41 @@ totalHealth = 600.0
 default_weapon = ExtResource( 4 )
 holstered_weap = ExtResource( 7 )
 
-[node name="upperbody_sprite" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="upperbody_sprite" parent="upper_body" index="0"]
 rotation = 1.5708
 scale = Vector2( 1, 0.5 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" parent="." index="2"]
-shape = SubResource( 1 )
+[node name="hand" parent="upper_body" index="1"]
+position = Vector2( 25, 30 )
 
 [node name="holsters" parent="." index="3"]
 visible = false
 position = Vector2( 20, 25 )
 
-[node name="hand" type="Node2D" parent="." index="4"]
-position = Vector2( 20, 25 )
+[node name="Dodge" parent="." index="4"]
+offset = Vector2( 0, 45 )
 
-[node name="Health" parent="." index="5"]
+[node name="health_bars" parent="." index="5"]
+position = Vector2( 0, -45 )
+
+[node name="Health" parent="health_bars" index="0"]
 texture = ExtResource( 6 )
 
-[node name="HealthG" type="Sprite" parent="." index="6"]
+[node name="HealthG" parent="health_bars" index="1"]
 texture = ExtResource( 5 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="7"]
+[node name="Camera2D" type="Camera2D" parent="." index="6"]
 current = true
 zoom = Vector2( 2, 2 )
 
-[node name="RollTimer" type="Timer" parent="." index="8"]
+[node name="RollTimer" type="Timer" parent="." index="7"]
 one_shot = true
 
-[node name="RollTimer2" type="Timer" parent="." index="9"]
+[node name="RollTimer2" type="Timer" parent="." index="8"]
 wait_time = 0.25
 
 [node name="CollisionShape2D" parent="Pre_pickup_Area2D" index="0"]

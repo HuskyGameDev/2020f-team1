@@ -13,8 +13,6 @@ var player_found = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    $Health.hide()
-    $HealthG.hide()
     var weapon = default_weapon.instance()
     print($holsters.get_child_count())
     player = Global.get_player()
@@ -51,13 +49,12 @@ func go_after_player() -> void:
         #get_parent().get_node("Line2D").points = PoolVector2Array(path)
 
 func take_damage(pos, damage_amount) -> void:
-    $Health.show()
-    $HealthG.show()
+    $health_bars.show()
     health -= damage_amount
     player_found = true
     if(health < 0):
         health = 0
-    $HealthG.scale.x = (health / totalHealth)
+    $health_bars/HealthG.scale.x = (health / totalHealth)
     Global.spill_blood(pos)
     print("HP percent: %f" % ((health / 100)))
     print("Damage, remaining health: %d" % health)
@@ -65,7 +62,8 @@ func take_damage(pos, damage_amount) -> void:
 func get_input():
     dodge = Vector2.ZERO
     if(player != null && path.size() > 0):
-        look_at(player.position)
+        $upper_body.look_at(player.position)
+        $holsters.look_at(player.position)
         var direction = position.direction_to(path[0])
         if(position.distance_to(player.position) < 250):
             var rand = randi()%100+1
