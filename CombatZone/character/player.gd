@@ -18,6 +18,7 @@ export (PackedScene) var holstered_weap
 func _ready() -> void:
     add_to_group("player")
     $Dodge.hide()
+    $HealthA.hide()
     var weapon = default_weapon.instance()
     if default_weapon != null:
         $upper_body/hand.add_child(weapon)
@@ -129,11 +130,16 @@ func weapon_full():
 func take_damage(pos, damage_amount) -> void:
     $health_bars.show()
     
-    health -= damage_amount
+    if(armor > 0):
+        armor -= damage_amount
+    else:
+        health -= damage_amount
+        
     if(health <= 0):
         health = 0
         die()
     $health_bars/HealthG.scale.x = (health / totalHealth)
+    $HealthA.scale.x = (armor / totalArmor)
     Global.spill_blood(pos)
     #print("Player HP percent: %f" % ((health / 100)))
     #print(" Player Damage, remaining health: %d" % health)
@@ -141,12 +147,22 @@ func take_damage(pos, damage_amount) -> void:
 func injured():
     return health < totalHealth
     
+func armorDamaged():
+    return armor < totalArmor
+    
 func heal_up(number):
     health += number
     if health>totalHealth:
         health = totalHealth
     $health_bars/HealthG.scale.x = (health / totalHealth)
         
+func armor_up(number):
+    armor += number
+    $HealthA.show()
+    if(armor > totalArmor):
+        armor = totalArmor
+    $HealthA.scale.x = (armor / totalArmor)
+    
 func die():
     get_tree().change_scene("res://assets/TitleScreen.tscn")
     queue_free()

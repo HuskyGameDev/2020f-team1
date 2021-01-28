@@ -8,6 +8,10 @@ export var health: = 100.0
 export var totalHealth: = 100.0
 export var healthPercent: = 100.0
 
+export var armor: = 0.0
+export var totalArmor: = 100.0
+export var armorPercent: = 0.0
+
 var dodge: = Vector2.ZERO
 export var counter: = 100.0
 export var countertotal: = 100.0

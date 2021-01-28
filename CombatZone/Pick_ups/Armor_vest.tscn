@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Armor.png" type="Texture" id=1]
+[ext_resource path="res://Pick_ups/Armor_vest.gd" type="Script" id=2]
+[ext_resource path="res://Pick_ups/Proto_pick_up.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.2035
+
+[node name="armor_vest" instance=ExtResource( 3 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="Pickup_Area2D" index="0"]
+shape = SubResource( 1 )

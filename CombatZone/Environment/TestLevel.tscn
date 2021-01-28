@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Pick_ups/health_pack.tscn" type="PackedScene" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Environment/TestLevel.gd" type="Script" id=4]
 [ext_resource path="res://Environment/TestLevel_Tileset.tres" type="TileSet" id=5]
 [ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Pick_ups/Armor_vest.tscn" type="PackedScene" id=7]
 
 [node name="TestLevel" type="Node2D"]
 position = Vector2( 28.3056, 30.8383 )
@@ -46,3 +47,6 @@ position = Vector2( -71.5561, 1414.18 )
 
 [node name="health_pack" parent="." instance=ExtResource( 1 )]
 position = Vector2( -490.657, 1162.54 )
+
+[node name="armor_vest" parent="." instance=ExtResource( 7 )]
+position = Vector2( -493.378, 1390.03 )
