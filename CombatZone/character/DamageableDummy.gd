@@ -44,7 +44,7 @@ func go_after_player() -> void:
         player = Global.get_player()
         if(path.size() < 1 && player != null):
             player_pos = player.position
-            path = get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)
+            path= get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)
             print("path assigned")
         #get_parent().get_node("Line2D").points = PoolVector2Array(path)
 
