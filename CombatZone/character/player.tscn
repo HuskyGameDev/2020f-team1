@@ -78,6 +78,7 @@ rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="ammo_call_out" type="RichTextLabel" parent="." index="10"]
+visible = false
 margin_left = 36.0
 margin_top = -114.0
 margin_right = 410.0
