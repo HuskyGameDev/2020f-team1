@@ -5,7 +5,7 @@ extends Node
 #bullets
 var b_9mm = preload("res://weapons/bullets/9mm_ammo.tscn")
 
-var caliber_dict = {'9mm': b_9mm}
+onready var caliber_dict = {'9mm': preload("res://weapons/bullets/9mm_ammo.tscn")}
 
 
 # weapons
@@ -14,7 +14,7 @@ var w_magnum = preload("res://weapons/hand_gun/magnum.tscn")
 var w_sawn_off_b = preload("res://weapons/hand_gun/sawn_off_broomstick.tscn")
 var weapon_dict = {'9mmloader': w_9mm_autoloader,
                     'magnum': w_magnum,
-                    'sawn_off_broom': w_sawn_off_b
+                    'sawn_off_boom': w_sawn_off_b
                     }
 
 

@@ -1,14 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://character/player.gd" type="Script" id=3]
 [ext_resource path="res://weapons/hand_gun/sawn_off_broomstick.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/HPGrn.png" type="Texture" id=5]
-[ext_resource path="res://assets/HPRed.png" type="Texture" id=6]
 [ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/fonts/Robot_Font.otf" type="DynamicFontData" id=8]
-[ext_resource path="res://Assets/ArmorBar.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.8975
@@ -46,16 +43,16 @@ texture = ExtResource( 2 )
 [node name="hand" parent="upper_body" index="1"]
 position = Vector2( 25, 30 )
 
+[node name="reach_for" type="RayCast2D" parent="upper_body" index="2"]
+cast_to = Vector2( 70, 0 )
+collision_mask = 16
+
 [node name="holsters" parent="." index="3"]
 visible = false
 position = Vector2( 20, 25 )
 
 [node name="Dodge" parent="." index="4"]
 offset = Vector2( 0, 45 )
-
-[node name="HealthA" parent="." index="5"]
-position = Vector2( 0, -46 )
-texture = ExtResource( 9 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="6"]
 current = true
@@ -70,12 +67,6 @@ one_shot = true
 
 [node name="health_bars" parent="." index="9"]
 position = Vector2( 0, -60 )
-
-[node name="Health" parent="health_bars" index="0"]
-texture = ExtResource( 6 )
-
-[node name="HealthG" parent="health_bars" index="1"]
-texture = ExtResource( 5 )
 
 [node name="ammo_call_out" type="RichTextLabel" parent="." index="10"]
 visible = false

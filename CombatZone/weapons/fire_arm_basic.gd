@@ -34,7 +34,7 @@ func shoot() -> int:    # returns int signifying success of firing
             Global.eject_shell($ejection_port.global_position,global_rotation) # eject shells
             bullet_in_mag = bullet_in_mag - 1
             print("bullet in mag ", bullet_in_mag)
-            return 1
+            return bullet_in_mag
         else:   # clip empty
             return 0
     return 1

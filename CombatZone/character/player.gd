@@ -13,12 +13,13 @@ export (PackedScene) var holstered_weap
 # var a: int = 2
 # var b: String = "text"
 
+onready var reach = $upper_body/reach_for
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     add_to_group("player")
     $Dodge.hide()
-    $HealthA.hide()
+    $Armor_bar.hide()
     var weapon = default_weapon.instance()
     if default_weapon != null:
         $upper_body/hand.add_child(weapon)
@@ -93,6 +94,13 @@ func swap_weap():
 
 
 func _process(delta):
+    if reach.is_colliding():
+        var reached_item = reach.get_collider()
+        if Global.debug_on():
+            print("player ray collided", reached_item)
+        if reach.get_collider().get_groups().has('weapon'):
+            print("collider is weapon")
+            
     $Dodge.scale.x = ($RollTimer.time_left / $RollTimer.wait_time)
     if($Dodge.scale.x == 0):
         $Dodge.hide()
@@ -158,10 +166,10 @@ func heal_up(number):
         
 func armor_up(number):
     armor += number
-    $HealthA.show()
+    $Armor_bar.show()
     if(armor > totalArmor):
         armor = totalArmor
-    $HealthA.scale.x = (armor / totalArmor)
+    $Armor_bar.scale.x = (armor / totalArmor)
     
 func die():
     get_tree().change_scene("res://assets/TitleScreen.tscn")
@@ -176,8 +184,6 @@ func player_speaks(text_input) -> void:
 func _on_reload_timer_timeout() -> void:
     canShoot = true
 
-
-
-
+# text box time out 
 func _on_text_box_timer_timeout() -> void:
     $ammo_call_out.hide()
