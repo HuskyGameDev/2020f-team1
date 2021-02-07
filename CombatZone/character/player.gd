@@ -148,6 +148,7 @@ func weapon_full():
         
 func take_damage(pos, damage_amount) -> void:
     $health_bars.show()
+    $Armor_bar.show()
     
     if(armor > 0):
         armor -= damage_amount
