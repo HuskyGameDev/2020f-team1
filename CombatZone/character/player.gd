@@ -137,6 +137,7 @@ func weapon_full():
         
 func take_damage(pos, damage_amount) -> void:
     $health_bars.show()
+    $Armor_bar.show()
     
     if(armor > 0):
         armor -= damage_amount
@@ -147,7 +148,7 @@ func take_damage(pos, damage_amount) -> void:
         health = 0
         die()
     $health_bars/HealthG.scale.x = (health / totalHealth)
-    $HealthA.scale.x = (armor / totalArmor)
+    $Armor_bar.scale.x = (armor / totalArmor)
     Global.spill_blood(pos)
     #print("Player HP percent: %f" % ((health / 100)))
     #print(" Player Damage, remaining health: %d" % health)

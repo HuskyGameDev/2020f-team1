@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_top = -1.0
+margin_right = 265.0
+margin_bottom = 149.0
+bbcode_enabled = true
+bbcode_text = "[shake] Ya  Yeet! [/shake] "
+text = " Ya  Yeet!  "
+__meta__ = {
+"_edit_use_anchors_": false
+}
