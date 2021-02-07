@@ -13,8 +13,11 @@ export (PackedScene) var holstered_weap
 # var a: int = 2
 # var b: String = "text"
 
-onready var reach = $upper_body/reach_for
+var weap_to_spawn   = null
+var weap_to_drop    = null
 
+onready var reach = $upper_body/reach_for
+onready var hand    = $upper_body/hand
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     add_to_group("player")
@@ -22,7 +25,7 @@ func _ready() -> void:
     $Armor_bar.hide()
     var weapon = default_weapon.instance()
     if default_weapon != null:
-        $upper_body/hand.add_child(weapon)
+        hand.add_child(weapon)
     if holstered_weap != null:
         $holsters.add_child(holstered_weap.instance())
 
@@ -30,23 +33,25 @@ func _ready() -> void:
 func get_input():
     dodge = Vector2.ZERO
     $upper_body.look_at(get_global_mouse_position())
-    $upper_body/hand.look_at(get_global_mouse_position()) # weapon points at mouse pos
+    hand.look_at(get_global_mouse_position()) # weapon points at mouse pos
     if Input.is_action_pressed("player_attack_1"):
         attack1()
     if Input.is_action_pressed("player_attach_2"):
         attack2()
     if Input.is_action_just_pressed("player_switch_weapon"):
         swap_weap()
+    if Input.is_action_just_pressed("player_interact"):
+        interAct()
     if Input.is_action_pressed("player_dodge"): #LEFT SHIFT TO ROLL
         dodge_roll()
     if Input.is_action_pressed("player_reload"):    # displays round in clip
         start_r = start_r + 1
         #print("check ammo ", start_r)
-        print("round in clip: ", $upper_body/hand.get_child(0).bullet_in_mag)
+        print("round in clip: ", hand.get_child(0).bullet_in_mag)
         if start_r > 30:
-            var words = " %d rounds left" % $upper_body/hand.get_child(0).bullet_in_mag
+            var words = " %d rounds left" % hand.get_child(0).bullet_in_mag
             player_speaks(words)
-    if Input.is_action_just_released("player_reload"):
+    if Input.is_action_just_released("player_reload"):  # reload weapon on release of buttom under 30 frame (maybe?)
         if(start_r <= 30):
             print("reload")
             reload_weapon()
@@ -57,8 +62,8 @@ func get_input():
     return input
 
 func attack1() -> void:
-    if $upper_body/hand.get_child_count() > 0 and canShoot:
-        var shot_fired = $upper_body/hand.get_child(0).shoot()
+    if hand.get_child_count() > 0 and canShoot:
+        var shot_fired = hand.get_child(0).shoot()
         if shot_fired == 0:
             canShoot = false
             reload_weapon()
@@ -66,12 +71,19 @@ func attack1() -> void:
 func attack2() -> void:
     pass
 
+func interAct() -> void:
+    if pickup_item != null:  # pick up items
+        if pickup_item.get_groups().has('weapon'):
+            pass
+func switch_weapon() -> void:
+    pass
+    
 func reload_weapon() -> void:
-    if $upper_body/hand.get_child(0).clip_full():
+    if hand.get_child(0).clip_full():
         if Global.debug:
             print("player weapon: clip full")
     else:
-        var reload_timr = $upper_body/hand.get_child(0).reload_weap()
+        var reload_timr = hand.get_child(0).reload_weap()
         if reload_timr > 0: # reload occured
             var words = "reloading"
             player_speaks(words)
@@ -94,13 +106,12 @@ func swap_weap():
 
 
 func _process(delta):
-    if reach.is_colliding():
-        var reached_item = reach.get_collider()
-        if Global.debug_on():
-            print("player ray collided", reached_item)
-        if reach.get_collider().get_groups().has('weapon'):
-            print("collider is weapon")
-            
+    #if reach.is_colliding():
+    #    var reached_item = reach.get_collider()
+    #    if Global.debug_on():
+    #        print("player ray collided", reached_item)
+     #   if reach.get_collider().get_groups().has('weapon'):
+     #       print("collider is weapon")     
     $Dodge.scale.x = ($RollTimer.time_left / $RollTimer.wait_time)
     if($Dodge.scale.x == 0):
         $Dodge.hide()
@@ -147,7 +158,7 @@ func take_damage(pos, damage_amount) -> void:
         health = 0
         die()
     $health_bars/HealthG.scale.x = (health / totalHealth)
-    $HealthA.scale.x = (armor / totalArmor)
+    $Armor_bar.scale.x = (armor / totalArmor)
     Global.spill_blood(pos)
     #print("Player HP percent: %f" % ((health / 100)))
     #print(" Player Damage, remaining health: %d" % health)
@@ -187,3 +198,19 @@ func _on_reload_timer_timeout() -> void:
 # text box time out 
 func _on_text_box_timer_timeout() -> void:
     $ammo_call_out.hide()
+
+
+func _on_pickup_Area2D_body_entered(body: Node) -> void:
+    print('pick up entered ', body)
+    if body.get_groups().has('item_pick_up'):
+        print('pick_up detedted')
+        pickup_item = body
+        if body.get_groups().has('weapon'):
+            print('weapon pick_up detected')
+
+
+func _on_pickup_Area2D_body_exited(body: Node) -> void:
+    if body.get_groups().has('item_pick_up'):
+        print('item exited ', body)
+        if body == pickup_item:
+            pickup_item = null

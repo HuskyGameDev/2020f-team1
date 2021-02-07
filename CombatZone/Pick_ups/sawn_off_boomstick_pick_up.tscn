@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/BoomstickTop.png" type="Texture" id=1]
 [ext_resource path="res://Pick_ups/boomstick_pickup.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=2]
+absorbent = true
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 14.0
@@ -9,7 +12,10 @@ height = 60.0
 
 [node name="sawn_off_broomstick_pick_up" type="RigidBody2D"]
 collision_layer = 16
+physics_material_override = SubResource( 2 )
 gravity_scale = 0.0
+linear_damp = 10.0
+angular_damp = 10.0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

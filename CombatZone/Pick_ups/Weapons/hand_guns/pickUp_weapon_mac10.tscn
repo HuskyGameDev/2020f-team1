@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Pick_ups/pickUp_proto_weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Mac10.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.61106
+
+[node name="pickUp_weapon_mac10" instance=ExtResource( 1 )]
+ammo_count = 60
+weapon_name = "mac10"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 1.26135, -9.24986 )
+scale = Vector2( 5, 5 )
+shape = SubResource( 1 )

@@ -3,6 +3,7 @@
 [ext_resource path="res://weapons/fire_arm_basic.gd" type="Script" id=1]
 
 [node name="fire_arm_basic" type="Area2D"]
+collision_mask = 22
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

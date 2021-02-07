@@ -11,13 +11,13 @@
 radius = 15.8975
 height = 36.1017
 
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 16.2584
+height = 0.685486
+
 [sub_resource type="DynamicFont" id=2]
 size = 50
 font_data = ExtResource( 8 )
-
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 22.475
-height = 52.3612
 
 [node name="player" instance=ExtResource( 1 )]
 z_index = 1
@@ -43,9 +43,15 @@ texture = ExtResource( 2 )
 [node name="hand" parent="upper_body" index="1"]
 position = Vector2( 25, 30 )
 
-[node name="reach_for" type="RayCast2D" parent="upper_body" index="2"]
-cast_to = Vector2( 70, 0 )
+[node name="pickup_Area2D" type="Area2D" parent="upper_body" index="2"]
+collision_layer = 2
 collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="upper_body/pickup_Area2D" index="0"]
+position = Vector2( 30, 0 )
+rotation = 1.5708
+scale = Vector2( 1.21516, 2.75001 )
+shape = SubResource( 3 )
 
 [node name="holsters" parent="." index="3"]
 visible = false
@@ -83,11 +89,8 @@ __meta__ = {
 [node name="text_box_timer" type="Timer" parent="ammo_call_out" index="1"]
 wait_time = 3.0
 one_shot = true
-
-[node name="CollisionShape2D" parent="Pre_pickup_Area2D" index="0"]
-position = Vector2( 30, 0 )
-rotation = 1.5708
-shape = SubResource( 3 )
+[connection signal="body_entered" from="upper_body/pickup_Area2D" to="." method="_on_pickup_Area2D_body_entered"]
+[connection signal="body_exited" from="upper_body/pickup_Area2D" to="." method="_on_pickup_Area2D_body_exited"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]
 [connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]
 [connection signal="timeout" from="ammo_call_out/text_box_timer" to="." method="_on_text_box_timer_timeout"]

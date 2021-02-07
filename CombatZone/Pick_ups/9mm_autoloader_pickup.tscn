@@ -37,5 +37,4 @@ scale = Vector2( 5, 5 )
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" index="0"]
-scale = Vector2( 1, 1 )
 shape = SubResource( 3 )

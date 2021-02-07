@@ -12,7 +12,7 @@ spread = 0.5
 shot_Per_shell = 5
 clip_size = 2
 fire_rate = 0.1
-weap_name = "sawn_off_broom"
+weap_name = "sawn_off_boom"
 bullet = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]

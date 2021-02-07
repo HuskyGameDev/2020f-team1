@@ -18,6 +18,8 @@ export var countertotal: = 100.0
 
 var velocity: = Vector2.ZERO
 var piloting = false
+
+var pickup_item = null
 # A dictionary of pickups to determine whether people needs certain pickups
 var pickup_bealth = { 'health': false, 'shield':false,}
 var pickup_weap   = {'autoloader':false, 'magnum':false, 'mac10':false}
@@ -60,14 +62,5 @@ func _physics_process(delta: float) -> void:
             velocity = lerp(velocity, Vector2.ZERO, friction)
         # set collision shape rotations
         $CollisionShape2D.rotation = $upper_body.rotation
-        $Pre_pickup_Area2D.rotation = $upper_body.rotation
+        #$Pre_pickup_Area2D.rotation = $upper_body.rotation
         velocity =  move_and_slide(velocity + dodge)
-
-
-func _on_Pre_pickup_Area2D_body_entered(body: Node) -> void:
-    print('picked up ',body)
-    if body.get_groups().has("item_pick_up"):
-        print("pick_up detected")
-        if body.get_groups().has("weapon"):
-            print("weapon pick_up detected")
-            body.die()

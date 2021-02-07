@@ -22,6 +22,7 @@ var caliber = 'default'
 var bullet_in_mag = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    bullet_in_mag = clip_size
     rng.randomize()
 
 func shoot() -> int:    # returns int signifying success of firing

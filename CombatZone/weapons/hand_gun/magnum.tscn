@@ -5,10 +5,11 @@
 [ext_resource path="res://weapons/hand_gun/magnum.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.16819
-height = 9.37948
+radius = 18.1955
+height = 52.0065
 
 [node name="magnum" instance=ExtResource( 2 )]
+collision_layer = 16
 script = ExtResource( 3 )
 spread = 0.0
 clip_size = 6
@@ -29,6 +30,6 @@ position = Vector2( 12, 0.5 )
 position = Vector2( 57.8898, 0.5 )
 
 [node name="CollisionShape2D" parent="." index="4"]
-position = Vector2( 2.70054, 0.501131 )
+position = Vector2( 15, 3 )
 rotation = 1.5708
 shape = SubResource( 1 )

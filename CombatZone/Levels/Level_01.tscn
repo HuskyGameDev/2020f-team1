@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/spritesheet_tiles desert.png" type="Texture" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Levels/Level_01.gd" type="Script" id=4]
 [ext_resource path="res://Pick_ups/9mm_autoloader_pickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Pick_ups/sawn_off_boomstick_pick_up.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Pick_ups/Weapons/hand_guns/pickUp_9mm_autoloader.tscn" type="PackedScene" id=8]
 
 [sub_resource type="TileSet" id=1]
 0/name = "spritesheet_tiles desert.png 0"
@@ -57,3 +58,6 @@ position = Vector2( 1941.16, -741.152 )
 
 [node name="sawn_off_broomstick_pick_up" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1079.11, -884.828 )
+
+[node name="pickUp_9mm_autoloader" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1198.85, -428.487 )
