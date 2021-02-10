@@ -3,10 +3,11 @@
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://character/player.gd" type="Script" id=3]
-[ext_resource path="res://weapons/hand_gun/sawn_off_broomstick.tscn" type="PackedScene" id=4]
+[ext_resource path="res://weapons/hand_gun/sawn_off_boomstick.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/ArmorBar.png" type="Texture" id=5]
 [ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/fonts/Robot_Font.otf" type="DynamicFontData" id=8]
+
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.8975
