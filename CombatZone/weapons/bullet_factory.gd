@@ -11,7 +11,7 @@ onready var caliber_dict = {'9mm': preload("res://weapons/bullets/9mm_ammo.tscn"
 # weapons
 var w_9mm_autoloader = preload("res://weapons/hand_gun/9mm_autoloader.tscn")
 var w_magnum = preload("res://weapons/hand_gun/magnum.tscn")
-var w_sawn_off_b = preload("res://weapons/hand_gun/sawn_off_broomstick.tscn")
+var w_sawn_off_b = preload("res://weapons/hand_gun/sawn_off_boomstick.tscn")
 
 # pickups
 var p_9mm_autoloader = preload("res://Pick_ups/Weapons/hand_guns/pickUp_9mm_autoloader.tscn")

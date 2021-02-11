@@ -3,6 +3,7 @@ extends "res://character/people.gd"
 var canShoot = true
 var canRoll = true
 var input = Vector2()
+var moves = false   #Used to keep track if player is moving or not
 
 # check reload
 var start_r = 0 # a counter to keep track how much has past since reload is pressed and held
@@ -116,6 +117,21 @@ func _process(delta):
     if($Dodge.scale.x == 0):
         $Dodge.hide()
         $Dodge.scale.x = 2
+        
+    #Animation: Checking to see if player is moving
+    if Input.is_action_pressed("player_move_down") || Input.is_action_pressed("player_move_up") || Input.is_action_pressed("player_move_left") || Input.is_action_pressed("player_move_right"):
+        moves = true
+    else:
+        moves = false
+        
+    #If moving, play ShoulderAnimation and LegAnimation
+    #Legs point with keyboard
+    if moves == true:
+        $upper_body/upperbody_sprite/ShoulderAnimation.play("Shoulder Movement")
+        $foot/LegAnimation.play()
+    else:
+        $upper_body/upperbody_sprite/ShoulderAnimation.stop(true)
+        $foot/LegAnimation.frame = 0    #Reset frame of LegAnimation to 0 (idle)
 
 func dodge_roll():
     if(canShoot == true && canRoll == true):
