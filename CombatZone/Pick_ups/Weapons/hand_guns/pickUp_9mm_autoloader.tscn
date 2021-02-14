@@ -7,7 +7,8 @@
 radius = 20.8845
 
 [node name="pickUp_9mm_autoloader" instance=ExtResource( 2 )]
-weapon_name = "9mmloader"
+ammo_count = 50
+weap_name = "9mmloader"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )

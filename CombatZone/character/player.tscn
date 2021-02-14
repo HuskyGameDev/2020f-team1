@@ -15,7 +15,7 @@
 radius = 16.9456
 height = 36.102
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "Shoulder Movement"
 length = 2.0
 loop = true
@@ -33,7 +33,7 @@ tracks/0/keys = {
 "values": [ 90.0, 95.0, 105.0, 90.0, 85.0, 75.0, 90.0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 16.2584
 height = 0.685486
 
@@ -45,7 +45,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 50
 font_data = ExtResource( 8 )
 
@@ -73,7 +73,7 @@ texture = ExtResource( 2 )
 
 [node name="ShoulderAnimation" type="AnimationPlayer" parent="upper_body/upperbody_sprite" index="0"]
 playback_speed = 1.65
-"anims/Shoulder Movement" = SubResource( 5 )
+"anims/Shoulder Movement" = SubResource( 2 )
 
 [node name="hand" parent="upper_body" index="1"]
 position = Vector2( 25, 30 )
@@ -86,7 +86,7 @@ collision_mask = 16
 position = Vector2( 30, 0 )
 rotation = 1.5708
 scale = Vector2( 1.21516, 2.75001 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="LegAnimation" type="AnimatedSprite" parent="foot" index="0"]
 position = Vector2( -3.57628e-07, 0 )
@@ -129,7 +129,7 @@ margin_left = 36.0
 margin_top = -114.0
 margin_right = 410.0
 margin_bottom = 9.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 5 )
 text = "default font"
 __meta__ = {
 "_edit_use_anchors_": false

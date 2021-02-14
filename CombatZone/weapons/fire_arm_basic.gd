@@ -30,6 +30,7 @@ func shoot() -> int:    # returns int signifying success of firing
         if bullet_in_mag > 0:
             can_shoot = false
             $rate_of_fire.start()
+            $fire.play()
             for n in range(shot_Per_shell): # shoot decided amount per shell
                 Global.shoot_bullet(caliber, $muzzle.global_position, global_rotation + bullet_spread(spread))
             Global.eject_shell($ejection_port.global_position,global_rotation) # eject shells

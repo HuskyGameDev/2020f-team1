@@ -17,7 +17,7 @@ export (PackedScene) var holstered_weap
 var weap_to_spawn   = null
 var weap_to_drop    = null
 
-onready var reach = $upper_body/reach_for
+onready var reach   = $upper_body/reach_for
 onready var hand    = $upper_body/hand
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +27,7 @@ func _ready() -> void:
     var weapon = default_weapon.instance()
     if default_weapon != null:
         hand.add_child(weapon)
+        weap_to_drop = weapon.weap_name
     if holstered_weap != null:
         $holsters.add_child(holstered_weap.instance())
 
@@ -72,10 +73,28 @@ func attack1() -> void:
 func attack2() -> void:
     pass
 
+# pick up items
 func interAct() -> void:
     if pickup_item != null:  # pick up items
-        if pickup_item.get_groups().has('weapon'):
+        if pickup_item.get_groups().has('weapon'):  # pick up weapon
+            # check different from weap in hand and in holster
+            var weap_to_pic = pickup_item.weap_name
+            if weap_to_pic != weap_to_drop && weap_to_pic != $holsters.get_child(0).weap_name:
+                # put gun in hand away
+                if hand.get_child(0) != null:
+                    # drop weapon to game level
+                    var temp_weap = BulletFactory.get_pickUp(weap_to_spawn)
+                    get_parent().add_child(temp_weap)
+                    temp_weap.global_transform = hand.global_transform
+                    # set temp_weap's drop to true
+                    hand.get_child(0).queue_free()
+                # spawn weapon on hand
+                hand.add_child(BulletFactory.get_weapon(weap_to_spawn))
+                weap_to_drop = hand.get_child(0).weap_name # new weapon to drop is the current ones in hand
+                # $holsters.remove_child($holsters.get_child(0))
+                # $holsters.add_child(temp_weap)
             pass
+            
 func switch_weapon() -> void:
     pass
     
@@ -102,6 +121,7 @@ func swap_weap():
         var temp_weap = $upper_body/hand.get_child(0).duplicate()
         $upper_body/hand.remove_child($upper_body/hand.get_child(0))
         $upper_body/hand.add_child($holsters.get_child(0).duplicate())
+        weap_to_drop = hand.get_child(0).weap_name
         $holsters.remove_child($holsters.get_child(0))
         $holsters.add_child(temp_weap)
 
@@ -216,14 +236,18 @@ func _on_reload_timer_timeout() -> void:
 func _on_text_box_timer_timeout() -> void:
     $ammo_call_out.hide()
 
-
+# Detects pick up items in front of the player
+# Should check ammo type when encounters weapons
+# Should prompt for pick up for health or armors
 func _on_pickup_Area2D_body_entered(body: Node) -> void:
     print('pick up entered ', body)
     if body.get_groups().has('item_pick_up'):
         print('pick_up detedted')
         pickup_item = body
         if body.get_groups().has('weapon'):
-            print('weapon pick_up detected')
+            # print('weapon pick_up detected')
+            weap_to_spawn = body.weap_name
+            print('weapon to spawn is ', weap_to_spawn)
 
 
 func _on_pickup_Area2D_body_exited(body: Node) -> void:
@@ -231,3 +255,4 @@ func _on_pickup_Area2D_body_exited(body: Node) -> void:
         print('item exited ', body)
         if body == pickup_item:
             pickup_item = null
+            weap_to_spawn = null
