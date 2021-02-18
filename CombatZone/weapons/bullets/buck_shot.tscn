@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/Buck_Shot.png" type="Texture" id=1]
+[ext_resource path="res://weapons/bullets/projectiles.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.00201
+height = 1.39062
+
+[node name="buck_shot" instance=ExtResource( 2 )]
+speed = 3000
+damage = 25
+
+[node name="Sprite" parent="." index="0"]
+rotation = -1.5708
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 0.297298 )
+shape = SubResource( 1 )

@@ -3,7 +3,7 @@ extends "res://Pick_ups/pickUp_proto.gd"
 
 export var ammo_type:= '9mm'
 export var ammo_count:= 20
-export var weapon_name:= 'no_name' # each actual weapon needs to match weapon name
+export var weap_name:= 'no_name' # each actual weapon needs to match weapon name
 
 
 # Called when the node enters the scene tree for the first time.
