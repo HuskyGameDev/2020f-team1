@@ -11,6 +11,9 @@ var new_scene = null
 var level: = 0
 var player
 
+#Objectives
+var current_objectives
+
 # effects
 var blood = preload("res://Environment/Effects/blood_splater.tscn")
 var shell = preload("res://Environment/Effects/Bullet_Eject.tscn")
@@ -31,6 +34,30 @@ func switch_camera2D(old_node,new_node):
 func register_player(game_player):
     player = game_player
     print("player set")
+
+# Provides the current level's objectives to global class to allow for completion.
+func register_objectives(new_objectives):
+    current_objectives = new_objectives
+    current_objectives._initial_display()
+    print("Objectives set!")
+    
+#Originally I used this thinking the scene scripts were bugged
+#Turns out I had the wrong script connected o_o
+#Oh well, keeping it for convinience.
+#This also makes sure that after objectives are defined, that they are displayed as well.
+func register_all(game_player, new_objectives):
+    player=game_player
+    print("Player set")
+    current_objectives = new_objectives
+    current_objectives._initial_display()
+    print("Objectives set")
+
+#It's a simple function that returns the current objectives the player has at the moment, so long as they exist.
+func get_objectives():
+    if current_objectives != null:
+        return current_objectives
+    elif debug:
+        print("Found no objectives")
     
 func get_player():
     if player != null:
@@ -89,6 +116,12 @@ func pickup(player,type,number):
 
 func scene_change(path_name):
     get_tree().change_scene_to(path_name)
+    
+#Not sure what scene_change is ever used for, please let me know and I can try to work with it.
+#Until then, this is what is used by objectives
+#It is used when going back to the title screen after all objectives are completed, if it's allowed.
+func scene_change_path(path_name:String):
+    get_tree().change_scene(path_name)
 
 func debug_on() -> bool:
     return debug

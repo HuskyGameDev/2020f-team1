@@ -241,6 +241,16 @@ func player_speaks(text_input) -> void:
     $ammo_call_out.show()
     $ammo_call_out/text_box_timer.start()
     
+#Adds the text given and displays it to the player
+#Made for convinience. Easier to let the player deal with its children.
+func _update_objectives(new_text:String):
+    $objective_list.add_text(new_text)
+    pass
+    
+#Makes it easier to clear the objectives if we can find the exact object that needs to be cleared.
+func _clear_objectives():
+    $objective_list.clear()
+    pass
 
 func _on_reload_timer_timeout() -> void:
     canShoot = true
