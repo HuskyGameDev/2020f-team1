@@ -1,4 +1,4 @@
-extends "res://weapons/fire_arm_basic.gd"
+extends "res://vehicle/car_1.gd"
 
 
 # Declare member variables here. Examples:
@@ -9,9 +9,8 @@ extends "res://weapons/fire_arm_basic.gd"
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
-    caliber = '9mm'
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
-#	pass
+#    pass
