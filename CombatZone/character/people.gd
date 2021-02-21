@@ -20,10 +20,8 @@ var velocity: = Vector2.ZERO
 var piloting = false
 
 var pickup_item = null
-# A dictionary of pickups to determine whether people needs certain pickups
-var pickup_bealth = { 'health': false, 'shield':false,}
-var pickup_weap   = {'autoloader':false, 'magnum':false, 'mac10':false}
-var pickup_ammo   = {'9mm':false}
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     add_to_group("flesh_damageable")

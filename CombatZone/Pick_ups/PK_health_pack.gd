@@ -1,16 +1,16 @@
 extends "res://Pick_ups/pickUp_proto.gd"
 
-
-export var ammo_type:= '9mm'
-export var ammo_count:= 20
-export var weap_name:= 'sawn_off_boom' # each actual weapon needs to match weapon name
-
+export var heal_amount = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    add_to_group("weapon")
+    pass # Replace with function body.
 
-
+func take_effect(player) -> void:
+    if player.get_groups().has('player'):
+        if player.injured():
+            player.heal_up(heal_amount)
+            queue_free()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #    pass

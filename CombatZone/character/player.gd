@@ -15,7 +15,7 @@ export (PackedScene) var holstered_weap
 # var b: String = "text"
 
 var weap_to_spawn   = null
-var weap_to_drop    = null
+var weap_in_hand    = null
 
 onready var reach   = $upper_body/reach_for
 onready var hand    = $upper_body/hand
@@ -27,7 +27,7 @@ func _ready() -> void:
     var weapon = default_weapon.instance()
     if default_weapon != null:
         hand.add_child(weapon)
-        weap_to_drop = weapon.weap_name
+        weap_in_hand = weapon.weap_name
     if holstered_weap != null:
         $holsters.add_child(holstered_weap.instance())
 
@@ -76,27 +76,37 @@ func attack2() -> void:
 # pick up items
 func interAct() -> void:
     if pickup_item != null:  # pick up items
-        if pickup_item.get_groups().has('weapon'):  # pick up weapon
-            # check different from weap in hand and in holster
-            var weap_to_pic = pickup_item.weap_name
-            if weap_to_pic != weap_to_drop && weap_to_pic != $holsters.get_child(0).weap_name:
-                # put gun in hand away
-                if hand.get_child(0) != null:
-                    # drop weapon to game level
-                    var temp_weap = BulletFactory.get_pickUp(weap_to_spawn)
-                    get_parent().add_child(temp_weap)
-                    temp_weap.global_transform = hand.global_transform
-                    # set temp_weap's drop to true
-                    hand.get_child(0).queue_free()
-                # spawn weapon on hand
-                hand.add_child(BulletFactory.get_weapon(weap_to_spawn))
-                weap_to_drop = hand.get_child(0).weap_name # new weapon to drop is the current ones in hand
-                # $holsters.remove_child($holsters.get_child(0))
-                # $holsters.add_child(temp_weap)
-            pass
+        # pick up weapon
+        if pickup_item.get_groups().has('weapon'):
+            switch_weapon()
+        else:
+            pickup_item.take_effect(self)   # other pickups take effect on player
             
 func switch_weapon() -> void:
-    pass
+    # check different from weap in hand and in holster
+    if weap_to_spawn != weap_in_hand && weap_to_spawn != $holsters.get_child(0).weap_name:
+        # drop weapon on floor
+        if hand.get_child(0) != null:
+            # drop weapon to game level
+            var temp_weap_Pickup = BulletFactory.get_pickUp(weap_in_hand)
+            var angle = hand.global_rotation    # upper body orientation
+            get_parent().add_child(temp_weap_Pickup)
+            temp_weap_Pickup.global_transform = hand.global_transform
+            # apply impulse to throw gun out
+            temp_weap_Pickup.apply_central_impulse(Vector2(cos(angle), sin(angle)) * 2000)
+            # set temp_weap's drop to true
+            hand.get_child(0).queue_free()
+            hand.remove_child(hand.get_child(0))
+            print('dropped weap, hand has child: ', hand.get_child_count())
+        # spawn weapon on hand
+        print('picking up weap, hand has children: ', hand.get_child_count())
+        hand.add_child(BulletFactory.get_weapon(weap_to_spawn))
+        pickup_item.queue_free()
+        weap_in_hand = hand.get_child(0).weap_name # new weapon to drop is the current ones in hand
+        print('weap to drop is ', weap_in_hand)
+        
+        # $holsters.remove_child($holsters.get_child(0))
+        # $holsters.add_child(temp_weap)
     
 func reload_weapon() -> void:
     if hand.get_child(0).clip_full():
@@ -121,7 +131,7 @@ func swap_weap():
         var temp_weap = $upper_body/hand.get_child(0).duplicate()
         $upper_body/hand.remove_child($upper_body/hand.get_child(0))
         $upper_body/hand.add_child($holsters.get_child(0).duplicate())
-        weap_to_drop = hand.get_child(0).weap_name
+        weap_in_hand = hand.get_child(0).weap_name
         $holsters.remove_child($holsters.get_child(0))
         $holsters.add_child(temp_weap)
 

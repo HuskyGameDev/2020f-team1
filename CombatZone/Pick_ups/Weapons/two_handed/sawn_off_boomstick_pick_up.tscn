@@ -18,7 +18,6 @@ linear_damp = 10.0
 angular_damp = 10.0
 script = ExtResource( 2 )
 ammo_count = 30
-weapon_name = "sawn_off_boom"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 5.5 )

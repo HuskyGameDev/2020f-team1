@@ -8,7 +8,8 @@
 [ext_resource path="res://Levels/Objectives/objective_beacon.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Levels/Objectives/Objectives.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Levels/Objectives/level_objective.gd" type="Script" id=8]
-[ext_resource path="res://Pick_ups/Armor_vest.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Pick_ups/legaxy pickUps/Armor_vest.tscn" type="PackedScene" id=9]
+
 
 [node name="Test_Objectives" type="Node2D"]
 script = ExtResource( 4 )
