@@ -44,7 +44,7 @@ animations = [ {
 "frames": [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walk",
-"speed": 5.0
+"speed": 8.0
 } ]
 
 [sub_resource type="DynamicFont" id=5]
@@ -70,15 +70,16 @@ holstered_weap = ExtResource( 7 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2( -2, 0 )
+scale = Vector2( 1.25, 1.15 )
 shape = SubResource( 1 )
 
 [node name="upperbody_sprite" parent="upper_body" index="0"]
-rotation = 1.7593
-scale = Vector2( 1.2, 1.1 )
+rotation = 1.5708
+scale = Vector2( 1.45, 1.4 )
 texture = ExtResource( 2 )
 
 [node name="ShoulderAnimation" type="AnimationPlayer" parent="upper_body/upperbody_sprite" index="0"]
-playback_speed = 1.65
+playback_speed = 3.0
 "anims/Shoulder Movement" = SubResource( 2 )
 
 [node name="hand" parent="upper_body" index="1"]
@@ -97,11 +98,11 @@ shape = SubResource( 3 )
 [node name="LegAnimation" type="AnimatedSprite" parent="foot" index="0"]
 position = Vector2( -3.57628e-07, 0 )
 rotation = 1.5708
-scale = Vector2( 1.2, 1.1 )
+scale = Vector2( 1.45, 1.4 )
 z_as_relative = false
 frames = SubResource( 4 )
 animation = "walk"
-frame = 3
+frame = 2
 speed_scale = 0.6
 
 [node name="holsters" parent="." index="3"]
