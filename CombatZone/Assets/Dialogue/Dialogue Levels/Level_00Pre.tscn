@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Dialogue/Dialogue Levels/Level_00Pre.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Dialogue/Dialogue Levels/Level_00PreButton.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Text BoxCropped.png" type="Texture" id=3]
+[ext_resource path="res://Assets/DialogueAdv.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Dialogue/DialogueWaiting.tres" type="Animation" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "00_anim"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 574.811, 163.09 ), Vector2( 595.85, 163.09 ) ]
+}
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skip" type="Button" parent="."]
+margin_left = 1041.0
+margin_top = 605.0
+margin_right = 1216.0
+margin_bottom = 664.0
+text = "Skip Dialogue"
+script = ExtResource( 2 )
+
+[node name="Continue" type="Button" parent="."]
+margin_left = 344.0
+margin_top = 498.0
+margin_right = 970.0
+margin_bottom = 688.0
+text = "Start"
+script = ExtResource( 2 )
+
+[node name="DialogueBox" type="Control" parent="."]
+margin_left = 340.0
+margin_top = 502.0
+margin_right = 969.0
+margin_bottom = 687.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="DialogueBox"]
+anchor_left = 0.5
+anchor_top = 1.201
+anchor_right = 0.509
+anchor_bottom = 1.221
+margin_left = -311.876
+margin_top = -226.67
+margin_right = 317.463
+margin_bottom = -32.37
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DialogueBox"]
+anchor_top = 0.014
+anchor_right = 1.0
+anchor_bottom = 1.194
+margin_left = 24.1888
+margin_top = 0.0513268
+margin_right = -10.8112
+margin_bottom = -25.2487
+bbcode_enabled = true
+bbcode_text = "Test"
+text = "Test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="DialogueBox"]
+position = Vector2( 595.85, 163.09 )
+scale = Vector2( 0.585938, 0.539063 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogueBox/Sprite"]
+anims/00_anim = SubResource( 1 )
+anims/DialogueWaiting = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="DialogueBox"]
+[connection signal="pressed" from="Skip" to="Skip" method="_on_Skip_pressed"]
+[connection signal="pressed" from="Continue" to="Skip" method="_on_Continue_pressed"]
