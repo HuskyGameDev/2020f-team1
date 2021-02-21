@@ -5,11 +5,11 @@
 [ext_resource path="res://vehicle/car_1.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 62.8176
+radius = 60.3916
 height = 67.7865
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 39.3321
+radius = 44.568
 height = 115.597
 
 [node name="car_1" instance=ExtResource( 1 )]
