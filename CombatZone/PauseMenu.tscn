@@ -1,15 +1,64 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Pause.gd" type="Script" id=1]
-[ext_resource path="res://Assets/DialogueBoxQuest.png" type="Texture" id=2]
 
-[node name="PopupMenu" type="PopupMenu"]
+[node name="PauseMenu" type="Control"]
 pause_mode = 2
-margin_right = 20.0
-margin_bottom = 20.0
-popup_exclusive = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.33484
+margin_top = 6.67419
+margin_right = 1.33484
+margin_bottom = 6.67419
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="DialogueBoxQuest" type="Sprite" parent="."]
-position = Vector2( 1246.86, 688.117 )
-texture = ExtResource( 2 )
+[node name="PauseOverlay" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.0823529 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PauseOverlay"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -158.5
+margin_right = 11.0
+margin_bottom = -144.5
+text = "PAUSED"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Restart" type="Button" parent="PauseOverlay"]
+margin_left = 541.5
+margin_top = 261.0
+margin_right = 741.5
+margin_bottom = 336.0
+text = "Restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="PauseOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -96.0
+margin_top = 15.0
+margin_right = 104.0
+margin_bottom = 90.0
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="PauseOverlay/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="PauseOverlay/Quit" to="." method="_on_Quit_pressed"]
