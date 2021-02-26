@@ -33,9 +33,10 @@ func display(ply):
     #Added a function call to player so they're the class resposible for managing their children.
     ply._update_objectives(obj_listing)
 
-func _remove_task(task:Node, complete:bool):
-    objectives.erase(task)
-    #TODO: Calculate new score based on whether we passed or failed the mission.
+func _remove_task(task:Node, success:bool):
+    if success:
+        objectives.erase(task)
+        #TODO: Calculate new score based on whether we passed or failed the mission.
     _redisplay_objectives()    
     if ((objectives.size() <= 0) && completing_beats_level):
         Global.scene_change_path("res://assets/TitleScreen.tscn") #For now using this function until I understand the use behind scene_change function.
@@ -52,3 +53,10 @@ func _redisplay_objectives():
 #func _process(delta):
 #    pass
 
+func _get_objective(name:String):
+    for node in objectives:
+        if (name == node.id):
+            return node
+        pass
+    return null
+    pass
