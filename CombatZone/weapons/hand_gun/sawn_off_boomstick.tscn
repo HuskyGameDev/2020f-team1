@@ -8,7 +8,7 @@
 [node name="sawn_off_broomstick" instance=ExtResource( 3 )]
 position = Vector2( 20, 0 )
 script = ExtResource( 4 )
-spread = 0.5
+spread = 0.2
 shot_Per_shell = 5
 clip_size = 3
 fire_rate = 0.1
