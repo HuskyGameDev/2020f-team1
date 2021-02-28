@@ -1,23 +1,64 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Character(s)/Enemies/BasicEnemyLight_Idle.png" type="Texture" id=2]
 [ext_resource path="res://character/DamageableDummy.gd" type="Script" id=3]
-[ext_resource path="res://assets/HPRed.png" type="Texture" id=4]
-[ext_resource path="res://assets/HPGrn.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Character(s)/Player/Character_Idle_Legs.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Character(s)/Enemies/BasicEnemyLight_LWalk.png" type="Texture" id=5]
 [ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Character(s)/Enemies/BasicEnemyLight_RWalk.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Character(s)/Enemies/BasicEnemyHeavy_LWalk.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Character(s)/Enemies/BasicEnemyHeavy_RWalk.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Character(s)/Enemies/BasicEnemyMedium_RWalk.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Character(s)/Enemies/BasicEnemyMedium_LWalk.png" type="Texture" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 33.0
+radius = 28.8232
+height = 26.155
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Animation" id=2]
+resource_name = "Shoulder Movement"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.9, 1.2, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 90.0, 95.0, 110.0, 90.0, 85.0, 70.0, 90.0 ]
+}
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "walkHeavy",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "walkLight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "walkMedium",
+"speed": 5.0
+} ]
+
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=4]
-trail_size_modifier = SubResource( 3 )
+[sub_resource type="ParticlesMaterial" id=6]
+trail_size_modifier = SubResource( 5 )
 emission_shape = 2
 emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
@@ -34,7 +75,7 @@ damping = 500.0
 scale = 11.64
 color = Color( 0.662745, 0.0823529, 0.0823529, 1 )
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=7]
 radius = 37.8178
 
 [node name="DamageableDummy" instance=ExtResource( 1 )]
@@ -46,14 +87,28 @@ health = 300.0
 default_weapon = ExtResource( 6 )
 
 [node name="CollisionShape2D" parent="." index="0"]
-rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="upperbody_sprite" parent="upper_body" index="0"]
+rotation = 1.5708
+scale = Vector2( 1.45, 1.4 )
+z_index = 1
 texture = ExtResource( 2 )
+
+[node name="ShoulderAnimation" type="AnimationPlayer" parent="upper_body/upperbody_sprite" index="0"]
+playback_speed = 2.5
+"anims/Shoulder Movement" = SubResource( 2 )
 
 [node name="hand" parent="upper_body" index="1"]
 position = Vector2( 25, 30 )
+
+[node name="foot" parent="." index="2"]
+rotation = 1.5708
+
+[node name="LegAnimation" type="AnimatedSprite" parent="foot" index="0"]
+scale = Vector2( 1.3, 1.25 )
+frames = SubResource( 3 )
+animation = "walkLight"
 
 [node name="holsters" parent="." index="3"]
 position = Vector2( 25, 30 )
@@ -65,19 +120,10 @@ lifetime = 4.24
 one_shot = true
 explosiveness = 1.0
 randomness = 0.27
-process_material = SubResource( 4 )
+process_material = SubResource( 6 )
 
 [node name="Dodge" parent="." index="5"]
 offset = Vector2( 0, 45 )
-
-[node name="health_bars" parent="." index="6"]
-position = Vector2( 0, -45 )
-
-[node name="Health" parent="health_bars" index="0"]
-texture = ExtResource( 4 )
-
-[node name="HealthG" parent="health_bars" index="1"]
-texture = ExtResource( 5 )
 
 [node name="enemy_navigation" type="Navigation2D" parent="." index="7"]
 
@@ -85,9 +131,12 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="range" index="0"]
 scale = Vector2( 10, 10 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="action_timer" type="Timer" parent="." index="9"]
 wait_time = 1.337
+
+[node name="health_bars" parent="." index="10"]
+position = Vector2( 0, -45 )
 [connection signal="body_entered" from="range" to="." method="_on_range_body_entered"]
 [connection signal="timeout" from="action_timer" to="." method="_on_action_timer_timeout"]
