@@ -1,6 +1,79 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Pause.gd" type="Script" id=1]
+[ext_resource path="res://Assets/fonts/Robot_Font.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Menu/StartButtonSelected.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menu/QuitButtonSelected.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Menu/StartButton.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Menu/DebugButtonSelected.png" type="Texture" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=11]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=12]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=13]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=15]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=16]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=17]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 2 )
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
@@ -19,7 +92,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.0823529 )
+color = Color( 0, 0, 0, 0.156863 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -28,9 +101,9 @@ __meta__ = {
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_top = -158.5
-margin_right = 11.0
-margin_bottom = -144.5
+margin_top = -200.0
+margin_bottom = -137.0
+custom_fonts/font = SubResource( 1 )
 text = "PAUSED"
 align = 1
 __meta__ = {
@@ -38,10 +111,14 @@ __meta__ = {
 }
 
 [node name="Restart" type="Button" parent="PauseOverlay"]
-margin_left = 541.5
-margin_top = 261.0
-margin_right = 741.5
-margin_bottom = 336.0
+margin_left = 544.0
+margin_top = 361.0
+margin_right = 744.0
+margin_bottom = 436.0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 2 )
 text = "Restart"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -53,12 +130,46 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -96.0
-margin_top = 15.0
+margin_top = 215.0
 margin_right = 104.0
-margin_bottom = 90.0
+margin_bottom = 290.0
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 3 )
 text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Button" parent="PauseOverlay"]
+margin_left = 544.0
+margin_top = 467.0
+margin_right = 744.0
+margin_bottom = 542.0
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/normal = SubResource( 14 )
+custom_fonts/font = SubResource( 4 )
+text = "Title"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="PauseOverlay"]
+margin_left = 544.0
+margin_top = 255.0
+margin_right = 744.0
+margin_bottom = 330.0
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 5 )
+text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="PauseOverlay/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="pressed" from="PauseOverlay/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="PauseOverlay/Title" to="." method="_on_Title_pressed"]
+[connection signal="pressed" from="PauseOverlay/Continue" to="." method="_on_Continue_pressed"]
