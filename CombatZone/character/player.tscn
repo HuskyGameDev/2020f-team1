@@ -11,7 +11,8 @@
 [ext_resource path="res://Assets/Character(s)/Player/Character_RWalk_Legs.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Character(s)/Player/Character_Idle_Legs.png" type="Texture" id=10]
 [ext_resource path="res://Levels/Objectives/Objectives.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/fonts/Robot_Font.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://Assets/fonts/obj_font.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Assets/primaryObjective.png" type="Texture" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 16.9456
@@ -50,10 +51,6 @@ animations = [ {
 [sub_resource type="DynamicFont" id=5]
 size = 62
 font_data = ExtResource( 8 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 80
-font_data = ExtResource( 12 )
 
 [node name="player" instance=ExtResource( 1 )]
 z_index = 1
@@ -148,14 +145,20 @@ one_shot = true
 [node name="Objectives" parent="." index="11" instance=ExtResource( 11 )]
 
 [node name="objective_list" type="RichTextLabel" parent="." index="12"]
-margin_left = -1279.0
-margin_top = -718.0
-margin_right = 1272.0
-margin_bottom = 712.0
-custom_fonts/normal_font = SubResource( 6 )
+margin_left = -1196.0
+margin_top = -710.0
+margin_right = 1280.0
+margin_bottom = 720.0
+custom_fonts/normal_font = ExtResource( 12 )
+bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="." index="13"]
+visible = false
+position = Vector2( -1239.41, -519.99 )
+texture = ExtResource( 13 )
 [connection signal="body_entered" from="upper_body/pickup_Area2D" to="." method="_on_pickup_Area2D_body_entered"]
 [connection signal="body_exited" from="upper_body/pickup_Area2D" to="." method="_on_pickup_Area2D_body_exited"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_RollTimer_timeout"]

@@ -14,6 +14,8 @@ export (PackedScene) var holstered_weap
 # var a: int = 2
 # var b: String = "text"
 
+var obj_priority_display = Array()
+
 var weap_to_spawn   = null
 var weap_in_hand    = null
 
@@ -253,13 +255,70 @@ func player_speaks(text_input) -> void:
     
 #Adds the text given and displays it to the player
 #Made for convinience. Easier to let the player deal with its children.
-func _update_objectives(new_text:String):
-    $objective_list.add_text(new_text)
+func _update_objectives(new_text:String, offset:int, status:int, priority:int):
+    
+    #Special case, don't print secret objective if we haven't done it yet.
+    if (priority == 2 && status == 0):
+        print(offset)
+        print("Hidden!")
+        return
+            
+    var img = Sprite.new()
+    
+    #Firstly some transformative stuff, making sure it allings properly.
+    print(offset)
+    print("offset")
+    print(((offset*80) -679.99))
+    img.position = Vector2(-1239.411, ((offset*80) -679.99)) #Precise numbers needed to display multiple of these and their associated statuses/priorities
+    img.scale = Vector2(1, 1)
+    
+    if (priority == 0):
+            #Primary Priority
+            match status:
+                0:
+                    img.texture = load("res://Assets/primaryObjective.png")
+                    #Ongoing
+                    print("loaded00")
+                1:
+                    img.texture = load("res://Assets/primaryObjectivePassed.png")
+                    #We succeeded!
+                    print("loaded01")
+                2:
+                    img.texture = load("res://Assets/primaryObjectiveFailed.png")
+                    print("loaded02")
+                    #We failed...
+    else:
+            #Hidden/Secondary
+            #Assuming now it's visible
+            match status:
+                0:
+                    #Ongoing, only used for secondary objectives (hopefully)
+                    img.texture = load("res://Assets/secondaryObjective.png")
+                    print("loaded10")
+                1:
+                    #We succeeded!
+                    img.texture = load("res://Assets/secondaryObjectivePassed.png")
+                    print("loaded11/21")
+                2:
+                    #We failed...
+                    img.texture = load("res://Assets/secondaryObjectiveFailed.png")
+                    print("loaded12/22")
+    
+    obj_priority_display.insert(offset, img)
+    self.add_child(img)
+    img.set_owner(self)
+    $objective_list.append_bbcode(new_text)
     pass
     
 #Makes it easier to clear the objectives if we can find the exact object that needs to be cleared.
 func _clear_objectives():
     $objective_list.clear()
+    var copy = obj_priority_display
+    while(not obj_priority_display.empty()):
+        var val = obj_priority_display.pop_front()
+        #Remove it from the scene for good if it exists.
+        if val != null:
+            val.queue_free()
     pass
 
 func _on_reload_timer_timeout() -> void:
