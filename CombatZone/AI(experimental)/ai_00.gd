@@ -19,6 +19,7 @@ onready var player_detection_zone = $AIDetection
 
 var current_state: int = State.PATROL setget set_state
 
+var actor = null
 var player: Player = null
 var weapon: Weapon = null
 
@@ -26,6 +27,17 @@ var weapon: Weapon = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass
+
+# get reference of actor and weapon
+func initialize(mySelf, hand):
+    actor = mySelf
+    
+    if hand.get_child_count()>0:    # hand has weapon, set weapon
+        weapon = hand.get_child(0)  # first weapon is weapon
+        if Global.debug:
+            print('AI weapon set')
+    else:
+        print("enemy has no weapon in hand")
 
 func _process(delta: float) -> void:
     if current_state != null:
@@ -35,6 +47,8 @@ func _process(delta: float) -> void:
             State.ENGAGE:
                 print('ai engaging...')
                 if player != null and weapon != null:
+                    
+                    # .rotation = actor.global_position.direction_to(player.global_position)
                     aiAttack()
                                        
                 else:
@@ -43,14 +57,6 @@ func _process(delta: float) -> void:
                 pass
             var new_emu:
                 print("Error: found a state for our enemy that should not exist: ", new_emu)
-    
-func set_hand(hand):
-    if hand.get_child_count()>0:    # hand has weapon, set weapon
-        weapon = hand.get_child(0)  # first weapon is weapon
-        if Global.debug:
-            print('AI weapon set')
-    else:
-        print("enemy has no weapon in hand")
 
 func aiAttack()-> void:
     if !weapon.shoot():
