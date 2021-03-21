@@ -1,5 +1,7 @@
 extends Node2D
 
+func _ready() -> void:
+    Global.register_player($player)
 
 func _unhandled_input(event):
     if event is InputEventMouseButton:

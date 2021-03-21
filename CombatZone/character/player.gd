@@ -1,4 +1,5 @@
 extends "res://character/people.gd"
+class_name Player
 
 var canShoot = true
 var canRoll = true
@@ -332,9 +333,8 @@ func _on_text_box_timer_timeout() -> void:
 # Should check ammo type when encounters weapons
 # Should prompt for pick up for health or armors
 func _on_pickup_Area2D_body_entered(body: Node) -> void:
-    print('pick up entered ', body)
     if body.get_groups().has('item_pick_up'):
-        print('pick_up detedted')
+        print('pick_up detected')
         pickup_item = body
         if body.get_groups().has('weapon'):
             # print('weapon pick_up detected')

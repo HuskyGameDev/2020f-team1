@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://AI(experimental)/ai_00.gd" type="Script" id=2]
+[ext_resource path="res://character/Proto_enemy.gd" type="Script" id=3]
+[ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 424.624
+
+[node name="Proto_enemy" groups=[
+"enemy",
+] instance=ExtResource( 1 )]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 3 )
+speed = 100
+friction = 0.01
+health = 100.0
+default_weapon = ExtResource( 4 )
+toRandom = true
+
+[node name="CollisionShape2D" parent="." index="0"]
+visible = false
+
+[node name="AI" type="Node2D" parent="." index="11"]
+script = ExtResource( 2 )
+
+[node name="AIDetection" type="Area2D" parent="AI" index="0"]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/AIDetection" index="0"]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="AI/AIDetection" to="AI" method="_on_AIDetertion_body_entered"]

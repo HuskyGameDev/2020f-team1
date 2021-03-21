@@ -35,11 +35,6 @@ tracks/0/keys = {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "walkHeavy",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "walkLight",
@@ -48,6 +43,11 @@ animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "walkMedium",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "walkHeavy",
 "speed": 5.0
 } ]
 

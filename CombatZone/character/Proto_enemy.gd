@@ -1,5 +1,11 @@
 extends "res://character/people.gd"
 
+# largely a copy of damageabledummy script
+# tweaked for AI use
+
+onready var ai = $AI
+onready var hand = $upper_body/hand
+
 var path := PoolVector2Array()
 #int represents state, 0 = idle, 1 = go after player
 var state = 1
@@ -10,17 +16,19 @@ var can_shoot = true
 var player 
 var player_found = false
 
-var toRandom = false #Whether to spawn random enemies (toggle in level)
+export var toRandom = false #Whether to spawn random enemies (toggle in level)
 var random = RandomNumberGenerator.new() #For producing random number for enemy variety
 var theLegs = "walkLight" #Specifies which legs to use in randomizer, walkLight is Default for light enemy
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:          # enemy don't  need holster for storing weapons at this stage of development
-    var weapon = default_weapon.instance()
+func _ready() -> void:
+    # enemy don't  need holster for storing weapons at this stage of development
+    var weapon = default_weapon.instance()  
+    
     $foot/LegAnimation.frame = 0 #Default set for leg animation frame (idle)
     # Varied enemies spawn (Randomizer pick):
-    if toRandom == true:
+    if toRandom == true:                        # how about change in health points after enemy class determination
         random.randomize()
         var rNum = random.randi_range(1, 3)
         if rNum == 1:
@@ -34,29 +42,20 @@ func _ready() -> void:          # enemy don't  need holster for storing weapons 
             theLegs = "walkHeavy"
     
     print($upper_body/hand.get_child_count())
-    player = Global.get_player()
-    if default_weapon != null:
+    player = Global.get_player()    # get player instance
+    if default_weapon != null:  # accquires weapon
         $upper_body/hand.add_child(weapon)
         print($upper_body/hand.get_child_count())
-        
+    ai.initialize(self, hand)
         
 func _process(delta):
+    # dies when not health left
     if(health <= 1):
         queue_free()
-    go_after_player()
-    if(player_found && player != null):
-        if(position.distance_to(player.position) < 1000):
-            shoot_player()
 
-func shoot_player() -> void:
-    if $upper_body/hand.get_child_count() > 0 && can_shoot:
-        if shoot_count > 100:
-            shoot_count = 0
-            $action_timer.start()
-            can_shoot = false
-        else:
-            shoot_count += 1
-            $upper_body/hand.get_child(0).shoot()
+# called when no weapon in hand
+func reset_weapon():
+    pass
            
 func go_after_player() -> void:
     if(player_found):
@@ -115,11 +114,6 @@ func get_input():
         return direction 
     else:
           return Vector2(0, 0)  
-
-func _on_range_body_entered(body):
-    print(body.position)
-    if(body.get_groups().has("player")):
-        player_found = true
 
 func _on_action_timer_timeout():
     can_shoot = true
