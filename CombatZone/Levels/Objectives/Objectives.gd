@@ -1,11 +1,14 @@
-extends Node
+extends Node2D
 
 
 #OBJECTIVES: Will show each and every objective on the current level.
 export (Array, PackedScene) var objectives = Array() #This stores the levels objectives by their pack scene files.
+var activeClocks = Array() #Stores the active clocks so that we may go and remove them at a notice.
 export var completing_beats_level:bool = false
 var obj_listing:String
 var obj_complete_counter = 0
+
+var clock = preload("res://character/Clock.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -74,6 +77,7 @@ pass
     
 
 func _remove_task(task:Node, destroy:bool):
+    _forceStopClock(task.id)
     if destroy:
         objectives.erase(task)
         obj_complete_counter = obj_complete_counter - 1
@@ -104,6 +108,68 @@ func _get_objective(name:String):
     return null
 pass
 
+func _createClock(beacon, id, length):
+
+    var cl = clock.instance()
+    var pl = Global.get_player()
+    var offset = ((-1)*activeClocks.size())
+    cl._Initialize(length, id, beacon)
+    cl.position = Vector2(1000, ((-500)+(-180*offset)))
+    cl.scale = Vector2(5, 5)
+    pl.add_child(cl)
+    pl._OnTimerStart()
+    activeClocks.push_front(cl)
+    
+    pass
+
+func _forceStopClock(id):
+
+    if activeClocks.empty():
+        return
+
+    for node in activeClocks:
+        if (id == node.objID):
+            node._EndClockPremature()
+            return
+        pass
+        
+    pass
+    
+func _removeClock(id):
+    
+    if activeClocks.empty():
+        return
+        
+    var obj = _get_objective(id)
+    
+    for node in activeClocks:
+        
+        if (id == node.objID):
+            Global.get_player().remove_child(node)
+            if (obj != null):
+                if (node.premature):
+                    match obj.obj_type:
+                        1:
+                            obj._OnFail()
+                        _:
+                            obj._MarkBeaconComplete(node.beaconName)
+                else:
+                    match obj.obj_type:
+                        1:
+                            obj._MarkBeaconComplete(node.beaconName)
+                        _:
+                            obj._OnFail()
+            
+            activeClocks.remove(activeClocks.find(node))
+            var pl = Global.get_player()
+            if activeClocks.empty():
+                pl._OnTimerEnd()    
+            node.queue_free()
+            #Either here or somewhere else we inform the objective
+            return
+    
+    pass
+
 func _show_hidden_on_requirement(name:String):
     for node in objectives:
         if (node.objective_requirement == name):
@@ -111,5 +177,21 @@ func _show_hidden_on_requirement(name:String):
         pass
     return
 pass
+
+func _SoundQueue(status, priority):
+    
+    match status:
+        1:
+            match priority:
+                0:
+                    $MainComplete.play()
+                _:
+                    $SideComplete.play()
+            return
+        _:
+            $ObjFail.play()        
+            
+    
+    pass
 
 #Custom functions: To be used in classes that inherit this one.

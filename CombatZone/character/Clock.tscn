@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://character/Clock.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Menu/StartButtonSelected.png" type="Texture" id=2]
+[ext_resource path="res://Assets/fonts/obj_font.tres" type="DynamicFont" id=3]
+
+[node name="Clock" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="TimerDisplay" type="Label" parent="."]
+margin_left = -29.0
+margin_top = -10.0
+margin_right = 29.0
+margin_bottom = 7.0
+text = "1:00"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MissionDisplay" type="Label" parent="."]
+margin_left = -29.0
+margin_top = -23.0
+margin_right = 29.0
+margin_bottom = -13.0
+custom_fonts/font = ExtResource( 3 )
+text = "L1O1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
