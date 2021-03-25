@@ -8,4 +8,4 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    Global.register_all($player, $Objectives)
+    Global.register_all($player)

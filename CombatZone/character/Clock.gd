@@ -52,7 +52,7 @@ func _process(delta):
     
     #Break the loop, end this timer
     if (ongoing == false):
-        _OnClockEnd()
+        Global.get_objectives()._removeClock(objID)
         pass
     
     internalTimer += delta
@@ -90,12 +90,5 @@ func _EndClockPremature():
     
     ongoing = false
     premature = true
-    
-    pass
-    
-    
-func _OnClockEnd():
-    
-    Global.get_objectives()._removeClock(objID)    
     
     pass

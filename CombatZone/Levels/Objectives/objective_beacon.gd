@@ -44,11 +44,6 @@ var timer = 0 #Declaring it here, but we may or may not use it depending on whet
 # Called when the node enters the scene tree for the first time.
 func _ready():
     _OnReady()
-    if is_timed == true && timer_start_on_spawn == true:
-        timer_active = true
-        Global.get_objectives()._createTimer(self.name, objective_id, timer_length)
-    else:
-        timer_active = false
     #Thanks to the post on the godot forums, I was able to allow dynamic scaling of the shape at runtime
     ### https://godotengine.org/qa/16283/how-to-resize-a-collisionshape2d-in-game
     #At least, if it worked.
@@ -69,6 +64,9 @@ func _ready():
 
 func _process(delta):
     _PreProcess()
+    if is_timed == true && timer_start_on_spawn == true && timer_active == false:
+        timer_active = true
+        Global.get_objectives()._createClock(self)
     _PostProcess()  
     pass
 
@@ -130,14 +128,10 @@ func _on_obj_radius_body_entered(body):
         _OnBeaconDestroy(false)
         return
     pass
-    ##Possibility that an approach beacon is timed, so we need to see if it's started already, or if it cannot start at all.
-    #If neither we move on to the next if statement.
-    if is_timed == false || timer_start_on_spawn == true:
-        _OnBeaconDestroy(false)
     
     if timer_active == false && timer_start_on_spawn == false:
         timer_active = true
-        Global.get_objectives()._createClock(self.name, objective_id, timer_length)
+        Global.get_objectives()._createClock(self)
         #Start printing more stuff
         #And continue on process    
         return

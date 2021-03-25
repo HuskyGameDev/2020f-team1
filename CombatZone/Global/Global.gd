@@ -12,6 +12,8 @@ var level: = 0
 var player
 
 #Objectives
+var objectives = preload("res://Levels/Objectives/Objectives.tscn")
+
 var current_objectives
 
 # effects
@@ -36,8 +38,8 @@ func register_player(game_player):
     print("Global: player set")
 
 # Provides the current level's objectives to global class to allow for completion.
-func register_objectives(new_objectives):
-    current_objectives = new_objectives
+func register_objectives():
+    current_objectives = objectives.instance()
     current_objectives._initial_display()
     print("Global: Objectives set!")
     
@@ -45,10 +47,10 @@ func register_objectives(new_objectives):
 #Turns out I had the wrong script connected o_o
 #Oh well, keeping it for convinience.
 #This also makes sure that after objectives are defined, that they are displayed as well.
-func register_all(game_player, new_objectives):
+func register_all(game_player):
     # changed to reduce redendancy
     register_player(game_player)
-    register_objectives(new_objectives)
+    register_objectives()
 
 #It's a simple function that returns the current objectives the player has at the moment, so long as they exist.
 func get_objectives():

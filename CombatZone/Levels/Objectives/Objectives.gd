@@ -78,15 +78,16 @@ pass
 
 func _remove_task(task:Node, destroy:bool):
     _forceStopClock(task.id)
+    obj_complete_counter = obj_complete_counter + 1
+    _show_hidden_on_requirement(task.name)
     if destroy:
         objectives.erase(task)
         obj_complete_counter = obj_complete_counter - 1
         #TODO: Calculate new score based on whether we passed or failed the mission.
-    obj_complete_counter = obj_complete_counter + 1
-    _show_hidden_on_requirement(task.name)
-    _redisplay_objectives()    
     if ((obj_complete_counter >= objectives.size()) && completing_beats_level):
         Global.scene_change_path("res://assets/TitleScreen.tscn") #For now using this function until I understand the use behind scene_change function.
+        return
+    _redisplay_objectives()    
 
 #This is the time where it redisplays the objectives after one is completed or removed.
 #It clears the text from the player's screen and displays a new set which more correctly shows the objectives.
@@ -108,12 +109,12 @@ func _get_objective(name:String):
     return null
 pass
 
-func _createClock(beacon, id, length):
+func _createClock(beacon):
 
     var cl = clock.instance()
     var pl = Global.get_player()
     var offset = ((-1)*activeClocks.size())
-    cl._Initialize(length, id, beacon)
+    cl._Initialize(beacon.timer_length, beacon.objective_id, beacon.name)
     cl.position = Vector2(1000, ((-500)+(-180*offset)))
     cl.scale = Vector2(5, 5)
     pl.add_child(cl)
@@ -193,5 +194,8 @@ func _SoundQueue(status, priority):
             
     
     pass
+
+func get_class():
+    return "Objectives"
 
 #Custom functions: To be used in classes that inherit this one.
