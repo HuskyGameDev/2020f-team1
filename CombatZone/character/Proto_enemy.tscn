@@ -23,8 +23,22 @@ toRandom = true
 [node name="CollisionShape2D" parent="." index="0"]
 visible = false
 
+[node name="hand" parent="upper_body" index="1"]
+position = Vector2( 25, 30 )
+
+[node name="RayCast2D" type="RayCast2D" parent="upper_body/hand" index="0"]
+enabled = true
+cast_to = Vector2( 3000, 0 )
+collision_mask = 3
+
+[node name="grip" type="Node2D" parent="upper_body/hand" index="1"]
+
+[node name="holsters" parent="." index="3"]
+visible = false
+
 [node name="AI" type="Node2D" parent="." index="11"]
 script = ExtResource( 2 )
+agility = 0.1
 
 [node name="AIDetection" type="Area2D" parent="AI" index="0"]
 collision_layer = 4
@@ -32,4 +46,9 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AI/AIDetection" index="0"]
 shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AI/AIDetection" index="1"]
+
+[node name="Engage_timer" type="Timer" parent="AI" index="1"]
 [connection signal="body_entered" from="AI/AIDetection" to="AI" method="_on_AIDetertion_body_entered"]
+[connection signal="timeout" from="AI/Engage_timer" to="AI" method="_on_Engage_timer_timeout"]

@@ -4,7 +4,7 @@ extends "res://character/people.gd"
 # tweaked for AI use
 
 onready var ai = $AI
-onready var hand = $upper_body/hand
+onready var grip = $upper_body/hand/grip    # grip grips the gun
 
 var path := PoolVector2Array()
 #int represents state, 0 = idle, 1 = go after player
@@ -41,12 +41,12 @@ func _ready() -> void:
             $upper_body/upperbody_sprite.texture = load("res://Assets/Character(s)/Enemies/BasicEnemyHeavy_Idle.png")
             theLegs = "walkHeavy"
     
-    print($upper_body/hand.get_child_count())
+    print($upper_body/hand/grip.get_child_count())
     player = Global.get_player()    # get player instance
     if default_weapon != null:  # accquires weapon
-        $upper_body/hand.add_child(weapon)
-        print($upper_body/hand.get_child_count())
-    ai.initialize(self, hand)
+        $upper_body/hand/grip.add_child(weapon)
+        print($upper_body/hand/grip.get_child_count())
+    ai.initialize(self, grip)
         
 func _process(delta):
     # dies when not health left
@@ -85,9 +85,11 @@ func take_damage(pos, damage_amount) -> void:
 
 func get_input():
     dodge = Vector2.ZERO
-    if(player != null && path.size() > 0):
+    if player!=null:
         $upper_body.look_at(player.position)
         $upper_body/hand.look_at(player.position)
+    if(player != null && path.size() > 0):
+        
         
         #Points legs towards player with shoulders
         $foot/LegAnimation.look_at(player.position)
@@ -114,6 +116,14 @@ func get_input():
         return direction 
     else:
           return Vector2(0, 0)  
+
+# set can_shoot false, used for reload
+func i_cant_shoot() -> void:
+    can_shoot = false
+
+# check if I can shoot
+func can_I_shoot() -> bool:
+    return can_shoot
 
 func _on_action_timer_timeout():
     can_shoot = true

@@ -14,21 +14,33 @@ weap_name = "mac10"
 reload_time = 4
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( 65.2306, 0.176781 )
+position = Vector2( 27.2306, 0.176788 )
 rotation = 1.5708
 scale = Vector2( 5, 5 )
 texture = ExtResource( 1 )
 offset = Vector2( 2, 10 )
 
+[node name="AnimatedSprite" parent="." index="1"]
+position = Vector2( -38, 0 )
+
 [node name="ejection_port" parent="." index="2"]
-position = Vector2( 50.6084, 10.3536 )
+position = Vector2( 12.6084, 10.3536 )
 
 [node name="muzzle" parent="." index="3"]
-position = Vector2( 106.012, 0 )
+position = Vector2( 68.012, 0 )
 
 [node name="CollisionShape2D" parent="." index="4"]
-position = Vector2( 27.2236, 0 )
+position = Vector2( -10.7764, 0 )
 shape = SubResource( 1 )
 
 [node name="rate_of_fire" parent="." index="6"]
 wait_time = 0.1
+
+[node name="trigger_pull" parent="." index="7"]
+position = Vector2( -38, 0 )
+
+[node name="fire" parent="." index="8"]
+position = Vector2( -38, 0 )
+
+[node name="reload" parent="." index="9"]
+position = Vector2( -38, 0 )
