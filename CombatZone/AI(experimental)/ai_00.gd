@@ -32,6 +32,8 @@ func _ready() -> void:
 func initialize(mySelf, hand):
     actor = mySelf
     
+    # a way to get items from actors
+    print('upper_body has children: ', actor.get_node('upper_body').get_child_count())
     if hand.get_child_count()>0:    # hand has weapon, set weapon
         weapon = hand.get_child(0)  # first weapon is weapon
         if Global.debug:
@@ -45,10 +47,8 @@ func _process(delta: float) -> void:
             State.PATROL:
                 pass
             State.ENGAGE:
-                print('ai engaging...')
                 if player != null and weapon != null:
-                    
-                    # .rotation = actor.global_position.direction_to(player.global_position)
+                    actor.get_node('upper_body').rotation = actor.get_node('upper_body').global_position.direction_to(player.global_position).angle()
                     aiAttack()
                                        
                 else:
@@ -72,8 +72,8 @@ func set_state(new_state: int):
     emit_signal('state_change', current_state)
 
 func _on_AIDetertion_body_entered(body: Node) -> void:
-    if body.is_in_group('player'):
-        player = body
+    if body.is_in_group('player'):  # Checks whether body is player group
+        player = body               # could change to other groups if player has allies
         if Global.debug:
             print('AI added player')
         set_state(State.ENGAGE)
