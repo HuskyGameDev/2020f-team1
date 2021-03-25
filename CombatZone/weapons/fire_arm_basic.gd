@@ -42,7 +42,7 @@ func shoot() -> int:    # returns int signifying success of firing
             return 0
     return 1
     
-func reload_weap() -> int:   # reload would probably return the number of bullets in the clip
+func reload_weap() -> int:   # reload would return the time it takes to reload
     if Global.debug_on():
         print("weapon: reloading")
         ammo -= clip_size
