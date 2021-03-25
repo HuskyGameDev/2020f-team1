@@ -321,6 +321,35 @@ func _clear_objectives():
         if val != null:
             val.queue_free()
     pass
+    
+func _OnTimerStart():
+    var snd = $TimerTick
+    match snd.playing:
+        false:
+            snd.play()
+
+func _OnTimerEnd():
+    var snd = $TimerTick
+    match snd.playing:
+        true:
+            snd.stop()
+            
+func _ObjectiveSoundQueue(status, priority):
+    
+    match status:
+        1:
+            match priority:
+                0:
+                    $MainComplete.play()
+                _:
+                    $SideComplete.play()
+            return
+        _:
+            $ObjFail.play()        
+            
+    
+    pass
+
 
 func _on_reload_timer_timeout() -> void:
     canShoot = true

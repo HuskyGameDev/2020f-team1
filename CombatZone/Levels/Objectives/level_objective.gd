@@ -87,6 +87,7 @@ func _OnCompleted():
     var objectives = Global.get_objectives()
     status = OBJECTIVE_STATUS.STATUS_SUCCESS #For later use, not needed to remove, but to add to the player's percentage score.
     #TODO: Apply a checkmark and don't remove.
+    Global.get_player()._ObjectiveSoundQueue(status, priority)
     objectives._remove_task(self, remove_on_complete)
     #Possibly make this a lambda function in the future?
 
@@ -96,12 +97,17 @@ func _OnFail():
     var objectives = Global.get_objectives()
     #This will be used for every time it is printed out from here on out
     status = OBJECTIVE_STATUS.STATUS_FAIL
+    Global.get_player()._ObjectiveSoundQueue(status, priority)
     #We don't technically actually remove it, but we have to notify the objectives class that this objective failed.
     objectives._remove_task(self, remove_on_complete)
+    
     pass
     
 func _MarkBeaconComplete(name:String):
     beacons.erase(name)
+    
+    Global.get_objectives()._forceStopClock(id)
+    
     if (beacons.size() <= 0):
         _OnCompleted()
     pass

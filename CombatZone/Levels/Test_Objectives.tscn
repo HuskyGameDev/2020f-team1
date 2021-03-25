@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Environment/desert.tres" type="TileSet" id=1]
 [ext_resource path="res://weapons/hand_gun/magnum.tscn" type="PackedScene" id=2]
@@ -9,12 +9,11 @@
 [ext_resource path="res://Levels/Objectives/Objectives.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Levels/Objectives/level_objective.gd" type="Script" id=8]
 [ext_resource path="res://Pick_ups/PK_Armor.tscn" type="PackedScene" id=9]
+[ext_resource path="res://vehicle/tank_1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Levels/Objectives/level_objective.tscn" type="PackedScene" id=11]
 
 [node name="Test_Objectives" type="Node2D"]
 script = ExtResource( 4 )
-
-[node name="Objectives" parent="." instance=ExtResource( 7 )]
 
 [node name="LTO1" parent="." instance=ExtResource( 11 )]
 id = "LTO1"
@@ -117,3 +116,8 @@ is_timed = true
 timer_length = 30.0
 objective_radius = 50.0
 beacon_type = 1
+
+[node name="tank_1" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1242.4, 711.691 )
+
+[node name="Objectives" parent="." instance=ExtResource( 7 )]

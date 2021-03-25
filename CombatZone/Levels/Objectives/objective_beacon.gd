@@ -46,6 +46,7 @@ func _ready():
     _OnReady()
     if is_timed == true && timer_start_on_spawn == true:
         timer_active = true
+        Global.get_objectives()._createTimer(self.name, objective_id, timer_length)
     else:
         timer_active = false
     #Thanks to the post on the godot forums, I was able to allow dynamic scaling of the shape at runtime
@@ -68,12 +69,6 @@ func _ready():
 
 func _process(delta):
     _PreProcess()
-    #Obviously we tick up the timer here, incrementing by in game time at its given speed.
-    if timer_active == true && is_timed == true:
-        timer += delta
-        if (timer > timer_length):
-            _OnTimerExpire()
-        print(timer)
     _PostProcess()  
     pass
 
@@ -88,6 +83,7 @@ func _OnTimerExpire():
     #Either way, if we fail or not, this beacon must be freed from the scene.
     queue_free()
     pass
+
 
 #Called whenever we want to manually destroy the beacon without removing the base entity
 #Typically used when a timer reaches completion, but in such case it must be noted the objective had failed
@@ -107,6 +103,7 @@ func _OnBeaconDestroy(fail:bool):
     else:
         _MarkFailed()
         objective._OnFail()   #TODO: Find a way to remove all associated beacons, probably best for the level_objective class
+    
     #Custom code here, potentially to clear the screen?
     _PostDestroy()
     pass
@@ -140,7 +137,7 @@ func _on_obj_radius_body_entered(body):
     
     if timer_active == false && timer_start_on_spawn == false:
         timer_active = true
-        timer = 0
+        Global.get_objectives()._createClock(self.name, objective_id, timer_length)
         #Start printing more stuff
         #And continue on process    
         return

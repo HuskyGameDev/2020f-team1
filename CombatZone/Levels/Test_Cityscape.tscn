@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Environment/cityscape.tres" type="TileSet" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Pick_ups/Weapons/two_handed/sawn_off_boomstick_pick_up.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Pick_ups/PK_health_pack.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Pick_ups/Weapons/hand_guns/pickUp_9mm_autoloader.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Levels/Objectives/Objectives.tscn" type="PackedScene" id=9]
 
 [node name="Level_01" type="Node2D"]
 script = ExtResource( 4 )
@@ -40,3 +41,5 @@ position = Vector2( 888.127, -649.196 )
 
 [node name="PK_health" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1532.61, -693.643 )
+
+[node name="Objectives" parent="." instance=ExtResource( 9 )]
