@@ -21,4 +21,4 @@ position = Vector2( -141.493, 170.859 )
 [node name="Line2D" type="Line2D" parent="."]
 
 [node name="Proto_enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 373.755, -130.814 )
+position = Vector2( -261.628, -69.4114 )

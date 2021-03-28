@@ -187,7 +187,7 @@ func dodge_roll():
         print("dodge roll begins")
         $RollTimer.start()
         counter = 100.0 
-        dodge = Vector2(input.x, input.y) * 5000
+        dodge = Vector2(input.x, input.y) * 10000
         #while(counter > 0):
         #    $RollTimer2.start()
         #    counter = counter - 1
