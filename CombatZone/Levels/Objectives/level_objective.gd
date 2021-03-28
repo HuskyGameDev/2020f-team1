@@ -25,6 +25,12 @@ enum OBJECTIVE_STATUS {
     STATUS_UNAVAILABLE
    }
 
+enum ROOT_SEARCH_TYPE {
+    TYPE_NULL = -1,
+    INITIALIZE,
+    COMPLETION_CHECK
+   }
+
 export var id:String #Put simply, we need to be sure we can identify the objective to make most of the magic work.
                      #I chose string because I plan to identify objectives by the level in question and objective number
                      # I.E: L1O1 for the first objective of the first level.
@@ -71,14 +77,36 @@ func _ready():
             if node.objective_id == id:
                 node._MarkPriority(priority)
                 beacons.push_back(node.get_name())
-        else:    
-            for child in node.get_children():
-                if child.get_class() == "objective_beacon":
-                #if the id is the same, we should exit the function, no need to mark as complete so long as a beacon exists
-                    if child.objective_id == id:
+        else: 
+                RootChildren(node, 0)
+    pass # Replace with function body.
+
+#Checks inside the node's children to see if there are beacons
+#If a node has a child we run this recursivley.
+func RootChildren(node, rootType):
+    
+    if node.get_child_count() < 0:
+        return false
+    
+    var foundInChild = false
+    
+    for child in node.get_children():
+        if child.get_class() == "objective_beacon":
+            #if the id is the same, we should exit the function, no need to mark as complete so long as a beacon exists
+            if child.objective_id == id:
+                match rootType:
+                    ROOT_SEARCH_TYPE.INITIALIZE:
                         child._MarkPriority(priority)
                         beacons.push_back(child.get_name())
-    pass # Replace with function body.
+                    ROOT_SEARCH_TYPE.COMPLETION_CHECK:
+                        foundInChild = true
+        elif child.get_child_count() > 0:
+            foundInChild = RootChildren(child, rootType)
+        #Else we call this again to see if the child has and children
+        
+    return foundInChild
+    
+    pass
 
 func _OnCompleted():
     if (status == OBJECTIVE_STATUS.STATUS_SUCCESS):
@@ -125,11 +153,9 @@ func _CheckCompletionStatus():
             if node.objective_id == id:
                 return
         else:  
-            for child in node.get_children():
-                if child.get_class() == "objective_beacon":
-                #if the id is the same, we should exit the function, no need to mark as complete so long as a beacon exists
-                    if child.objective_id == id:
-                        return
+            if node.get_child_count() > 0:
+                if (RootChildren(node, 1) == true):
+                    return
     #Now that we see there is nothing left, we see now if our objective type changes if we complete this or not
     #Only fail on destroy if the objective was simply to protect another thing.
     if obj_type == OBJECTIVE_TYPE.TYPE_SECURE && beacons.size() > 0 && status == OBJECTIVE_STATUS.STATUS_ONGOING:

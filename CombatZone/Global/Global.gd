@@ -3,7 +3,7 @@ extends Node
 # Global script will be used to store persistent game info
 
 # Game Settings
-export var debug = true
+export var debug = false
 var game_over: = false
 var game_paused: = false
 var current_scene = null
@@ -95,6 +95,10 @@ func embark(people: Node2D, vehicle):
         vehicle.can_embark = false
         people.piloting = true
         people.position = Vector2(-1000,-1000)
+        if (people.get_groups().has('player')):
+            people.remove_from_group('player')
+            vehicle.add_to_group('player')
+            register_player(vehicle)
         people.hide()
 
 func disembark(people: Node2D,vehicle: Node):
@@ -102,12 +106,19 @@ func disembark(people: Node2D,vehicle: Node):
         #print('is parent')
     #vehicle.remove_child(people)
     switch_camera2D(vehicle,people)
+    if (vehicle.get_groups().has('player')):
+            vehicle.remove_from_group('player')
+            people.add_to_group('player')
+            register_player(people)
+    vehicle.remove_from_group('player')
     people.show()
     people.set_process(true)
     people.piloting = false
+    vehicle.passenger = null
     print(people.position)
     people.set("position", vehicle.get_node('disembark_Position2D').get_global_position())
     vehicle.manned = false
+       
     
 # puck-ups
 func pickup(player,type,number):

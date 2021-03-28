@@ -262,7 +262,7 @@ func _update_objectives(new_text:String, offset:int, status:int, priority:int):
     if (priority == 2 && status == 0):
         print(offset)
         print("Hidden!")
-        return
+        return false
             
     var img = Sprite.new()
     
@@ -308,12 +308,13 @@ func _update_objectives(new_text:String, offset:int, status:int, priority:int):
     obj_priority_display.insert(offset, img)
     self.add_child(img)
     img.set_owner(self)
-    $objective_list.append_bbcode(new_text)
+    get_node("objective_list/text").append_bbcode(new_text)
+    return true
     pass
     
 #Makes it easier to clear the objectives if we can find the exact object that needs to be cleared.
 func _clear_objectives():
-    $objective_list.clear()
+    get_node("objective_list/text").clear()
     var copy = obj_priority_display
     while(not obj_priority_display.empty()):
         var val = obj_priority_display.pop_front()

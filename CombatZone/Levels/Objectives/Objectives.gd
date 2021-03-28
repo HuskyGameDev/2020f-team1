@@ -20,8 +20,19 @@ func _ready():
         if node.get_class() == "level_objective":
             if (objectives.count(node) == 0 && node.disabled == false):
                 objectives.append(node)
+        if node.get_child_count() > 0:
+            RootObjectives(node)
     
     pass # Replace with function body.
+
+func RootObjectives(node):
+    for child in node.get_children():
+        if (child.get_class() == "level_objective"):
+            if (objectives.count(child) == 0 && child.disabled == false):
+                objectives.append(child)
+        if child.get_child_count() > 0:
+            RootObjectives(child)
+    pass
 
 #This assumes that the variable actually listing the objectives is empty to begin with
 func _initial_display():
@@ -31,6 +42,8 @@ func _initial_display():
 #Adds the text for each objective yet to be completed on the player's screen
 func display(ply):
     var oInterval = 0
+    if (objectives.empty()):
+        return
     var fNode = objectives[oInterval]
     var offset = 0
     
@@ -43,6 +56,9 @@ func display(ply):
         _:
             #Else, display later
             oInterval = oInterval + 1
+    
+    if oInterval >= objectives.size():
+        return
     
     var node = objectives[oInterval]
     var priority = 0
@@ -66,8 +82,10 @@ func display(ply):
         pass
         
         #Should be assumed by now priority is the same, and the node is unique, so we should print.
-        ply._update_objectives(node._get_objective_string() + "\n", offset, node.status, priority)
-        offset = offset + 1
+        if (ply._update_objectives(node._get_objective_string() + "\n", offset, node.status, priority) == true):    
+            offset = offset + 1
+            pass
+        
         oInterval = (oInterval + 1) if oInterval < objectives.size() - 1 else 0
         node = objectives[oInterval]
         
@@ -85,7 +103,7 @@ func _remove_task(task:Node, destroy:bool):
         obj_complete_counter = obj_complete_counter - 1
         #TODO: Calculate new score based on whether we passed or failed the mission.
     if ((obj_complete_counter >= objectives.size()) && completing_beats_level):
-        Global.scene_change_path("res://assets/TitleScreen.tscn") #For now using this function until I understand the use behind scene_change function.
+        Global.scene_change_path("res://Assets/TitleScreen.tscn") #For now using this function until I understand the use behind scene_change function.
         return
     _redisplay_objectives()    
 

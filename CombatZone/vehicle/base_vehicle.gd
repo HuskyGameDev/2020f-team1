@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_embark_Area2D_body_entered(body: Node) -> void:
     print('Object entered', body)
-    if(body.get_groups().has('player')):
+    if(body.get_groups().has('player') && !(passenger == body)):
         print('player entered')
         can_embark = true
         passenger_tobe = body

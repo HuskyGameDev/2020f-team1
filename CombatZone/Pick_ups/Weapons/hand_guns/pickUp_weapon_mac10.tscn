@@ -8,6 +8,7 @@ radius = 8.61106
 
 [node name="pickUp_weapon_mac10" instance=ExtResource( 1 )]
 ammo_count = 120
+weap_name = "mac10"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
