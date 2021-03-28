@@ -26,15 +26,21 @@ var actor = null
 var player: Player = null
 var weapon: Weapon = null
 
+var upperBody = null
+var hand = null
+var aim = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass
 
 # get reference of actor and weapon
+# from parent(actor) to AI
 func initialize(mySelf, grip):
     actor = mySelf
-    
+    upperBody = actor.get_node('upper_body')
+    hand = upperBody.get_node('hand')
+    aim = hand.get_node('RayCast2D')
     # a way to get items from actors
     # print('upper_body has children: ', actor.get_node('upper_body').get_child_count())
     if grip.get_child_count()>0:    # hand has weapon, set weapon
@@ -50,11 +56,6 @@ func _process(delta: float) -> void:
             State.PATROL:
                 pass
             State.ENGAGE:
-                var upperBody = actor.get_node('upper_body')
-                var hand = upperBody.get_node('hand')
-                var aim = hand.get_node('RayCast2D')
-                #print('collide with: ',aim.get_collider())
-
                 if player != null and weapon != null:
                     # body face target
                     upperBody.rotation = lerp(upperBody.rotation, upperBody.global_position.direction_to(player.global_position).angle(), agility)
@@ -96,6 +97,8 @@ func set_state(new_state: int):
     print('ai now in state: ', current_state)
     emit_signal('state_change', current_state)
 
+# When target enter detection zone,
+# if raycast reaches target, switch to engage
 func _on_AIDetertion_body_entered(body: Node) -> void:
     if body.is_in_group('player'):  # Checks whether body is player group
         player = body               # could change to other groups if player has allies

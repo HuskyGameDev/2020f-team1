@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://AI(experimental)/ai_00.gd" type="Script" id=2]
 [ext_resource path="res://character/Proto_enemy.gd" type="Script" id=3]
 [ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=4]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 424.624
 
 [node name="Proto_enemy" groups=[
 "enemy",
@@ -23,9 +20,6 @@ toRandom = true
 [node name="CollisionShape2D" parent="." index="0"]
 visible = false
 
-[node name="hand" parent="upper_body" index="1"]
-position = Vector2( 25, 30 )
-
 [node name="RayCast2D" type="RayCast2D" parent="upper_body/hand" index="0"]
 enabled = true
 cast_to = Vector2( 3000, 0 )
@@ -38,16 +32,13 @@ visible = false
 
 [node name="AI" type="Node2D" parent="." index="11"]
 script = ExtResource( 2 )
-agility = 0.1
 
 [node name="AIDetection" type="Area2D" parent="AI" index="0"]
 collision_layer = 4
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/AIDetection" index="0"]
-shape = SubResource( 1 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AI/AIDetection" index="1"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AI/AIDetection" index="0"]
+polygon = PoolVector2Array( 0, 0, 500, 200, 500, -200 )
 
 [node name="Engage_timer" type="Timer" parent="AI" index="1"]
 [connection signal="body_entered" from="AI/AIDetection" to="AI" method="_on_AIDetertion_body_entered"]
