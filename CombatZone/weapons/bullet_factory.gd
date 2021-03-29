@@ -14,6 +14,7 @@ var caliber_dict = {'9mm': b_9mm,
 # weapons
 var w_9mm_autoloader = preload("res://weapons/hand_gun/9mm_autoloader.tscn")
 var w_magnum = preload("res://weapons/hand_gun/magnum.tscn")
+var w_mac10 = preload("res://weapons/hand_gun/Mac_10.tscn")
 var w_sawn_off_b = preload("res://weapons/hand_gun/sawn_off_boomstick.tscn")
 
 # pickups
@@ -24,6 +25,7 @@ var p_sawn_off_b = preload("res://Pick_ups/Weapons/two_handed/sawn_off_boomstick
 # dictionary for spawning weapons
 var weapon_dict = {'9mmloader': w_9mm_autoloader,
                     'magnum': w_magnum,
+                    'mac10': w_mac10,
                     'sawn_off_boom': w_sawn_off_b
                     }
 

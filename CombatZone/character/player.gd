@@ -84,7 +84,20 @@ func interAct() -> void:
             switch_weapon()
         else:
             pickup_item.take_effect(self)   # other pickups take effect on player
-            
+
+func embark(vehicle):
+    self.vehicle = vehicle
+    piloting = true
+    # avoid collision with car
+    set_collision_layer_bit(1,false)
+    hide()
+    
+func disembark():
+    vehicle = null
+    piloting = false
+    set_collision_layer_bit(1,true)
+    show()
+
 func switch_weapon() -> void:
     # check different from weap in hand and in holster
     if weap_to_spawn != weap_in_hand && weap_to_spawn != $holsters.get_child(0).weap_name:

@@ -125,6 +125,8 @@ position = Vector2( -1173.86, -1232.14 )
 
 [node name="tank_1" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1242.4, 711.691 )
+collision_layer = 64
+collision_mask = 1
 
 [node name="health_pack" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2033.64, -132.936 )

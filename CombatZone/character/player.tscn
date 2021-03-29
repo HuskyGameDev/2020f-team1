@@ -94,7 +94,7 @@ playback_speed = 3.0
 position = Vector2( 25, 30 )
 
 [node name="pickup_Area2D" type="Area2D" parent="upper_body" index="2"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="upper_body/pickup_Area2D" index="0"]

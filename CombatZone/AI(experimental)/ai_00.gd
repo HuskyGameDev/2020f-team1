@@ -108,6 +108,7 @@ func aiAttack()-> void:
         print('ai reloading')
         weapon.add_ammo(weapon.get_clip_size())
         var time_returned = weapon.reload_weap()
+        print('after reload magazine clip fullis : ', weapon.clip_full())
         actor.i_cant_shoot()
         print('reload takes: ', time_returned)
         actor.get_node('action_timer').start(time_returned)

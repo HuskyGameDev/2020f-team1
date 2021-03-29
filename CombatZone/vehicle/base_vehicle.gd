@@ -61,7 +61,7 @@ func _on_embark_Area2D_body_entered(body: Node) -> void:
 
 func _on_embark_Area2D_body_exited(body: Node) -> void:
     if body.get_groups().has('player'):
-        print('player existed embark area')
+        print('player exited embark area')
         can_embark = false
         passenger_tobe = null
         

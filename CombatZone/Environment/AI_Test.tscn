@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Environment/TestLevel_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://character/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://vehicle/car_1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environment/AI_Test.gd" type="Script" id=4]
 [ext_resource path="res://character/Proto_enemy.tscn" type="PackedScene" id=5]
 
@@ -22,3 +23,6 @@ position = Vector2( -141.493, 170.859 )
 
 [node name="Proto_enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( -261.628, -69.4114 )
+
+[node name="car_1" parent="." instance=ExtResource( 3 )]
+position = Vector2( 176.842, 272.692 )

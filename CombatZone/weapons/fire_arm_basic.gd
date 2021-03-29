@@ -45,17 +45,17 @@ func shoot() -> int:    # returns int signifying success of firing
 func reload_weap() -> int:   # reload would return the time it takes to reload
     if Global.debug_on():
         print("weapon: reloading")
-        ammo -= clip_size
-        if ammo == 0 - clip_size:   # no ammo to reload
-            if Global.debug:
-                print("ammo used up")
-            return -1
-        bullet_in_mag = clip_size   # reloaded
+    ammo -= clip_size
+    if ammo == 0 - clip_size:   # no ammo to reload
         if Global.debug:
-            print("ammo left ", ammo)
-        if ammo < 0:
-            bullet_in_mag += ammo   # if not enough ammo count to fill up clip
-            ammo = 0
+            print("ammo used up")
+        return -1
+    bullet_in_mag = clip_size   # reloaded
+    if Global.debug:
+        print("ammo left ", ammo)
+    if ammo < 0:
+        bullet_in_mag += ammo   # if not enough ammo count to fill up clip
+        ammo = 0
     return reload_time
 
 func clip_full() -> bool:

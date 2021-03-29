@@ -32,6 +32,9 @@ collision_mask = 3
 [node name="holsters" parent="." index="3"]
 visible = false
 
+[node name="action_timer" parent="." index="9"]
+one_shot = true
+
 [node name="AI" type="Node2D" parent="." index="11"]
 script = ExtResource( 2 )
 
