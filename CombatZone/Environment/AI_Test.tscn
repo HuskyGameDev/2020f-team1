@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Environment/TestLevel_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://character/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://vehicle/car_1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environment/AI_Test.gd" type="Script" id=4]
 [ext_resource path="res://character/Proto_enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://vehicle/tank_1.tscn" type="PackedScene" id=6]
 
 [node name="AI_Test" type="Node2D"]
 script = ExtResource( 4 )
@@ -26,3 +27,9 @@ position = Vector2( -261.628, -69.4114 )
 
 [node name="car_1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 176.842, 272.692 )
+
+[node name="tank_1" parent="." instance=ExtResource( 6 )]
+position = Vector2( -130.713, 360.244 )
+engine_power = 800
+max_speed_reverse = 250
+friction = -0.9

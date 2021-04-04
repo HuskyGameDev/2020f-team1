@@ -14,9 +14,10 @@ enum State {
     SEARCH
    }
 
-export var agility = 0.1
+export var agility = 0.1        # affects how fast ai can turn and look around
 export var engage_timeout = 2   # a timer that breaks engagement when I can't see target
                                 # with ray cast
+export var search_timeout = 7   # a timer that return ai to patrol when search took too long
 
 onready var player_detection_zone = $AIDetection
 
@@ -148,6 +149,11 @@ func _on_AIDetertion_body_entered(body: Node) -> void:
                 print('AI added player')
             set_state(State.ENGAGE)
         
+# get player, change state to engage
+func get_player(player_in):
+    if player != player_in: # get reference
+        player = player_in
+    set_state(State.ENGAGE)
 
 # set to search when engage timed out
 func _on_Engage_timer_timeout() -> void:
@@ -163,3 +169,7 @@ func _on_Patrol_timer_timeout() -> void:
     # reset patrol status
     patrol_location_reached = false
     pass # Replace with function body.
+
+# when time out, go back to patrol
+func _on_Search_timeOut_timeout() -> void:
+    set_state(State.PATROL)

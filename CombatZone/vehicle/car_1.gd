@@ -23,24 +23,6 @@ func get_input() -> void:
         # Braking
         if Input.is_action_pressed("vehicle_brake"):
             acceleration = transform.x * braking * Input.get_action_strength("vehicle_brake")
-    # Embark
-    if not manned:
-        if can_embark && Input.is_action_just_released("player_interact"):
-            # Global.embark(passenger_tobe,self)
-            manned = true
-            passenger = passenger_tobe
-            can_embark = false
-            passenger_tobe.embark(self)
-            set_collision_mask_bit(1, false)
-            print('to embark')
-        # Disembark
-    elif Input.is_action_just_released("player_interact"):   # only when it is manned
-            # Global.disembark(passenger, self)
-            passenger.disembark()
-            passenger = null
-            manned = false
-            set_collision_mask_bit(1, true)
-            print('to disembark')
     
 func calculate_steering(delta):
     var rear_wheel = position - transform.x * wheel_base / 2.0

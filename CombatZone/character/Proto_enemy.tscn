@@ -50,6 +50,9 @@ one_shot = true
 
 [node name="Patrol_timer" type="Timer" parent="AI" index="2"]
 one_shot = true
+
+[node name="Search_timeOut" type="Timer" parent="AI" index="3"]
 [connection signal="body_entered" from="AI/AIDetection" to="AI" method="_on_AIDetertion_body_entered"]
 [connection signal="timeout" from="AI/Engage_timer" to="AI" method="_on_Engage_timer_timeout"]
 [connection signal="timeout" from="AI/Patrol_timer" to="AI" method="_on_Patrol_timer_timeout"]
+[connection signal="timeout" from="AI/Search_timeOut" to="AI" method="_on_Search_timeOut_timeout"]
