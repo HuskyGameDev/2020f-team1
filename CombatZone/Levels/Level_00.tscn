@@ -144,14 +144,12 @@ collision_mask = 1
 
 [node name="tank_1" parent="." index="17" instance=ExtResource( 5 )]
 position = Vector2( 4940.75, -1709.63 )
-collision_layer = 64
 engine_power = 800
 max_speed_reverse = 250
 friction = -0.9
 
 [node name="tank_2" parent="." index="18" instance=ExtResource( 5 )]
 position = Vector2( 2695.83, 804.684 )
-collision_layer = 64
 engine_power = 800
 max_speed_reverse = 250
 friction = -0.9
