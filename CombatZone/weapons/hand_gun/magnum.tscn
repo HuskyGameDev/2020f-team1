@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/RevolverTop.png" type="Texture" id=1]
 [ext_resource path="res://weapons/fire_arm_basic.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons/hand_gun/magnum.gd" type="Script" id=3]
+[ext_resource path="res://weapons/bullets/45acp.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.1955
@@ -15,6 +16,7 @@ spread = 0.0
 clip_size = 6
 fire_rate = 0.5
 weap_name = "magnum"
+bullet = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="0"]
 rotation = 1.5708
