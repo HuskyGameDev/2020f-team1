@@ -65,4 +65,4 @@ func _physics_process(delta: float) -> void:
         velocity =  move_and_slide(velocity + dodge)
     else:
         position = vehicle.global_position
-        rotation = vehicle.global_rotation
+        #rotation = vehicle.global_rotation

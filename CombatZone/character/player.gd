@@ -90,13 +90,28 @@ func embark(vehicle):
     piloting = true
     # avoid collision with car
     set_collision_layer_bit(1,false)
-    hide()
+    $upper_body.hide()
+    $foot.hide()
+    #$holsters.hide()
+    $Dodge.hide()
+    $Armor_bar.hide()
+    #$health_bars.hide()
+    #$ammo_call_out.hide()
     
 func disembark():
     vehicle = null
     piloting = false
     set_collision_layer_bit(1,true)
-    show()
+    rotation = 0
+    $upper_body.show()
+    $foot.show()
+    #$holsters.show()
+    $Dodge.show()
+    if(armor > 0):
+        $Armor_bar.show()
+    if (health < totalHealth):
+        $health_bars.show()
+    #$ammo_call_out.show()
 
 func switch_weapon() -> void:
     # check different from weap in hand and in holster
@@ -163,7 +178,8 @@ func _process(delta):
     if($Dodge.scale.x == 0):
         $Dodge.hide()
         $Dodge.scale.x = 2
-        
+         
+    
     #Animation: Checking to see if player is moving
     if Input.is_action_pressed("player_move_down") || Input.is_action_pressed("player_move_up") || Input.is_action_pressed("player_move_left") || Input.is_action_pressed("player_move_right"):
         moves = true
@@ -321,13 +337,13 @@ func _update_objectives(new_text:String, offset:int, status:int, priority:int):
     obj_priority_display.insert(offset, img)
     self.add_child(img)
     img.set_owner(self)
-    get_node("objective_list/text").append_bbcode(new_text)
+    $objective_list.append_bbcode(new_text)
     return true
     pass
     
 #Makes it easier to clear the objectives if we can find the exact object that needs to be cleared.
 func _clear_objectives():
-    get_node("objective_list/text").clear()
+    $objective_list.clear()
     var copy = obj_priority_display
     while(not obj_priority_display.empty()):
         var val = obj_priority_display.pop_front()
