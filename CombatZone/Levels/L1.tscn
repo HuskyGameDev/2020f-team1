@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Environment/cityscape.tres" type="TileSet" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://character/Proto_enemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Environment/TestLevel_Tileset.tres" type="TileSet" id=10]
 [ext_resource path="res://Environment/grass.tres" type="TileSet" id=11]
-[ext_resource path="res://Environment/TestRoofs.tres" type="TileSet" id=12]
 [ext_resource path="res://weapons/hand_gun/9mm_autoloader.tscn" type="PackedScene" id=13]
 [ext_resource path="res://weapons/hand_gun/magnum.tscn" type="PackedScene" id=14]
 [ext_resource path="res://weapons/hand_gun/Mac_10.tscn" type="PackedScene" id=15]
@@ -78,14 +77,6 @@ position = Vector2( -38.7576, -773.787 )
 
 [node name="PK_health" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1532.61, -693.643 )
-
-[node name="TempHouseTiles" type="TileMap" parent="."]
-z_index = 9
-tile_set = ExtResource( 12 )
-collision_layer = 524288
-collision_mask = 2
-format = 1
-tile_data = PoolIntArray( -1114050, 0, 7, -1114049, 0, 196612, -1114048, 0, 196612, -1114047, 0, 196612, -1114046, 0, 196612, -1114045, 0, 196612, -1114044, 0, 196612, -1114043, 0, 8, -983042, 0, 7, -983041, 0, 196612, -1048576, 0, 8, -1048514, 0, 131076, -1048513, 0, 131078, -1048512, 0, 131078, -1048511, 0, 131078, -1048510, 0, 131078, -1048509, 0, 131078, -1048508, 0, 131078, -1048507, 0, 131077, -917506, 0, 131076, -917505, 0, 131078, -983040, 0, 131077, -982978, 0, 131076, -982977, 0, 131078, -982976, 0, 131078, -982975, 0, 131078, -982974, 0, 131078, -982973, 0, 131078, -982972, 0, 131078, -982971, 0, 131077, -851970, 0, 131076, -851969, 0, 131078, -917504, 0, 131077, -917442, 0, 131076, -917441, 0, 131078, -917440, 0, 131078, -917439, 0, 131078, -917438, 0, 131078, -917437, 0, 131078, -917436, 0, 131078, -917435, 0, 131077, -786434, 0, 131076, -786433, 0, 131078, -851968, 0, 131077, -851906, 0, 131076, -851905, 0, 131078, -851904, 0, 131072, -851903, 0, 196613, -851902, 0, 196613, -851901, 0, 131073, -851900, 0, 131078, -851899, 0, 131077, -720898, 0, 131076, -720897, 0, 131078, -786432, 0, 131077, -786370, 0, 65543, -786369, 0, 196613, -786368, 0, 65544, -786365, 0, 65543, -786364, 0, 196613, -786363, 0, 65544, -655362, 0, 131076, -655361, 0, 131078, -720896, 0, 131077, -589826, 0, 65543, -589825, 0, 196613, -655360, 0, 65544 )
 
 [node name="FutureEnemies" type="Node2D" parent="."]
 visible = false

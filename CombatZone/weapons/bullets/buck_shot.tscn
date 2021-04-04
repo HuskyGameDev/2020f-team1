@@ -4,8 +4,8 @@
 [ext_resource path="res://weapons/bullets/projectiles.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 1.00201
-height = 1.39062
+radius = 4.52979
+height = 0.98421
 
 [node name="buck_shot" instance=ExtResource( 2 )]
 speed = 3000
