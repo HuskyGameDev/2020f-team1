@@ -42,8 +42,30 @@ func apply_friction() -> void:
         friction_force *= 3
     acceleration += drag_force + friction_force
     
+    
+func embarking():
+    # Embark
+    if not manned:
+        if can_embark && Input.is_action_just_released("player_interact"):
+            # Global.embark(passenger_tobe,self)
+            manned = true
+            passenger = passenger_tobe
+            can_embark = false
+            passenger_tobe.embark(self)
+            set_collision_mask_bit(1, false)
+            print('to embark')
+        # Disembark
+    elif Input.is_action_just_released("player_interact"):   # only when it is manned
+            # Global.disembark(passenger, self)
+            passenger.disembark()
+            passenger = null
+            manned = false
+            set_collision_mask_bit(1, true)
+            print('to disembark')
+            
 func _physics_process(delta: float) -> void:
     acceleration = Vector2.ZERO
+    embarking()
     get_input()
     apply_friction()
     calculate_steering(delta)
@@ -53,7 +75,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_embark_Area2D_body_entered(body: Node) -> void:
     print('Object entered', body)
-    if(body.get_groups().has('player')):
+    if(body.get_groups().has('player') && !(passenger == body)):
         print('player entered')
         can_embark = true
         passenger_tobe = body
@@ -61,7 +83,7 @@ func _on_embark_Area2D_body_entered(body: Node) -> void:
 
 func _on_embark_Area2D_body_exited(body: Node) -> void:
     if body.get_groups().has('player'):
-        print('player existed embark area')
+        print('player exited embark area')
         can_embark = false
         passenger_tobe = null
         

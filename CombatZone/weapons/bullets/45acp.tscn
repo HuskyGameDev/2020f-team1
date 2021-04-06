@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://weapons/bullets/projectiles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Gun_Bullet.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25.8671, 10.262 )
+
+[node name="45acp" instance=ExtResource( 1 )]
+speed = 2600
+damage = 120
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 8, 8 )
+texture = ExtResource( 2 )
+offset = Vector2( 1.99, 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -4.56664, 0 )
+scale = Vector2( 0.78169, 0.819752 )
+shape = SubResource( 1 )

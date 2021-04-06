@@ -1,4 +1,5 @@
 extends "res://character/people.gd"
+class_name Player
 
 var canShoot = true
 var canRoll = true
@@ -13,6 +14,8 @@ export (PackedScene) var holstered_weap
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
+
+var obj_priority_display = Array()
 
 var weap_to_spawn   = null
 var weap_in_hand    = null
@@ -81,7 +84,35 @@ func interAct() -> void:
             switch_weapon()
         else:
             pickup_item.take_effect(self)   # other pickups take effect on player
-            
+
+func embark(vehicle):
+    self.vehicle = vehicle
+    piloting = true
+    # avoid collision with car
+    set_collision_layer_bit(1,false)
+    $upper_body.hide()
+    $foot.hide()
+    #$holsters.hide()
+    $Dodge.hide()
+    $Armor_bar.hide()
+    #$health_bars.hide()
+    #$ammo_call_out.hide()
+    
+func disembark():
+    vehicle = null
+    piloting = false
+    set_collision_layer_bit(1,true)
+    rotation = 0
+    $upper_body.show()
+    $foot.show()
+    #$holsters.show()
+    $Dodge.show()
+    if(armor > 0):
+        $Armor_bar.show()
+    if (health < totalHealth):
+        $health_bars.show()
+    #$ammo_call_out.show()
+
 func switch_weapon() -> void:
     # check different from weap in hand and in holster
     if weap_to_spawn != weap_in_hand && weap_to_spawn != $holsters.get_child(0).weap_name:
@@ -147,7 +178,8 @@ func _process(delta):
     if($Dodge.scale.x == 0):
         $Dodge.hide()
         $Dodge.scale.x = 2
-        
+         
+    
     #Animation: Checking to see if player is moving
     if Input.is_action_pressed("player_move_down") || Input.is_action_pressed("player_move_up") || Input.is_action_pressed("player_move_left") || Input.is_action_pressed("player_move_right"):
         moves = true
@@ -184,7 +216,7 @@ func dodge_roll():
         print("dodge roll begins")
         $RollTimer.start()
         counter = 100.0 
-        dodge = Vector2(input.x, input.y) * 5000
+        dodge = Vector2(input.x, input.y) * 10000
         #while(counter > 0):
         #    $RollTimer2.start()
         #    counter = counter - 1
@@ -253,14 +285,101 @@ func player_speaks(text_input) -> void:
     
 #Adds the text given and displays it to the player
 #Made for convinience. Easier to let the player deal with its children.
-func _update_objectives(new_text:String):
-    $objective_list.add_text(new_text)
+func _update_objectives(new_text:String, offset:int, status:int, priority:int):
+    
+    #Special case, don't print secret objective if we haven't done it yet.
+    if (priority == 2 && status == 0):
+        print(offset)
+        print("Hidden!")
+        return false
+            
+    var img = Sprite.new()
+    
+    #Firstly some transformative stuff, making sure it allings properly.
+    print(offset)
+    print("offset")
+    print(((offset*80) -679.99))
+    img.position = Vector2(-1239.411, ((offset*80) -679.99)) #Precise numbers needed to display multiple of these and their associated statuses/priorities
+    img.scale = Vector2(1, 1)
+    
+    if (priority == 0):
+            #Primary Priority
+            match status:
+                0:
+                    img.texture = load("res://Assets/primaryObjective.png")
+                    #Ongoing
+                    print("loaded00")
+                1:
+                    img.texture = load("res://Assets/primaryObjectivePassed.png")
+                    #We succeeded!
+                    print("loaded01")
+                2:
+                    img.texture = load("res://Assets/primaryObjectiveFailed.png")
+                    print("loaded02")
+                    #We failed...
+    else:
+            #Hidden/Secondary
+            #Assuming now it's visible
+            match status:
+                0:
+                    #Ongoing, only used for secondary objectives (hopefully)
+                    img.texture = load("res://Assets/secondaryObjective.png")
+                    print("loaded10")
+                1:
+                    #We succeeded!
+                    img.texture = load("res://Assets/secondaryObjectivePassed.png")
+                    print("loaded11/21")
+                2:
+                    #We failed...
+                    img.texture = load("res://Assets/secondaryObjectiveFailed.png")
+                    print("loaded12/22")
+    
+    obj_priority_display.insert(offset, img)
+    self.add_child(img)
+    img.set_owner(self)
+    $objective_list.append_bbcode(new_text)
+    return true
     pass
     
 #Makes it easier to clear the objectives if we can find the exact object that needs to be cleared.
 func _clear_objectives():
     $objective_list.clear()
+    var copy = obj_priority_display
+    while(not obj_priority_display.empty()):
+        var val = obj_priority_display.pop_front()
+        #Remove it from the scene for good if it exists.
+        if val != null:
+            val.queue_free()
     pass
+    
+func _OnTimerStart():
+    var snd = $TimerTick
+    match snd.playing:
+        false:
+            snd.play()
+
+func _OnTimerEnd():
+    var snd = $TimerTick
+    match snd.playing:
+        true:
+            snd.stop()
+            
+func _ObjectiveSoundQueue(status, priority):
+    
+    match status:
+        1:
+            match priority:
+                0:
+                    $MainComplete.play()
+                _:
+                    $SideComplete.play()
+            return
+        _:
+            $ObjFail.play()        
+            
+    
+    pass
+
 
 func _on_reload_timer_timeout() -> void:
     canShoot = true
@@ -273,9 +392,8 @@ func _on_text_box_timer_timeout() -> void:
 # Should check ammo type when encounters weapons
 # Should prompt for pick up for health or armors
 func _on_pickup_Area2D_body_entered(body: Node) -> void:
-    print('pick up entered ', body)
     if body.get_groups().has('item_pick_up'):
-        print('pick_up detedted')
+        print('pick_up detected')
         pickup_item = body
         if body.get_groups().has('weapon'):
             # print('weapon pick_up detected')

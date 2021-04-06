@@ -18,6 +18,7 @@ export var countertotal: = 100.0
 
 var velocity: = Vector2.ZERO
 var piloting = false
+var vehicle = null
 
 var pickup_item = null
 
@@ -62,3 +63,6 @@ func _physics_process(delta: float) -> void:
         $CollisionShape2D.rotation = $upper_body.rotation
         #$Pre_pickup_Area2D.rotation = $upper_body.rotation
         velocity =  move_and_slide(velocity + dodge)
+    else:
+        position = vehicle.global_position
+        #rotation = vehicle.global_rotation

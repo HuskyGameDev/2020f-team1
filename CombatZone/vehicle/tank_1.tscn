@@ -36,8 +36,11 @@ script = ExtResource( 4 )
 
 [node name="embark_Area2D" parent="." index="4"]
 position = Vector2( -18.7289, 0.37458 )
+collision_layer = 1
+collision_mask = 1
 
 [node name="embark_Colli2D" parent="embark_Area2D" index="0"]
+visible = true
 position = Vector2( -4.00452, -1.33484 )
 shape = SubResource( 2 )
 

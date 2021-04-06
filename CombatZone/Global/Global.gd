@@ -3,7 +3,7 @@ extends Node
 # Global script will be used to store persistent game info
 
 # Game Settings
-export var debug = true
+export var debug = false
 var game_over: = false
 var game_paused: = false
 var current_scene = null
@@ -12,6 +12,8 @@ var level: = 0
 var player
 
 #Objectives
+var objectives = preload("res://Levels/Objectives/Objectives.tscn")
+
 var current_objectives
 
 # effects
@@ -24,7 +26,7 @@ var shell = preload("res://Environment/Effects/Bullet_Eject.tscn")
 func _ready() -> void:
     if player == null:
         if debug:
-            print('player not set...')
+            print('Global: player not set...')
 # UI
 func switch_camera2D(old_node,new_node):
     old_node.get_node('Camera2D').current = false
@@ -33,37 +35,35 @@ func switch_camera2D(old_node,new_node):
 # register player as player variable for later referencing by script
 func register_player(game_player):
     player = game_player
-    print("player set")
+    print("Global: player set")
 
 # Provides the current level's objectives to global class to allow for completion.
-func register_objectives(new_objectives):
-    current_objectives = new_objectives
+func register_objectives():
+    current_objectives = objectives.instance()
     current_objectives._initial_display()
-    print("Objectives set!")
+    print("Global: Objectives set!")
     
 #Originally I used this thinking the scene scripts were bugged
 #Turns out I had the wrong script connected o_o
 #Oh well, keeping it for convinience.
 #This also makes sure that after objectives are defined, that they are displayed as well.
-func register_all(game_player, new_objectives):
-    player=game_player
-    print("Player set")
-    current_objectives = new_objectives
-    current_objectives._initial_display()
-    print("Objectives set")
+func register_all(game_player):
+    # changed to reduce redendancy
+    register_player(game_player)
+    register_objectives()
 
 #It's a simple function that returns the current objectives the player has at the moment, so long as they exist.
 func get_objectives():
     if current_objectives != null:
         return current_objectives
     elif debug:
-        print("Found no objectives")
+        print("Global: Found no objectives")
     
 func get_player():
     if player != null:
         return player
     elif debug:
-        print("player not set, can't return")
+        print("Global: player not set, can't return")
         
 # weapon
 func shoot_bullet(caliber, pos, rot):
@@ -95,6 +95,10 @@ func embark(people: Node2D, vehicle):
         vehicle.can_embark = false
         people.piloting = true
         people.position = Vector2(-1000,-1000)
+        if (people.get_groups().has('player')):
+            people.remove_from_group('player')
+            vehicle.add_to_group('player')
+            register_player(vehicle)
         people.hide()
 
 func disembark(people: Node2D,vehicle: Node):
@@ -102,12 +106,19 @@ func disembark(people: Node2D,vehicle: Node):
         #print('is parent')
     #vehicle.remove_child(people)
     switch_camera2D(vehicle,people)
+    if (vehicle.get_groups().has('player')):
+            vehicle.remove_from_group('player')
+            people.add_to_group('player')
+            register_player(people)
+    vehicle.remove_from_group('player')
     people.show()
     people.set_process(true)
     people.piloting = false
+    vehicle.passenger = null
     print(people.position)
     people.set("position", vehicle.get_node('disembark_Position2D').get_global_position())
     vehicle.manned = false
+       
     
 # puck-ups
 func pickup(player,type,number):

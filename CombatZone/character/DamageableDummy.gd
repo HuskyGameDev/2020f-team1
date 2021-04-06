@@ -19,7 +19,7 @@ var theLegs = "walkLight" #Specifies which legs to use in randomizer, walkLight 
 func _ready() -> void:          # enemy don't  need holster for storing weapons at this stage of development
     var weapon = default_weapon.instance()
     $foot/LegAnimation.frame = 0 #Default set for leg animation frame (idle)
-    #Varied enemies spawn (Randomizer pick):
+    # Varied enemies spawn (Randomizer pick):
     if toRandom == true:
         random.randomize()
         var rNum = random.randi_range(1, 3)
