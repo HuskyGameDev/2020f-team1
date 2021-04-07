@@ -11,67 +11,67 @@
 size = 64
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 18, 64, 25 )
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 3 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 4 )
 region_rect = Rect2( 0, 18, 64, 25 )
 
 [sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 18, 64, 25 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=9]
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxTexture" id=9]
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 18, 64, 25 )
-
 [sub_resource type="StyleBoxTexture" id=10]
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 region_rect = Rect2( 0, 18, 64, 25 )
 
 [sub_resource type="StyleBoxTexture" id=11]
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 region_rect = Rect2( 0, 18, 64, 25 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 32
-font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxTexture" id=12]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 18, 64, 25 )
-
-[sub_resource type="StyleBoxTexture" id=13]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 18, 64, 25 )
-
-[sub_resource type="StyleBoxTexture" id=14]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 18, 64, 25 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=13]
 size = 32
 font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 18, 64, 25 )
 
 [sub_resource type="StyleBoxTexture" id=15]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 18, 64, 25 )
 
 [sub_resource type="StyleBoxTexture" id=16]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 18, 64, 25 )
-
-[sub_resource type="StyleBoxTexture" id=17]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 18, 64, 25 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=17]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -115,10 +115,10 @@ margin_left = 544.0
 margin_top = 361.0
 margin_right = 744.0
 margin_bottom = 436.0
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
-custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "Restart"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -133,10 +133,10 @@ margin_left = -96.0
 margin_top = 215.0
 margin_right = 104.0
 margin_bottom = 290.0
-custom_styles/hover = SubResource( 9 )
-custom_styles/pressed = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -147,10 +147,10 @@ margin_left = 544.0
 margin_top = 467.0
 margin_right = 744.0
 margin_bottom = 542.0
-custom_styles/hover = SubResource( 12 )
-custom_styles/pressed = SubResource( 13 )
-custom_styles/normal = SubResource( 14 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "Title"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -161,10 +161,10 @@ margin_left = 544.0
 margin_top = 255.0
 margin_right = 744.0
 margin_bottom = 330.0
-custom_styles/hover = SubResource( 15 )
-custom_styles/pressed = SubResource( 16 )
-custom_styles/normal = SubResource( 17 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+custom_fonts/font = SubResource( 17 )
 text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false
