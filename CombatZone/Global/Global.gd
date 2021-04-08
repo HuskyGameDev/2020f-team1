@@ -11,9 +11,11 @@ var new_scene = null
 var level: = 0
 var player
 
+# Navigation
+var nav2D = null
+
 #Objectives
 var objectives = preload("res://Levels/Objectives/Objectives.tscn")
-
 var current_objectives
 
 # effects
@@ -37,6 +39,9 @@ func register_player(game_player):
     player = game_player
     print("Global: player set")
 
+func register_nav2D(nav):
+    nav2D = nav
+    print("Global: nav2D set")
 # Provides the current level's objectives to global class to allow for completion.
 func register_objectives():
     current_objectives = objectives.instance()
@@ -65,6 +70,12 @@ func get_player():
     elif debug:
         print("Global: player not set, can't return")
         
+func get_nav2D():
+    if nav2D != null:
+        return nav2D
+    elif debug:
+        print("global: nav2D not set, can't return")
+
 # weapon
 func shoot_bullet(caliber, pos, rot):
     #var b = bullet_caliber[caliber].instance()

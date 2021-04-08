@@ -9,4 +9,4 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     Global.register_player($player)
-
+    Global.register_nav2D($Navigation2D)

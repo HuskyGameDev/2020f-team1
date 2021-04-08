@@ -7,6 +7,7 @@ onready var ai = $AI
 onready var grip = $upper_body/hand/grip    # grip grips the gun
 
 var path := PoolVector2Array()
+var direction := Vector2.ZERO
 #int represents state, 0 = idle, 1 = go after player
 var state = 1
 var player_pos
@@ -85,28 +86,13 @@ func take_damage(pos, damage_amount) -> void:
 
 func get_input():
     dodge = Vector2.ZERO
-    if player!=null:
-        $upper_body.look_at(player.position)
-        $upper_body/hand.look_at(player.position)
     if(player != null && path.size() > 0):
-        
-        
         #Points legs towards player with shoulders
         $foot/LegAnimation.look_at(player.position)
         #The 'front' of the legs are to the side, so offset by 90 degrees
         $foot/LegAnimation.rotation_degrees = $foot/LegAnimation.rotation_degrees + 90
         
-        var direction = position.direction_to(path[0])
-        if(position.distance_to(player.position) < 250):
-            var rand = randi()%100+1
-            if(rand == 1): 
-                dodge = Vector2(-direction.y, direction.x) * 400
-                return Vector2(-direction.y, direction.x)
-            elif(rand == 2): 
-                dodge = Vector2(direction.y, -direction.x) * 400
-                return Vector2(direction.y, -direction.x)
-            else: 
-                return Vector2(-direction.x, -direction.y)
+        direction = position.direction_to(path[0])
         if(position.distance_to(path[0]) > position.distance_to(player.position)):
             path.empty()
             path[0] = player.position
@@ -115,7 +101,7 @@ func get_input():
              path.remove(0)
         return direction 
     else:
-          return Vector2(0, 0)  
+          return direction
 
 # set can_shoot false, used for reload
 func i_cant_shoot() -> void:
