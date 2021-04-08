@@ -31,8 +31,18 @@ func set_paused(value: bool) -> void:
 #Reload current level
 func _on_Restart_pressed():
     get_tree().reload_current_scene()
+    self.already_paused = not already_paused
     
 
 #Quit game
 func _on_Quit_pressed():
     get_tree().quit()
+
+
+func _on_Title_pressed():
+    get_tree().change_scene("res://Assets/TitleScreen.tscn")
+    self.already_paused = not already_paused
+
+
+func _on_Continue_pressed():
+    self.already_paused = not already_paused
