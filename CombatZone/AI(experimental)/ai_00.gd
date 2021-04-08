@@ -14,16 +14,18 @@ enum State {
     SEARCH
    }
 
-export var agility = 0.1        # affects how fast ai can turn and look around
-export var engage_timeout = 2   # a timer that breaks engagement when I can't see target
-                                # with ray cast
-export var search_timeout = 7   # a timer that return ai to patrol when search took too long
+export var agility = 0.1            # affects how fast ai can turn and look around
+export var patrol_stand_timeout = 3 # a timer determining how long actor stays at one patrol point
+export var patrol_range = 20        # how far from origin point does actor patrol to
+export var engage_timeout = 2       # a timer that breaks engagement when I can't see target
+                                    # with ray cast
+export var search_timeout = 7       # a timer that return ai to patrol when search took too long
 
 onready var player_detection_zone = $AIDetection
 
 # States
 var current_state: int = State.PATROL setget set_state
-var origin_location := Vector2.ZERO
+var origin_location := Vector2.ZERO 
 # Patrol
 var patrol_location := Vector2.ZERO
 var patrol_location_reached := false
@@ -41,22 +43,28 @@ var aim = null
 var sight = null
 var weapon: Weapon = null
 
+var navi2D = null
+var path := PoolVector2Array()  # path from navi2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass
 
 # get reference of actor and weapon
 # from parent(actor) to AI
-func initialize(mySelf, grip):
-    # Set position
-    origin_location = self.global_position
-    
+func initialize(mySelf, grip):    
     # set actor
     actor = mySelf
     upperBody = actor.get_node('upper_body')
     hand = upperBody.get_node('hand')
     aim = upperBody.get_node('head')
     sight = aim.get_node('RayCast2D')
+    
+    # Set position
+    origin_location = actor.global_position
+    
+    # accquire navigation2D of level from Global
+    navi2D = Global.get_nav2D()
     
     # a way to get items from actors
     # print('upper_body has children: ', actor.get_node('upper_body').get_child_count())
@@ -75,7 +83,11 @@ func _process(delta: float) -> void:
     if current_state != null:
         match current_state:
             State.PATROL:
-                pass
+                if not patrol_location_reached: # actor not reach patrol point yet
+                    if path.size() > 0:
+                        actor.direction = actor.global_position.direction_to(path[0])
+                    patrol_location_reached = actor.global_position.distance_to(patrol_location) < 5
+                $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
             State.ENGAGE:
                 if player != null and weapon != null:
                     # body face target
@@ -103,6 +115,11 @@ func _physics_process(delta: float) -> void:
     #var space_state = get_world_2d().direct_space_state
     #var result = space_state.interesect_ray()
     pass
+
+func next_patrol_point():
+    var randx = rand_range(-patrol_range, patrol_range)
+    var randy = rand_range(-patrol_range, patrol_range)
+    patrol_location = Vector2(randx ,randy) + origin_location
 
 func aiAttack()-> void:
     if !weapon.shoot(): # if gun shooting returns false, clip empty
@@ -164,6 +181,7 @@ func _on_Engage_timer_timeout() -> void:
 # upon time out move to next patrol waypoint
 func _on_Patrol_timer_timeout() -> void:
     # accquire next point
+    next_patrol_point()
     # go to next point
     # reset timer
     # reset patrol status
