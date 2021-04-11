@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
             State.PATROL:
                 if not patrol_location_reached: # actor not reach patrol point yet
                     if path.size() > 0:
-                        actor.direction = actor.global_position.direction_to(path[0])
+                        actor.direction = actor.global_position.direction_to(path[0])   # get direction to first way point in the array
                     patrol_location_reached = actor.global_position.distance_to(patrol_location) < 5
                 $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
             State.ENGAGE:
