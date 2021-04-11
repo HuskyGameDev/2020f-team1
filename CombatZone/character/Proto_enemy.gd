@@ -92,16 +92,16 @@ func get_input():
         #The 'front' of the legs are to the side, so offset by 90 degrees
         $foot/LegAnimation.rotation_degrees = $foot/LegAnimation.rotation_degrees + 90
         
-        direction = position.direction_to(path[0])
+        #direction = position.direction_to(path[0])
         if(position.distance_to(path[0]) > position.distance_to(player.position)):
             path.empty()
             path[0] = player.position
-        direction = position.direction_to(path[0])
+        #direction = position.direction_to(path[0])
         if(position.distance_to(path[0]) < 2.5):
              path.remove(0)
         return direction 
     else:
-          return direction
+        return direction
 
 # set can_shoot false, used for reload
 func i_cant_shoot() -> void:

@@ -37,6 +37,7 @@ one_shot = true
 
 [node name="AI" type="Node2D" parent="." index="11"]
 script = ExtResource( 2 )
+patrol_stand_timeout = 1
 patrol_range = 1000
 
 [node name="AIDetection" type="Area2D" parent="AI" index="0"]

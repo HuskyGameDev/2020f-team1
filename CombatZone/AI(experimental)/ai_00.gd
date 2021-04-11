@@ -87,11 +87,16 @@ func _process(delta: float) -> void:
         match current_state:
             State.PATROL:
                 if not patrol_location_reached: # actor not reach patrol point yet
-                    if not path.empty():    # move to next point
+                    if not path.empty():    #  as long as there are waypoints, move to next point
                         actor.direction = actor.global_position.direction_to(path[0])   # get direction to first way point in the array
+                        upperBody.rotation = lerp(upperBody.rotation, upperBody.global_position.direction_to(path[0]).angle(), agility)
+                        if actor.global_position.distance_to(path[0]) < 5:
+                            path.remove(0)
+                    elif $Patrol_timer.is_stopped():
+                        $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
                         
-                    patrol_location_reached = actor.global_position.distance_to(patrol_location) < 50
-                if $Patrol_timer.is_stopped():
+                    patrol_location_reached = actor.global_position.distance_to(patrol_location) < 5
+                elif $Patrol_timer.is_stopped():
                     $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
                     print('patrol time start: ', patrol_stand_timeout)
             State.ENGAGE:
@@ -125,9 +130,12 @@ func _physics_process(delta: float) -> void:
     pass
 
 func next_patrol_point():
-    var randx = rand_range(-patrol_range, patrol_range)
-    var randy = rand_range(-patrol_range, patrol_range)
+    randomize()
+    var randx = rand_range(-patrol_range, +patrol_range)
+    var randy = rand_range(-patrol_range, +patrol_range)
     patrol_location = Vector2(randx ,randy) + origin_location
+    print('patrol location is x: ', randx)
+    print('y: ', randy)
 
 func aiAttack()-> void:
     if !weapon.shoot(): # if gun shooting returns false, clip empty
@@ -139,11 +147,19 @@ func aiAttack()-> void:
         print('reload takes: ', time_returned)
         actor.get_node('action_timer').start(time_returned)
     
+# Stops all state timers
+# incase timers from other states switches state
+func stop_timers():
+    $Engage_timer.stop()
+    $Patrol_timer.stop()
+    $Search_timeOut.stop()
+
 func set_state(new_state: int):
     print('setting ai state: ', new_state)
     if new_state == current_state:
         return        
     current_state = new_state
+    stop_timers()
     print('ai now in state: ', current_state)
     emit_signal('state_change', current_state)
 
@@ -167,12 +183,17 @@ func checkout_target(target) -> bool:
 # When target enter detection zone,
 # if raycast reaches target, switch to engage
 func _on_AIDetertion_body_entered(body: Node) -> void:
-    if body.is_in_group('player'):  # Checks whether body is player group
-        if checkout_target(body):   # could change to other groups if player has allies
+    print('ai red detected: ', body)
+    if body.is_in_group('player'):  # Checks whether body is player group 
+                                    # could change to other groups if player has allies
+        if checkout_target(body):
             player = body
             if Global.debug:
                 print('AI added player')
             set_state(State.ENGAGE)
+    else:
+        print('this is not player: ', body)
+    
         
 # get player, change state to engage
 func get_player(player_in):
