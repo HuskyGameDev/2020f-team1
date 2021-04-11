@@ -41,6 +41,7 @@ var upperBody = null
 var hand = null
 var aim = null
 var sight = null
+var wall_detector: RayCast2D = null
 var weapon: Weapon = null
 
 var navi2D : Navigation2D = null
@@ -62,6 +63,7 @@ func initialize(mySelf, grip):
     hand = upperBody.get_node('hand')
     aim = upperBody.get_node('head')
     sight = aim.get_node('RayCast2D')
+    wall_detector = aim.get_node('WallDetector2D')
     
     # Set position
     origin_location = actor.global_position
@@ -94,17 +96,31 @@ func _process(delta: float) -> void:
                             path.remove(0)
                     elif $Patrol_timer.is_stopped():
                         $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
-                        
+                    
+                    # wall detection, hit wall mean can't get through
+                    if wall_detector.is_colliding():
+                        print('wall_detector is colliding with: ', wall_detector.get_collider())
+                        if $Patrol_timer.is_stopped():
+                            $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout                        
+                    
+                    # reach location check    
                     patrol_location_reached = actor.global_position.distance_to(patrol_location) < 5
+                    
                 elif $Patrol_timer.is_stopped():
                     $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
                     print('patrol time start: ', patrol_stand_timeout)
+                    
             State.ENGAGE:
                 if player != null and weapon != null:
                     # body face target
                     upperBody.rotation = lerp(upperBody.rotation, upperBody.global_position.direction_to(player.global_position).angle(), agility)
                     hand.global_rotation = lerp(hand.global_rotation, hand.global_position.direction_to(player.global_position).angle(), agility/2)
+                    
+                    # get path to target
+                    
+                    # switch state
                     if sight.get_collider() == player:
+                        last_known_location = player.global_position    # record location for search state
                         $Engage_timer.stop()
                         if actor.can_shoot:
                             aiAttack()
@@ -150,9 +166,43 @@ func aiAttack()-> void:
 # Stops all state timers
 # incase timers from other states switches state
 func stop_timers():
+    $Engage_timer.set_paused(false)
     $Engage_timer.stop()
+    $Patrol_timer.set_paused(false)
     $Patrol_timer.stop()
+    $Search_timeOut.set_paused(false)
     $Search_timeOut.stop()
+
+func pause_timer(timer_in: Timer):
+    if not timer_in.is_stopped():
+        timer_in.set_paused(true)
+        
+func unpause_timer(timer_in: Timer):
+    if timer_in.is_paused():
+        timer_in.set_paused(false)
+    
+# if timer is running, pause it
+# if timer is paused, unpause
+# otherwise do nothing
+func pause_timers(pause_switch: int):
+    match pause_switch:
+        0:  # unpause
+            unpause_timer($Engage_timer)
+            unpause_timer($Patrol_timer)
+            unpause_timer($Search_timeOut)
+        1:  # pause
+            pause_timer($Engage_timer)
+            pause_timer($Patrol_timer)
+            pause_timer($Search_timeOut)
+        
+        
+func accquire_path_to(target):
+    if navi2D != null:  # check navi2D availabilities
+        path = navi2D.get_simple_path(global_position, target) # accquire path from my location
+    else:
+        accquire_Nav2D() # reaccquire navigation
+    if get_parent().get_parent().has_node('Line2D'):
+        get_parent().get_parent().pathVisualize(path) # path visualize
 
 func set_state(new_state: int):
     print('setting ai state: ', new_state)
@@ -183,6 +233,7 @@ func checkout_target(target) -> bool:
 # When target enter detection zone,
 # if raycast reaches target, switch to engage
 func _on_AIDetertion_body_entered(body: Node) -> void:
+    pause_timers(1) # pause timers
     print('ai red detected: ', body)
     if body.is_in_group('player'):  # Checks whether body is player group 
                                     # could change to other groups if player has allies
@@ -193,9 +244,11 @@ func _on_AIDetertion_body_entered(body: Node) -> void:
             set_state(State.ENGAGE)
     else:
         print('this is not player: ', body)
+    pause_timers(0) # unpause timers
     
         
 # get player, change state to engage
+# should only be used when other enemies spotted player
 func get_player(player_in):
     if player != player_in: # get reference
         player = player_in
@@ -205,19 +258,13 @@ func get_player(player_in):
 func _on_Engage_timer_timeout() -> void:
     if player != null:
         set_state(State.SEARCH)
-    
 
 # upon time out move to next patrol waypoint
 func _on_Patrol_timer_timeout() -> void:
     print('patrol timer timedout')
     # accquire next point
     next_patrol_point()
-    if navi2D != null:  # check navi2D availabilities
-        path = navi2D.get_simple_path(global_position, patrol_location) # accquire path
-    else:
-        accquire_Nav2D() # reaccquire navigation
-    if get_parent().get_parent().has_node('Line2D'):
-        get_parent().get_parent().pathVisualize(path) # path visualize
+    accquire_path_to(patrol_location)
     # reset patrol status
     patrol_location_reached = false
 
