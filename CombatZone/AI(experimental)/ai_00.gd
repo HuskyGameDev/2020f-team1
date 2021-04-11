@@ -43,12 +43,15 @@ var aim = null
 var sight = null
 var weapon: Weapon = null
 
-var navi2D = null
+var navi2D : Navigation2D = null
 var path := PoolVector2Array()  # path from navi2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     pass
+
+func accquire_Nav2D():
+    navi2D = Global.get_nav2D()
 
 # get reference of actor and weapon
 # from parent(actor) to AI
@@ -64,7 +67,7 @@ func initialize(mySelf, grip):
     origin_location = actor.global_position
     
     # accquire navigation2D of level from Global
-    navi2D = Global.get_nav2D()
+    accquire_Nav2D()
     
     # a way to get items from actors
     # print('upper_body has children: ', actor.get_node('upper_body').get_child_count())
@@ -84,10 +87,13 @@ func _process(delta: float) -> void:
         match current_state:
             State.PATROL:
                 if not patrol_location_reached: # actor not reach patrol point yet
-                    if path.size() > 0:
+                    if not path.empty():    # move to next point
                         actor.direction = actor.global_position.direction_to(path[0])   # get direction to first way point in the array
-                    patrol_location_reached = actor.global_position.distance_to(patrol_location) < 5
-                $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
+                        
+                    patrol_location_reached = actor.global_position.distance_to(patrol_location) < 50
+                if $Patrol_timer.is_stopped():
+                    $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
+                    print('patrol time start: ', patrol_stand_timeout)
             State.ENGAGE:
                 if player != null and weapon != null:
                     # body face target
@@ -109,6 +115,8 @@ func _process(delta: float) -> void:
                 pass
             var new_emu:
                 print("Error: found a state for our enemy that should not exist: ", new_emu)
+    else:
+        current_state = State.PATROL
 
 func _physics_process(delta: float) -> void:
     # get space state for RayCast collision quary
@@ -180,13 +188,17 @@ func _on_Engage_timer_timeout() -> void:
 
 # upon time out move to next patrol waypoint
 func _on_Patrol_timer_timeout() -> void:
+    print('patrol timer timedout')
     # accquire next point
     next_patrol_point()
-    # go to next point
-    # reset timer
+    if navi2D != null:  # check navi2D availabilities
+        path = navi2D.get_simple_path(global_position, patrol_location) # accquire path
+    else:
+        accquire_Nav2D() # reaccquire navigation
+    if get_parent().get_parent().has_node('Line2D'):
+        get_parent().get_parent().pathVisualize(path) # path visualize
     # reset patrol status
     patrol_location_reached = false
-    pass # Replace with function body.
 
 # when time out, go back to patrol
 func _on_Search_timeOut_timeout() -> void:

@@ -3,7 +3,7 @@ extends Node
 # Global script will be used to store persistent game info
 
 # Game Settings
-export var debug = false
+export var debug = true
 var game_over: = false
 var game_paused: = false
 var current_scene = null
@@ -12,7 +12,7 @@ var level: = 0
 var player
 
 # Navigation
-var nav2D = null
+var nav2D :Navigation2D = null
 
 #Objectives
 var objectives = preload("res://Levels/Objectives/Objectives.tscn")
