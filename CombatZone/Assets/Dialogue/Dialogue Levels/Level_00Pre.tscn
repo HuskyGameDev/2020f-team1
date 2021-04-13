@@ -1,10 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Dialogue/Dialogue Levels/Level_00Pre.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Dialogue/Dialogue Levels/Level_00PreButton.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Text BoxCropped.png" type="Texture" id=3]
 [ext_resource path="res://Assets/DialogueAdv.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Dialogue/DialogueWaiting.tres" type="Animation" id=5]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_Talk2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_IdleTalk2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_MidTalk2.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkNod.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkIdle.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkNodBreathing.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkBreathing.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_MidTalk2Breath.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_IdleTalk2Breathing.png" type="Texture" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "00_anim"
@@ -22,6 +31,32 @@ tracks/0/keys = {
 "values": [ Vector2( 574.811, 163.09 ), Vector2( 595.85, 163.09 ) ]
 }
 
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 14 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "Talking",
+"speed": 2.5
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "Waiting",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Talking",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "Waiting",
+"speed": 1.0
+} ]
+
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,6 +71,9 @@ margin_right = 717.873
 margin_bottom = 688.109
 text = "Skip Dialogue"
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Continue" type="Button" parent="."]
 margin_left = 326.361
@@ -46,9 +84,9 @@ text = "Start"
 script = ExtResource( 2 )
 
 [node name="DialogueBox" type="Control" parent="."]
-margin_left = 322.361
+margin_left = 318.361
 margin_top = 399.946
-margin_right = 951.361
+margin_right = 947.361
 margin_bottom = 584.946
 script = ExtResource( 1 )
 __meta__ = {
@@ -95,5 +133,23 @@ anims/00_anim = SubResource( 1 )
 anims/DialogueWaiting = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="DialogueBox"]
+
+[node name="General" type="Sprite" parent="DialogueBox"]
+
+[node name="Talking" type="AnimatedSprite" parent="DialogueBox/General"]
+position = Vector2( -148.5, -1.9136 )
+scale = Vector2( 4.6, 4.2 )
+frames = SubResource( 2 )
+animation = "Talking"
+frame = 4
+
+[node name="Player" type="Sprite" parent="DialogueBox"]
+
+[node name="Talking" type="AnimatedSprite" parent="DialogueBox/Player"]
+position = Vector2( 797.9, 8.19559 )
+scale = Vector2( 3.6, 4 )
+frames = SubResource( 3 )
+animation = "Waiting"
+frame = 1
 [connection signal="pressed" from="Skip" to="Skip" method="_on_Skip_pressed"]
 [connection signal="pressed" from="Continue" to="Skip" method="_on_Continue_pressed"]

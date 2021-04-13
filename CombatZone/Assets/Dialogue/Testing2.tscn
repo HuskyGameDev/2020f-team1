@@ -9,9 +9,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -2.05945
-margin_top = -1.0
+margin_top = 2.0
 margin_right = -2.05945
-margin_bottom = -1.0
+margin_bottom = 2.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,7 +55,7 @@ __meta__ = {
 }
 
 [node name="DialogueAdv" type="Sprite" parent="DialogueBox"]
-position = Vector2( 331.121, 105 )
+position = Vector2( 330, 105 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 2 )
 

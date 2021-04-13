@@ -13,11 +13,32 @@ var dialogue = [
 var index = 0
 var finished = false
 
+#FOENIX: animation
+var time = 0
+
 func _ready():
     load_dialogue()
+    
+    #FOENIX: animation
+    $General/Talking.animation = "Waiting"
+    $Player/Talking.animation = "Waiting"
+    #FOENIX: animation
 
 func _process(delta):
     $Sprite.visible = finished
+    
+    #FOENIX: animation USE TWEEN INSTEAD?
+    if time < 250:
+        $General/Talking.animation = "Talking"
+        $Player/Talking.animation = "Waiting"
+    else:
+        $General/Talking.animation = "Waiting"
+        $Player/Talking.animation = "Talking"
+    time += 1
+    $General/Talking.play()
+    $Player/Talking.play()
+    #FOENIX: animation
+    
     if Input.is_action_just_pressed("ui_accept"):
         load_dialogue()
 
@@ -30,6 +51,11 @@ func load_dialogue():
             $RichTextLabel, "percent_visible", 0, 1, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
            )
         $Tween.start()
+        
+        #FOENIX: animation
+        time = 0
+        #FOENIX: animation
+        
     else:
         queue_free()
     index += 1
