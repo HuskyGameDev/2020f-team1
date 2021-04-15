@@ -213,6 +213,7 @@ func dodge_roll():
         canRoll = false
         canShoot = false
         $Dodge.show()
+        $Dodgeroll.play()
         print("dodge roll begins")
         $RollTimer.start()
         counter = 100.0 

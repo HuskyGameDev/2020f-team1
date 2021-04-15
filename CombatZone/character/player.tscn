@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://character/people.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Character(s)/Player/CombatZone_Character.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Assets/Audio/Click-higher_UI_Moser.wav" type="AudioStream" id=15]
 [ext_resource path="res://Assets/Audio/Click-Low_UI_Moser.wav" type="AudioStream" id=16]
 [ext_resource path="res://Assets/Audio/Collision_3_Moser.wav" type="AudioStream" id=17]
+[ext_resource path="res://Assets/Audio/Dodge_Roll_2_Moser.wav" type="AudioStream" id=18]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 16.9456
@@ -118,25 +119,28 @@ position = Vector2( 20, 25 )
 [node name="Dodge" parent="." index="4"]
 offset = Vector2( 0, 45 )
 
-[node name="Armor_bar" parent="." index="5"]
+[node name="Dodgeroll" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 18 )
+
+[node name="Armor_bar" parent="." index="6"]
 position = Vector2( 0, -47 )
 texture = ExtResource( 5 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="6"]
+[node name="Camera2D" type="Camera2D" parent="." index="7"]
 current = true
 zoom = Vector2( 2, 2 )
 
-[node name="RollTimer" type="Timer" parent="." index="7"]
+[node name="RollTimer" type="Timer" parent="." index="8"]
 one_shot = true
 
-[node name="reload_timer" type="Timer" parent="." index="8"]
+[node name="reload_timer" type="Timer" parent="." index="9"]
 wait_time = 0.25
 one_shot = true
 
-[node name="health_bars" parent="." index="9"]
+[node name="health_bars" parent="." index="10"]
 position = Vector2( 0, -60 )
 
-[node name="ammo_call_out" type="RichTextLabel" parent="." index="10"]
+[node name="ammo_call_out" type="RichTextLabel" parent="." index="11"]
 visible = false
 margin_left = 36.0
 margin_top = -114.0
@@ -152,7 +156,7 @@ __meta__ = {
 wait_time = 3.0
 one_shot = true
 
-[node name="objective_list" type="RichTextLabel" parent="." index="11"]
+[node name="objective_list" type="RichTextLabel" parent="." index="12"]
 margin_left = -1196.0
 margin_top = -710.0
 margin_right = 1280.0
@@ -163,25 +167,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="." index="12"]
+[node name="Sprite" type="Sprite" parent="." index="13"]
 visible = false
 position = Vector2( -1239.41, -519.99 )
 texture = ExtResource( 13 )
 
-[node name="TimerTick" type="AudioStreamPlayer2D" parent="." index="13"]
+[node name="TimerTick" type="AudioStreamPlayer2D" parent="." index="14"]
 stream = ExtResource( 14 )
 volume_db = -5.032
 attenuation = 0.68302
 
-[node name="Objectives" parent="." index="14" instance=ExtResource( 11 )]
+[node name="Objectives" parent="." index="15" instance=ExtResource( 11 )]
 
-[node name="MainComplete" type="AudioStreamPlayer2D" parent="." index="15"]
+[node name="MainComplete" type="AudioStreamPlayer2D" parent="." index="16"]
 stream = ExtResource( 15 )
 
-[node name="SideComplete" type="AudioStreamPlayer2D" parent="." index="16"]
+[node name="SideComplete" type="AudioStreamPlayer2D" parent="." index="17"]
 stream = ExtResource( 16 )
 
-[node name="ObjFail" type="AudioStreamPlayer2D" parent="." index="17"]
+[node name="ObjFail" type="AudioStreamPlayer2D" parent="." index="18"]
 stream = ExtResource( 17 )
 [connection signal="body_entered" from="upper_body/pickup_Area2D" to="." method="_on_pickup_Area2D_body_entered"]
 [connection signal="body_exited" from="upper_body/pickup_Area2D" to="." method="_on_pickup_Area2D_body_exited"]

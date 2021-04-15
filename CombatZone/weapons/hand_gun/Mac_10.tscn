@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/Mac10Top.png" type="Texture" id=1]
 [ext_resource path="res://weapons/fire_arm_basic.tscn" type="PackedScene" id=2]
 [ext_resource path="res://weapons/hand_gun/Mac_10.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Audio/Pistol_Fire-2_GUN_Moser.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Audio/Handgun reload_GUN_Moser.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.2686, 10 )
@@ -41,6 +43,10 @@ position = Vector2( -38, 0 )
 
 [node name="fire" parent="." index="8"]
 position = Vector2( -38, 0 )
+stream = ExtResource( 4 )
+pitch_scale = 0.57
 
 [node name="reload" parent="." index="9"]
 position = Vector2( -38, 0 )
+stream = ExtResource( 5 )
+pitch_scale = 1.3
