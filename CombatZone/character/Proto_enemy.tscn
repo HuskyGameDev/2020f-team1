@@ -24,7 +24,7 @@ visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="upper_body/head" index="0"]
 enabled = true
-cast_to = Vector2( 3000, 0 )
+cast_to = Vector2( 1000, 0 )
 collision_mask = 3
 
 [node name="WallDetector2D" type="RayCast2D" parent="upper_body/head" index="1"]
@@ -60,7 +60,10 @@ one_shot = true
 one_shot = true
 
 [node name="Search_timeOut" type="Timer" parent="AI" index="3"]
+
+[node name="Checkout_timer" type="Timer" parent="AI" index="4"]
 [connection signal="body_entered" from="AI/AIDetection" to="AI" method="_on_AIDetertion_body_entered"]
 [connection signal="timeout" from="AI/Engage_timer" to="AI" method="_on_Engage_timer_timeout"]
 [connection signal="timeout" from="AI/Patrol_timer" to="AI" method="_on_Patrol_timer_timeout"]
 [connection signal="timeout" from="AI/Search_timeOut" to="AI" method="_on_Search_timeOut_timeout"]
+[connection signal="timeout" from="AI/Checkout_timer" to="AI" method="_on_Checkout_timer_timeout"]

@@ -9,9 +9,10 @@ signal state_change(new_state)  # signal for state changing
 
 # State enumerator for AI
 enum State {
-    PATROL,
-    ENGAGE,
-    SEARCH
+    PATROL, # goes around randomm location in certain distance from origin location
+    ENGAGE, # engages enemies after accquiring target
+    SEARCH, # search after loose sight of enemies
+    CHECKOUT    # accquire target after noticing
    }
 
 export var agility = 0.1            # affects how fast ai can turn and look around
@@ -30,7 +31,11 @@ var origin_location := Vector2.ZERO
 var patrol_location := Vector2.ZERO
 var patrol_location_reached := false
 var patrol_waitTime := 3    # how long of a wait time before patroling to the next waypoint
-
+# SEARCH
+var search_location_reached := false
+# CHECKOUT
+var body_spotted: KinematicBody2D = null
+var old_angle:= 0.0 # old uppderBody rotation in degree
 # targetting
 var player: Player = null   # reference to target
 var last_known_location: = Vector2.ZERO  # last known location of target  
@@ -39,13 +44,16 @@ var last_known_location: = Vector2.ZERO  # last known location of target
 var actor: KinematicBody2D = null
 var upperBody = null
 var hand = null
-var aim = null
-var sight = null
+var aim: Node2D = null
+var sight: RayCast2D = null
 var wall_detector: RayCast2D = null
 var weapon: Weapon = null
 
 var navi2D : Navigation2D = null
+# patrol path
 var path := PoolVector2Array()  # path from navi2D
+# search path
+var search_path := PoolVector2Array()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -94,8 +102,10 @@ func _process(delta: float) -> void:
                         upperBody.rotation = lerp(upperBody.rotation, upperBody.global_position.direction_to(path[0]).angle(), agility)
                         if actor.global_position.distance_to(path[0]) < 5:
                             path.remove(0)
-                    elif $Patrol_timer.is_stopped():
-                        $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
+                    else:
+                        actor.direction = Vector2.ZERO
+                        if $Patrol_timer.is_stopped():
+                            $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
                     
                     # wall detection, hit wall mean can't get through
                     if wall_detector.is_colliding():
@@ -133,7 +143,41 @@ func _process(delta: float) -> void:
                 else:
                     print('In the engage state but no weapon/player')
             State.SEARCH:
-                pass
+                # go to last know location
+                if not search_location_reached: # actor not reach search point yet
+                    if not search_path.empty(): # as long as there are waypoints, move
+                        print(' has search waypoints come first')
+                        actor.direction = actor.global_position.direction_to(search_path[0])    # get waypoint to first waypoint
+                        upperBody.rotation = lerp(upperBody.rotation, upperBody.global_position.direction_to(search_path[0]).angle(),agility)
+                        if actor.global_position.distance_to(search_path[0]) < 5:
+                            search_path.remove(0)
+                    else:   # no waypoint left
+                        actor.direction = Vector2.ZERO
+                        print(' out of search waypoint come later')
+                else:   # if location reached, then yes start checking out
+                    set_state(State.CHECKOUT)
+                    
+                search_location_reached =  actor.global_position.distance_to(last_known_location) < 5
+                print('searching')
+            State.CHECKOUT:
+                actor.direction = Vector2.ZERO  # stop walking from other state
+                
+                upperBody.rotation = upperBody.rotation + 0.05
+                var new_angle = upperBody.global_rotation - old_angle
+                
+                if $Checkout_timer.is_stopped():
+                    $Checkout_timer.start(5)
+                
+                sight.force_raycast_update()
+                if sight.get_collider() == body_spotted: # target not behind wall
+                    player = body_spotted       # body spotted is not nulled since only one target (player) is available
+                    if Global.debug:
+                        print('AI added player, will engage')
+                    set_state(State.ENGAGE)
+                if new_angle == 0:
+                    print("dont't find player, back to patrol")
+                    set_state(State.PATROL)
+
             var new_emu:
                 print("Error: found a state for our enemy that should not exist: ", new_emu)
     else:
@@ -196,11 +240,20 @@ func pause_timers(pause_switch: int):
             pause_timer($Search_timeOut)
         
         
-func accquire_path_to(target):
+func accquire_path_to( target):
     if navi2D != null:  # check navi2D availabilities
         path = navi2D.get_simple_path(global_position, target) # accquire path from my location
     else:
         accquire_Nav2D() # reaccquire navigation
+    if get_parent().get_parent().has_node('Line2D'):
+        get_parent().get_parent().pathVisualize(path) # path visualize
+
+func get_search_path():
+    if navi2D != null:
+        search_path = navi2D.get_simple_path(global_position, last_known_location)  # path to LKL of player
+        print(' search path accquired')
+    else:
+        accquire_Nav2D()
     if get_parent().get_parent().has_node('Line2D'):
         get_parent().get_parent().pathVisualize(path) # path visualize
 
@@ -216,10 +269,12 @@ func set_state(new_state: int):
 # called when detected beody entering, check if target behind wall
 # return bool
 func checkout_target(target) -> bool:
+    print('checking out body')
     var old_rotation = aim.rotation # old rotation for reset after target check
     var see_target = false  # return value
     # scan toward target direction
-    aim.rotation = aim.global_position.direction_to(target.global_position).angle()
+    #aim.rotation = aim.global_position.direction_to(target.global_position).angle()
+    aim.look_at(target.global_position)
     
     # force raycast update to avoid
     # waiting for _physics_proccess'es update
@@ -233,18 +288,17 @@ func checkout_target(target) -> bool:
 # When target enter detection zone,
 # if raycast reaches target, switch to engage
 func _on_AIDetertion_body_entered(body: Node) -> void:
-    pause_timers(1) # pause timers
+    #pause_timers(1) # pause timers
     print('ai red detected: ', body)
     if body.is_in_group('player'):  # Checks whether body is player group 
                                     # could change to other groups if player has allies
-        if checkout_target(body):
-            player = body
-            if Global.debug:
-                print('AI added player')
-            set_state(State.ENGAGE)
+        body_spotted = body
+        old_angle = upperBody.global_rotation
+        set_state(State.CHECKOUT)
+        
     else:
         print('this is not player: ', body)
-    pause_timers(0) # unpause timers
+    #pause_timers(0) # unpause timers
     
         
 # get player, change state to engage
@@ -257,17 +311,26 @@ func get_player(player_in):
 # set to search when engage timed out
 func _on_Engage_timer_timeout() -> void:
     if player != null:
+        get_search_path()
         set_state(State.SEARCH)
 
 # upon time out move to next patrol waypoint
 func _on_Patrol_timer_timeout() -> void:
     print('patrol timer timedout')
-    # accquire next point
-    next_patrol_point()
-    accquire_path_to(patrol_location)
-    # reset patrol status
-    patrol_location_reached = false
+    if current_state == State.PATROL:
+        # accquire next point
+        next_patrol_point()
+        accquire_path_to(patrol_location)
+        # reset patrol status
+        patrol_location_reached = false
 
 # when time out, go back to patrol
 func _on_Search_timeOut_timeout() -> void:
-    set_state(State.PATROL)
+    if current_state == State.SEARCH:
+        
+        set_state(State.PATROL)
+
+
+func _on_Checkout_timer_timeout() -> void:
+    if current_state == State.CHECKOUT:
+        set_state(State.PATROL)
