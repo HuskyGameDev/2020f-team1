@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/spritesheet_tiles copy.png" type="Texture" id=1]
 
 [sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 15.1173, 15.1173, 15.1173, 64, 48.9558, 64, 48.9558, 48.9558, 64, 48.9341, 64, 15.1173 )
+vertices = PoolVector2Array( 15.6091, 15.5156, 15.6091, 64, 48.4149, 64, 48.5084, 48.6018, 64, 48.6018, 64, 15.5156 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
 [sub_resource type="NavigationPolygon" id=2]
@@ -27,7 +27,7 @@ vertices = PoolVector2Array( 64, 0, 64, 48.9666, 48.563, 49.1012, 48.6976, 64, 1
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ) ]
 
 [sub_resource type="NavigationPolygon" id=7]
-vertices = PoolVector2Array( 0, 15.0494, 48.948, 15.0427, 48.948, 64, 15.0349, 64, 15.0349, 48.9558, 0, 48.9601 )
+vertices = PoolVector2Array( 0, 15.539, 48.4387, 15.7259, 48.3452, 64, 15.5394, 64, 15.3525, 48.7187, 0, 48.5317 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
 [sub_resource type="NavigationPolygon" id=8]

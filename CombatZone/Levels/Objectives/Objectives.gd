@@ -132,7 +132,7 @@ func _createClock(beacon):
     var cl = clock.instance()
     var pl = Global.get_player()
     var offset = ((-1)*activeClocks.size())
-    cl._Initialize(beacon.timer_length, beacon.objective_id, beacon.name)
+    cl._Initialize(beacon)
     cl.position = Vector2(1000, ((-500)+(-180*offset)))
     cl.scale = Vector2(5, 5)
     pl.add_child(cl)
@@ -173,6 +173,7 @@ func _removeClock(id):
                         _:
                             obj._MarkBeaconComplete(node.beaconName)
                 else:
+                    node.beacon_obj._OnTimerExpire()
                     match obj.obj_type:
                         1:
                             obj._MarkBeaconComplete(node.beaconName)
@@ -193,6 +194,7 @@ func _show_hidden_on_requirement(name:String):
     for node in objectives:
         if (node.objective_requirement == name):
             node.priority = node.realPriority
+            node._OnRevealed()
         pass
     return
 pass

@@ -18,6 +18,8 @@ enum BEACON_PRIORITY{
 
 export var objective_id:String #This is what connects the beacon to the objective.
 
+export var timer_text:String #Associated with what is to be displayed with the timer rather than just the ID.
+
 export var is_timed:bool #If it's timed, simply check this.
 
 export var timer_length:float #The length of the timer, only applied if the beacon is a timed one.
@@ -66,17 +68,17 @@ func _process(delta):
     _PreProcess()
     if is_timed == true && timer_start_on_spawn == true && timer_active == false:
         timer_active = true
-        Global.get_objectives()._createClock(self)
+        _ActivateClock()
     _PostProcess()  
     pass
 
 func _OnTimerExpire():
     _PreTimerExpire()
     #Only two outcomes if a timer expires, we pass or we fail. 
-    if beacon_type == BEACON_TYPE.BEACON_SECURE:
-        _OnBeaconDestroy(false) #If this was a secure job, we did our job and can complete the mission!
-    else:
-        _OnBeaconDestroy(true)
+#    if beacon_type == BEACON_TYPE.BEACON_SECURE:
+#        _OnBeaconDestroy(false) #If this was a secure job, we did our job and can complete the mission!
+#    else:
+#        _OnBeaconDestroy(true)
     _PostTimerExpire()
     #Either way, if we fail or not, this beacon must be freed from the scene.
     queue_free()
@@ -190,6 +192,10 @@ func _MarkPriority(priority:int):
         BEACON_PRIORITY.BEACON_SECONDARY:
             $obj_secondary_incomplete.show()
 pass
+
+func _ActivateClock():
+    Global.get_objectives()._createClock(self)
+    pass
 
 #Custom functions: To be used in classes that inherit this one.
 

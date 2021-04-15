@@ -13,6 +13,7 @@ var totalMinutes = 0
 var totalSeconds = 0
 
 var objID #Stores the objective id for when we need to tell the objective that the timer has stopped.
+var objText
 var beaconName
 
 var delay = 1 #A one second delay between updating a display.
@@ -21,25 +22,31 @@ var internalTimer = 0
 var ongoing
 var premature
 
+var beacon_obj = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     premature = false
     pass # Replace with function body.
 
-func _Initialize(time, id, beacon):
+func _Initialize(beacon):
+    
+    beacon_obj = beacon
     
     #For a timer, we want to display it like a traditional clock. Minutes before seconds.
     #To get minutes, divide the time by 60, to get the seconds, divide the time but get the remainder.
-    totalMinutes = floor(time / 60) #Be sure to floor here, we don't want this to round up in any case.
-    totalSeconds = int(time) % 60
+    totalMinutes = floor(beacon_obj.timer_length / 60) #Be sure to floor here, we don't want this to round up in any case.
+    totalSeconds = int(beacon_obj.timer_length) % 60
     
     print("Total Minutes:")
     print(totalMinutes)
     
-    objID = id
-    beaconName = beacon
+    objID = beacon_obj.objective_id
+    objText = beacon_obj.timer_text
+    beaconName = beacon_obj.name
     
-    $MissionDisplay.text = objID
+    #TODO: Conditional: Either text or id depending on DEBUG MODE ENABLED
+    $MissionDisplay.text = objText
     _updateDisplay()
     
     ongoing = true

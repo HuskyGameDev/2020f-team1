@@ -14,3 +14,6 @@ func _PreFail():
     
 func _PreCompletion():
     pass
+
+func _OnRevealed():
+    pass

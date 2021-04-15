@@ -173,6 +173,10 @@ func _PrintTime(total, remaining):
     
     pass
 
+func _OnTimerExpire():
+    
+    pass
+
 #Easier way to get a printed version of the objective based on description
 func _get_objective_string() -> String:
     var description:String
@@ -206,3 +210,18 @@ func _PreFail():
     
 func _PreCompletion():
     pass
+
+func _OnRevealed():
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
