@@ -12,6 +12,7 @@ var clock = preload("res://character/Clock.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    objectives.clear()
     #if ply == null:
     #    return
     var current_scene = get_tree().get_current_scene()
