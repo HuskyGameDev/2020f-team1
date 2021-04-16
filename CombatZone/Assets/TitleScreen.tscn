@@ -64,7 +64,7 @@ func _on_Quit_pressed():
 
 
 func _on_StartButton_pressed():
-    get_tree().change_scene(\"res://Assets/Dialogue/Dialogue Levels/Level_00Pre.tscn\")
+    get_tree().change_scene(\"res://Assets/Dialogue/Dialogue Levels/CityScape_TestDialogue.tscn\")
 
 
 func _on_Debug_pressed():

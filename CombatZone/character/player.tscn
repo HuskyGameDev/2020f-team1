@@ -104,6 +104,9 @@ rotation = 1.5708
 scale = Vector2( 1.21516, 2.75001 )
 shape = SubResource( 3 )
 
+[node name="foot" parent="." index="2"]
+show_behind_parent = true
+
 [node name="LegAnimation" type="AnimatedSprite" parent="foot" index="0"]
 position = Vector2( -3.57628e-07, 0 )
 rotation = 1.5708

@@ -1,0 +1,187 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://DialogueCity.gd" type="Script" id=1]
+[ext_resource path="res://Assets/DialogueAdv.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_MidTalk2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkIdle.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_IdleTalk2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkNodBreathing.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_MidTalk2Breath.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_IdleTalk2Breathing.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkBreathing.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Character(s)/Dialogue/General_Talk2.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkNod.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Text BoxCropped.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Dialogue/Dialogue Levels/CityscapeButtons.gd" type="Script" id=13]
+[ext_resource path="res://Assets/Character(s)/Dialogue/MenuBackgroundDialogue.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Menu/StartButton.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Menu/StartButtonSelected.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Menu/DebugButtonSelected.png" type="Texture" id=17]
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 18, 64, 25 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "Waiting"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 930.643, 298.877 ), Vector2( 955.643, 298.877 ) ]
+}
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Talking",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Waiting",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Talking",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Waiting",
+"speed": 1.5
+} ]
+
+[node name="TestingDialogueScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+self_modulate = Color( 0.513726, 0.513726, 0.513726, 1 )
+margin_right = 1278.0
+margin_bottom = 718.0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="Continue" type="Button" parent="."]
+margin_left = 325.0
+margin_top = 89.0
+margin_right = 971.0
+margin_bottom = 316.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "Continue to Level"
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Skip" type="Button" parent="."]
+margin_left = 563.911
+margin_top = 369.368
+margin_right = 729.911
+margin_bottom = 431.368
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+text = "Skip Dialogue"
+
+[node name="DialogueBox" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueBackground" type="TextureRect" parent="DialogueBox"]
+anchor_left = 0.5
+anchor_top = 1.2
+anchor_right = 0.5
+anchor_bottom = 1.2
+margin_left = 299.439
+margin_top = 34.0827
+margin_right = 957.439
+margin_bottom = 276.083
+texture = ExtResource( 12 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueBox"]
+margin_left = 325.0
+margin_top = 90.0
+margin_right = 970.0
+margin_bottom = 314.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueArrow" type="Sprite" parent="DialogueBox"]
+position = Vector2( 930.643, 298.877 )
+scale = Vector2( 0.517693, 0.544 )
+texture = ExtResource( 2 )
+
+[node name="Shift" type="AnimationPlayer" parent="DialogueBox/ContinueArrow"]
+anims/Waiting = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="DialogueBox"]
+
+[node name="General" type="Sprite" parent="DialogueBox"]
+
+[node name="Talking" type="AnimatedSprite" parent="DialogueBox/General"]
+position = Vector2( 211.208, 508.418 )
+scale = Vector2( 4.6, 4.2 )
+frames = SubResource( 2 )
+animation = "Waiting"
+frame = 2
+speed_scale = 2.0
+
+[node name="Player" type="Sprite" parent="DialogueBox"]
+
+[node name="Talking" type="AnimatedSprite" parent="DialogueBox/Player"]
+position = Vector2( 1068.63, 518.217 )
+scale = Vector2( 3.6, 4 )
+frames = SubResource( 3 )
+animation = "Waiting"
+frame = 1
+speed_scale = 1.5
+[connection signal="pressed" from="Continue" to="Continue" method="_on_Continue_pressed"]
+[connection signal="pressed" from="Skip" to="Continue" method="_on_Skip_pressed"]

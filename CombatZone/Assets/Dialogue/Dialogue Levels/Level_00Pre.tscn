@@ -82,6 +82,9 @@ margin_right = 952.361
 margin_bottom = 585.946
 text = "Start"
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DialogueBox" type="Control" parent="."]
 margin_left = 318.361
