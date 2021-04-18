@@ -303,7 +303,7 @@ func _on_AIDetertion_body_entered(body: Node) -> void:
         
 # get player, change state to engage
 # should only be used when other enemies spotted player
-func get_player(player_in):
+func accqu_player(player_in):
     if player != player_in: # get reference
         player = player_in
     set_state(State.ENGAGE)
@@ -327,10 +327,14 @@ func _on_Patrol_timer_timeout() -> void:
 # when time out, go back to patrol
 func _on_Search_timeOut_timeout() -> void:
     if current_state == State.SEARCH:
-        
         set_state(State.PATROL)
 
 
 func _on_Checkout_timer_timeout() -> void:
     if current_state == State.CHECKOUT:
         set_state(State.PATROL)
+
+# detects bullet and directs actor to player
+func _on_range_area_entered(area: Area2D) -> void:
+    if area.get_groups().has("projectiles"):
+        accqu_player(Global.get_player())

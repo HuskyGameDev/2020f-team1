@@ -42,6 +42,7 @@ func register_player(game_player):
 func register_nav2D(nav):
     nav2D = nav
     print("Global: nav2D set")
+    
 # Provides the current level's objectives to global class to allow for completion.
 func register_objectives():
     current_objectives = objectives.instance()

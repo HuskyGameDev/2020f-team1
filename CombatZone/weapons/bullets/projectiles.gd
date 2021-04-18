@@ -6,17 +6,17 @@ export var lifetime = 2.0
 
 var velocity:= Vector2()
 #var speed: = 0
-var rng: = RandomNumberGenerator.new()
+var rng: = RandomNumberGenerator.new()  # for bullet spread
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     rng.randomize()
-    print("bullet readied")
+    add_to_group("projectiles")
 
 func start_at(pos, dir) -> void:
     # rotation = dir.angle()
-    print("bullet starts")
-    print(pos)
+    # print("bullet starts")
+    # print(pos)
     rotation = dir
     position = pos
     $life_time.wait_time = lifetime
