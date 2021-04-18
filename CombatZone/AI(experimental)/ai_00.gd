@@ -127,7 +127,7 @@ func _process(delta: float) -> void:
                     hand.global_rotation = lerp(hand.global_rotation, hand.global_position.direction_to(player.global_position).angle(), agility/2)
                     
                     # get path to target
-                    
+                    actor.direction = actor.global_position.direction_to(player.global_position)
                     # switch state
                     if sight.get_collider() == player:
                         last_known_location = player.global_position    # record location for search state
