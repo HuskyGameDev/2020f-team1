@@ -281,7 +281,7 @@ func armor_up(number):
     $Armor_bar.scale.x = (armor / totalArmor)
     
 func die():
-    get_tree().change_scene("res://assets/TitleScreen.tscn")
+    get_tree().change_scene("res://Assets/Dialogue/Dialogue Levels/GameOver.tscn")
     queue_free()
 
 func player_speaks(text_input) -> void:
