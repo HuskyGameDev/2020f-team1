@@ -51,7 +51,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AI/AIDetection" index="0"]
-polygon = PoolVector2Array( 0, 0, 500, 200, 500, -200 )
+polygon = PoolVector2Array( 0, 0, 700, 300, 700, -300 )
 
 [node name="Engage_timer" type="Timer" parent="AI" index="1"]
 one_shot = true
