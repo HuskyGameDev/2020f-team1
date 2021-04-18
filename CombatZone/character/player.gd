@@ -114,6 +114,11 @@ func disembark():
     #$ammo_call_out.show()
 
 func switch_weapon() -> void:
+    if $holsters.get_child(0) == null:
+        $holsters.add_child(BulletFactory.get_weapon(weap_to_spawn))
+        pickup_item.queue_free()
+        #weap_in_hand = hand.get_child(0).weap_name
+        return
     # check different from weap in hand and in holster
     if weap_to_spawn != weap_in_hand && weap_to_spawn != $holsters.get_child(0).weap_name:
         # drop weapon on floor
