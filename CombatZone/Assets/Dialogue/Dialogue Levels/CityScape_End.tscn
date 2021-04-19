@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
-[ext_resource path="res://DialogueCity.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Dialogue/Dialogue Levels/TheEnd.gd" type="Script" id=1]
 [ext_resource path="res://Assets/DialogueAdv.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Character(s)/Dialogue/General_MidTalk2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkIdle.png" type="Texture" id=4]
@@ -12,7 +12,7 @@
 [ext_resource path="res://Assets/Character(s)/Dialogue/General_Talk2.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Character(s)/Dialogue/Player_TalkNod.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Text BoxCropped.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Dialogue/Dialogue Levels/CityscapeButtons.gd" type="Script" id=13]
+[ext_resource path="res://Assets/Dialogue/Dialogue Levels/Continue.gd" type="Script" id=13]
 [ext_resource path="res://Assets/Character(s)/Dialogue/MenuBackgroundDialogue.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Menu/StartButton.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Menu/StartButtonSelected.png" type="Texture" id=16]
@@ -74,7 +74,9 @@ animations = [ {
 "speed": 1.0
 } ]
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="ImageTexture" id=9]
+
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 9 ) ],
 "loop": true,
@@ -86,6 +88,22 @@ animations = [ {
 "name": "Waiting",
 "speed": 1.5
 } ]
+
+[sub_resource type="Animation" id=11]
+resource_name = "Shift"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -423, 0 ) ]
+}
 
 [node name="TestingDialogueScene" type="Control"]
 anchor_right = 1.0
@@ -111,13 +129,14 @@ margin_bottom = 316.0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
-text = "Continue to Level"
+text = "Back to Main Menu"
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Skip" type="Button" parent="."]
+visible = false
 margin_left = 563.911
 margin_top = 369.368
 margin_right = 729.911
@@ -130,7 +149,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogueBox" type="Control" parent="."]
+[node name="TheEnd" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1 )
@@ -138,7 +157,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogueBackground" type="TextureRect" parent="DialogueBox"]
+[node name="DialogueBackground" type="TextureRect" parent="TheEnd"]
 anchor_left = 0.5
 anchor_top = 1.2
 anchor_right = 0.5
@@ -153,7 +172,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogueText" type="RichTextLabel" parent="DialogueBox"]
+[node name="DialogueText" type="RichTextLabel" parent="TheEnd"]
 margin_left = 340.0
 margin_top = 90.0
 margin_right = 955.0
@@ -162,19 +181,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ContinueArrow" type="Sprite" parent="DialogueBox"]
-position = Vector2( 930.643, 298.877 )
+[node name="ContinueArrow" type="Sprite" parent="TheEnd"]
+position = Vector2( 940.864, 298.877 )
 scale = Vector2( 0.517693, 0.544 )
 texture = ExtResource( 2 )
 
-[node name="Shift" type="AnimationPlayer" parent="DialogueBox/ContinueArrow"]
+[node name="Shift" type="AnimationPlayer" parent="TheEnd/ContinueArrow"]
 anims/Waiting = SubResource( 7 )
 
-[node name="Tween" type="Tween" parent="DialogueBox"]
+[node name="Tween" type="Tween" parent="TheEnd"]
 
-[node name="General" type="Sprite" parent="DialogueBox"]
+[node name="General" type="Sprite" parent="TheEnd"]
 
-[node name="Talking" type="AnimatedSprite" parent="DialogueBox/General"]
+[node name="Talking" type="AnimatedSprite" parent="TheEnd/General"]
 position = Vector2( 211.208, 508.418 )
 scale = Vector2( 4.6, 4.2 )
 frames = SubResource( 8 )
@@ -182,25 +201,29 @@ animation = "Waiting"
 frame = 2
 speed_scale = 2.0
 
-[node name="Player" type="Sprite" parent="DialogueBox"]
+[node name="Player" type="Sprite" parent="TheEnd"]
+texture = SubResource( 9 )
 
-[node name="Talking" type="AnimatedSprite" parent="DialogueBox/Player"]
+[node name="Talking" type="AnimatedSprite" parent="TheEnd/Player"]
 position = Vector2( 1068.63, 518.217 )
 scale = Vector2( 3.6, 4 )
-frames = SubResource( 9 )
+frames = SubResource( 10 )
 animation = "Waiting"
 frame = 1
 speed_scale = 1.5
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogueBox"]
+[node name="Shift" type="AnimationPlayer" parent="TheEnd/Player"]
+anims/Shift = SubResource( 11 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="TheEnd"]
 stream = ExtResource( 18 )
 volume_db = -16.0
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="DialogueBox"]
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="TheEnd"]
 stream = ExtResource( 20 )
 volume_db = -14.0
 
-[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="DialogueBox"]
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="TheEnd"]
 stream = ExtResource( 21 )
 volume_db = -12.0
 
