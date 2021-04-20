@@ -24,6 +24,7 @@ func _PostDestroy():
 func _PreTimerExpire():
     pass
     
+#Should we even explain? If the timer expires, the missiles go off, and you die!
 func _PostTimerExpire():
     #TODO: Fancier shit
     Global.get_player().die()

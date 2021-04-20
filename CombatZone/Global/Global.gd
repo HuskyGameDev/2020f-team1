@@ -98,9 +98,9 @@ func spill_blood(pos):
     bl.start_at(pos)
     get_parent().add_child(bl)
 
-func create_explosion(pos):
+func create_explosion(pos, dmg):
     var xpl = explosion.instance()
-    xpl.start_at(pos)
+    xpl.start_at(pos, dmg)
     get_parent().add_child(xpl)
 
 # vehicle

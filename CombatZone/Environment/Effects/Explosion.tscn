@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Environment/Effects/Explosion.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Explosive_1_Moser.wav" type="AudioStream" id=2]
 [ext_resource path="res://Environment/Effects/ExplosionParticles.gd" type="Script" id=3]
-
-[sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -18,11 +16,11 @@ curve = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
-emission_sphere_radius = 5.78
+emission_sphere_radius = 30.0
 flag_disable_z = true
-spread = 170.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 414.89
+spread = 180.0
+gravity = Vector3( 0, -0.037, 0 )
+initial_velocity = 894.22
 initial_velocity_random = 0.54
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
@@ -44,26 +42,14 @@ wait_time = 2.02
 one_shot = true
 autostart = true
 
-[node name="InnerRadius" type="Area2D" parent="."]
-
-[node name="InnerCollide" type="CollisionShape2D" parent="InnerRadius"]
-scale = Vector2( 6, 6 )
-shape = SubResource( 1 )
-
-[node name="MidCollide" type="Area2D" parent="."]
-
-[node name="MidCollide" type="CollisionShape2D" parent="MidCollide"]
-scale = Vector2( 10, 10 )
-shape = SubResource( 2 )
-
 [node name="OuterCollide" type="Area2D" parent="."]
 
 [node name="OuterCollide" type="CollisionShape2D" parent="OuterCollide"]
-scale = Vector2( 20, 20 )
+scale = Vector2( 60, 60 )
 shape = SubResource( 2 )
 
 [node name="ExplosionDamageTimer" type="Timer" parent="."]
-wait_time = 0.854
+wait_time = 0.521
 one_shot = true
 autostart = true
 
@@ -72,18 +58,16 @@ stream = ExtResource( 2 )
 
 [node name="Particles" type="Particles2D" parent="."]
 emitting = false
-amount = 18
+amount = 22
 lifetime = 1.51
 one_shot = true
 speed_scale = 1.04
 explosiveness = 1.0
-randomness = 0.61
+randomness = 0.85
 visibility_rect = Rect2( -90, -100, 200, 200 )
 draw_order = 1
 process_material = SubResource( 5 )
 script = ExtResource( 3 )
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
-[connection signal="body_entered" from="InnerRadius" to="." method="_on_InnerRadius_body_entered"]
-[connection signal="body_entered" from="MidCollide" to="." method="_on_MidCollide_body_entered"]
 [connection signal="body_entered" from="OuterCollide" to="." method="_on_OuterCollide_body_entered"]
 [connection signal="timeout" from="ExplosionDamageTimer" to="." method="_on_ExplosionDamageTimer_timeout"]

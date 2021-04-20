@@ -15,6 +15,8 @@ func _PreFail():
 func _PreCompletion():
     pass
 
+#Typically a clock is activated right as soon as the scene starts, this script makes it
+#So that a clock is activated when the objective is revealed.
 func _OnRevealed():
     #Activate timer for the beacon
     var current_scene = get_tree().get_current_scene()

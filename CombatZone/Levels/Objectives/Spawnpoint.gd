@@ -5,6 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
+#Simply the weapon that should be assinged to the spawned entity.
 export var spawn_weapon = 'mac10'
 
 # Called when the node enters the scene tree for the first time.
