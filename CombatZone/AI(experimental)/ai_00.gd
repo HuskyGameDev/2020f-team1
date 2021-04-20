@@ -201,7 +201,7 @@ func aiAttack()-> void:
         print('ai reloading')
         weapon.add_ammo(weapon.get_clip_size())
         var time_returned = weapon.reload_weap()
-        print('after reload magazine clip fullis : ', weapon.clip_full())
+        print('after reload magazine clip full is : ', weapon.clip_full())
         actor.i_cant_shoot()
         print('reload takes: ', time_returned)
         actor.get_node('action_timer').start(time_returned)
@@ -246,7 +246,7 @@ func changeWeap(weapName):
     if grip.get_child_count():
         pass
     
-        
+
 func accquire_path_to( target):
     if navi2D != null:  # check navi2D availabilities
         path = navi2D.get_simple_path(global_position, target) # accquire path from my location
@@ -304,7 +304,8 @@ func _on_AIDetertion_body_entered(body: Node) -> void:
         set_state(State.CHECKOUT)
         
     else:
-        print('this is not player: ', body)
+        pass
+        #print('this is not player: ', body)
     #pause_timers(0) # unpause timers
     
         

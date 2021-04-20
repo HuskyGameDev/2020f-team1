@@ -25,5 +25,4 @@ pass
 
 func do_base_dmg(body):
     body.take_damage(global_position, damage)
-    pass
     

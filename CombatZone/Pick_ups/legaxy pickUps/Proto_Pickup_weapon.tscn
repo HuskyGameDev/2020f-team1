@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Pick_ups/Proto_pick_up.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Pick_ups/legaxy pickUps/Proto_pick_up.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Pick_ups/legaxy pickUps/Proto_Pickup_weapon.gd" type="Script" id=2]
+
 
 [node name="Proto_Pickup_weapon" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

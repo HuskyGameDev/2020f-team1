@@ -76,6 +76,13 @@ func attack1() -> void:
 func attack2() -> void:
     pass
 
+# call to refill ammo of weapon on hand and holster
+func refill_ammo(amount):
+    var in_hand = $upper_body/hand.get_child(0)
+    var in_holster = $holsters.get_child(0)
+    in_hand.add_ammo(in_hand.get_clip_size() * amount)
+    in_holster.add_ammo(in_holster.get_clip_size() * amount)
+
 # pick up items
 func interAct() -> void:
     if pickup_item != null:  # pick up items
@@ -113,6 +120,7 @@ func disembark():
         $health_bars.show()
     #$ammo_call_out.show()
 
+# pick up weapon from ground
 func switch_weapon() -> void:
     if $holsters.get_child(0) == null:
         $holsters.add_child(BulletFactory.get_weapon(weap_to_spawn))
@@ -149,7 +157,7 @@ func reload_weapon() -> void:
         if Global.debug:
             print("player weapon: clip full")
     else:
-        var reload_timr = hand.get_child(0).reload_weap()
+        var reload_timr = hand.get_child(0).reload_weap()   # call weapon's reload weapon and get reload time
         if reload_timr > 0: # reload occured
             var words = "reloading"
             player_speaks(words)
@@ -160,10 +168,11 @@ func reload_weapon() -> void:
             if Global.debug:
                 print("player: out of ammo")
 
-func swap_weap():
+func old_swap_weap():
     print("switching weapon")
     if $holsters.get_child_count() > 0:
-        print("I'm switching")
+        if Global.debug_on():
+            print("I'm switching")
         var temp_weap = $upper_body/hand.get_child(0).duplicate()
         var ammo = $upper_body/hand.get_child(0).ammo
         var bimag = $upper_body/hand.get_child(0).bullet_in_mag
@@ -180,7 +189,29 @@ func swap_weap():
         $holsters.get_child(0).ammo = ammo
         $holsters.get_child(0).bullet_in_mag = bimag
 
+func swap_weap():
+    print('switching weapon')
+    if $holsters.get_child_count() > 0: # holster has weapon
+        if Global.debug_on():
+            print('player swapping weapon')
+        
+        # get reference to two weapons
+        var weap_from_hand: = $upper_body/hand.get_child(0)
+        var weap_from_holster: = $holsters.get_child(0)
+        
+        # swap them
+        # delete from parent
+        $upper_body/hand.remove_child(weap_from_hand)
+        $holsters.remove_child(weap_from_holster)
+        # add to new parent
+        $upper_body/hand.add_child(weap_from_holster)
+        $holsters.add_child(weap_from_hand)
+        weap_in_hand = weap_from_holster.weap_name
 
+# return a reference to currently holding weapon
+func current_weapon():
+    return $upper_body/hand.get_child(0)
+    
 func _process(delta):
     #if reach.is_colliding():
     #    var reached_item = reach.get_collider()

@@ -9,7 +9,7 @@ func _ready() -> void:
 
 #On base damage, if the player is piloting a vehicle, do more damage.
 func do_base_dmg(body):
-    if (body.get_groups().has("player") and body.piloting == true):
+    if body.get_groups().has("player") and body.piloting == true:
         body.take_damage(global_position, damage*3)
     else:
         body.take_damage(global_position, damage)

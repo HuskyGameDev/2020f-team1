@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Pick_ups/Proto_pick_up.gd" type="Script" id=1]
+[ext_resource path="res://Pick_ups/legaxy pickUps/Proto_pick_up.gd" type="Script" id=1]
 
 [node name="Proto_Pickup" type="Node2D"]
 script = ExtResource( 1 )
