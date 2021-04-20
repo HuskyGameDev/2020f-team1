@@ -21,6 +21,8 @@ var current_objectives
 # effects
 var blood = preload("res://Environment/Effects/blood_splater.tscn")
 var shell = preload("res://Environment/Effects/Bullet_Eject.tscn")
+var explosion = preload("res://Environment/Effects/Explosion.tscn")
+
 # weapon Settings
 
 # projectiles
@@ -95,6 +97,11 @@ func spill_blood(pos):
     var bl = blood.instance()
     bl.start_at(pos)
     get_parent().add_child(bl)
+
+func create_explosion(pos):
+    var xpl = explosion.instance()
+    xpl.start_at(pos)
+    get_parent().add_child(xpl)
 
 # vehicle
 func embark(people: Node2D, vehicle):

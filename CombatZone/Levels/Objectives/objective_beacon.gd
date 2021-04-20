@@ -55,9 +55,11 @@ func _ready():
     #shape.setExtents(Vector2((objective_radius*oldScale.x), (objective_radius*oldScale.y)))
     
     #This is actually what we got working. This sets the radius of the objective in the case it's an approach to activate or complete.
-    var test = $obj_radius.get_child(0)
-    test.shape.radius = objective_radius
-    print($obj_radius.get_child(0).shape.radius)
+    var shape = CircleShape2D.new()
+    shape.set_radius(objective_radius)
+    $obj_radius/obj_radius_child.set_shape(shape)
+#    $obj_radius/obj_radius_child.shape.radius = objective_radius
+#    print($obj_radius/obj_radius_child.shape.radius)
     
     #TODO: Find a way to automatically set a beacon's priority
     #beacon_priority = Global.get_objectives()._get_objective(objective_id).priority

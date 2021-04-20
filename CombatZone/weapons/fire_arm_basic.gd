@@ -27,6 +27,7 @@ func _ready() -> void:
     rng.randomize()
 
 func shoot() -> int:    # returns int signifying success of firing
+    _PreShoot()
     if can_shoot:
         if bullet_in_mag > 0:
             can_shoot = false
@@ -80,3 +81,6 @@ func on_weapon_shoot():
 
 func _on_rate_of_fire_timeout() -> void:
     can_shoot = true
+
+func _PreShoot():
+    pass

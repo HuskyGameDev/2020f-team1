@@ -165,11 +165,20 @@ func swap_weap():
     if $holsters.get_child_count() > 0:
         print("I'm switching")
         var temp_weap = $upper_body/hand.get_child(0).duplicate()
+        var ammo = $upper_body/hand.get_child(0).ammo
+        var bimag = $upper_body/hand.get_child(0).bullet_in_mag
+        var swapWeap = $holsters.get_child(0).duplicate()
+        var swapAmmo = $holsters.get_child(0).ammo
+        var swapBiMag = $holsters.get_child(0).bullet_in_mag
         $upper_body/hand.remove_child($upper_body/hand.get_child(0))
-        $upper_body/hand.add_child($holsters.get_child(0).duplicate())
+        $upper_body/hand.add_child(swapWeap)
+        hand.get_child(0).ammo = swapAmmo
+        hand.get_child(0).bullet_in_mag = swapBiMag
         weap_in_hand = hand.get_child(0).weap_name
         $holsters.remove_child($holsters.get_child(0))
         $holsters.add_child(temp_weap)
+        $holsters.get_child(0).ammo = ammo
+        $holsters.get_child(0).bullet_in_mag = bimag
 
 
 func _process(delta):

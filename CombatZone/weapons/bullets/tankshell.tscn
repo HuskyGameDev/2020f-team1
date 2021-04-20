@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://weapons/bullets/projectiles.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapons/bullets/tankshell.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Tankshell.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.99153, 2.05453 )
+
+[node name="tankshell" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+speed = 4000
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 1 )
