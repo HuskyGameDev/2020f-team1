@@ -51,6 +51,7 @@ func get_bullet(caliber):
     print("returning bullet")
     return caliber_dict[caliber].instance()
 
+# call to return an instanced actual weapon
 func get_weapon(weapon_name):
     return weapon_dict[weapon_name].instance()
     

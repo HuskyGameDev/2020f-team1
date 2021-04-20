@@ -109,7 +109,7 @@ func _process(delta: float) -> void:
                     
                     # wall detection, hit wall mean can't get through
                     if wall_detector.is_colliding():
-                        print('wall_detector is colliding with: ', wall_detector.get_collider())
+                        # print('wall_detector is colliding with: ', wall_detector.get_collider())
                         if $Patrol_timer.is_stopped():
                             $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout                        
                     
@@ -138,8 +138,7 @@ func _process(delta: float) -> void:
                         # start timing when lose sight of target
                         if $Engage_timer.is_stopped():
                             last_known_location = player.global_position    # record location for search state
-                            $Engage_timer.start(engage_timeout)
-                        
+                            $Engage_timer.start(engage_timeout)         
                 else:
                     print('In the engage state but no weapon/player')
             State.SEARCH:
@@ -224,7 +223,7 @@ func pause_timer(timer_in: Timer):
 func unpause_timer(timer_in: Timer):
     if timer_in.is_paused():
         timer_in.set_paused(false)
-    
+
 # if timer is running, pause it
 # if timer is paused, unpause
 # otherwise do nothing
@@ -238,7 +237,15 @@ func pause_timers(pause_switch: int):
             pause_timer($Engage_timer)
             pause_timer($Patrol_timer)
             pause_timer($Search_timeOut)
-        
+
+# a method to change ai weapon after activation
+# no use yet, since method not needed anymore
+func changeWeap(weapName):
+    var newWeap = BulletFactory.get_weapon(weapName)
+    var grip: Node2D = hand.get_node('grip')
+    if grip.get_child_count():
+        pass
+    
         
 func accquire_path_to( target):
     if navi2D != null:  # check navi2D availabilities
@@ -289,7 +296,7 @@ func checkout_target(target) -> bool:
 # if raycast reaches target, switch to engage
 func _on_AIDetertion_body_entered(body: Node) -> void:
     #pause_timers(1) # pause timers
-    print('ai red detected: ', body)
+    # print('ai red detected: ', body)
     if body.is_in_group('player'):  # Checks whether body is player group 
                                     # could change to other groups if player has allies
         body_spotted = body
