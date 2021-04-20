@@ -4,8 +4,9 @@
 [ext_resource path="res://Assets/RPGRocket.png" type="Texture" id=2]
 [ext_resource path="res://weapons/bullets/rocket.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18.125, 10 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.17157
+height = 52.0581
 
 [node name="projectiles" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -16,6 +17,7 @@ lifetime = 6.0
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
+offset = Vector2( 0, 4 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Pick_ups/legaxy pickUps/health_pack.tscn" type="PackedScene" id=1]
 [ext_resource path="res://character/DamageableDummy.tscn" type="PackedScene" id=2]
@@ -7,8 +7,7 @@
 [ext_resource path="res://Environment/TestLevel_Tileset.tres" type="TileSet" id=5]
 [ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Pick_ups/legaxy pickUps/Armor_vest.tscn" type="PackedScene" id=7]
-
-
+[ext_resource path="res://Pick_ups/pk_AmmoBox.tscn" type="PackedScene" id=8]
 
 [node name="TestLevel" type="Node2D"]
 position = Vector2( 28.3056, 30.8383 )
@@ -52,3 +51,6 @@ position = Vector2( -490.657, 1162.54 )
 
 [node name="armor_vest" parent="." instance=ExtResource( 7 )]
 position = Vector2( -493.378, 1390.03 )
+
+[node name="pk_AmmoBox" parent="." instance=ExtResource( 8 )]
+position = Vector2( -637.492, 1722.9 )

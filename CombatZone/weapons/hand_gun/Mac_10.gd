@@ -1,10 +1,10 @@
 extends "res://weapons/fire_arm_basic.gd"
 
-var maxSpread = 0.5
-var minSpread = 0.08
-var spreadInterval = 0.01
+export var maxSpread = 0.5
+export var minSpread = 0.08
+export var spreadInterval = 0.01
 var timerOngoing
-var spreadTimer
+var spreadTimer:Timer
 
 
 # Declare member variables here. Examples:
@@ -25,7 +25,7 @@ func _ready() -> void:
 #    pass
 
 func _PreShoot():
-    if (spreadTimer.time_left > 0):
+    if (spreadTimer.time_left > 0):                   # what is this magic number? 0.09?
         spreadTimer.set_wait_time(spreadTimer.get_wait_time() + 0.09)
         
         if (spread < maxSpread):
@@ -33,7 +33,9 @@ func _PreShoot():
         
     else:
         spreadTimer.start(0.09)
-        timerOngoing = true        
+        timerOngoing = true
+        
+    print('spread is: ', spread)      
     pass
 
 

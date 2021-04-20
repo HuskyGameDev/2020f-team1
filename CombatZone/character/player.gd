@@ -78,13 +78,16 @@ func attack2() -> void:
 
 # call to refill ammo of weapon on hand and holster
 func refill_ammo(amount):
-    var in_hand = $upper_body/hand.get_child(0)
-    var in_holster = $holsters.get_child(0)
-    in_hand.add_ammo(in_hand.get_clip_size() * amount)
-    in_holster.add_ammo(in_holster.get_clip_size() * amount)
+    if $upper_body/hand.get_child_count() > 0:
+        var in_hand = $upper_body/hand.get_child(0)
+        in_hand.add_ammo(in_hand.get_clip_size() * amount)
+    if $holsters.get_child_count() > 0:
+        var in_holster = $holsters.get_child(0)
+        in_holster.add_ammo(in_holster.get_clip_size() * amount)
 
 # pick up items
 func interAct() -> void:
+    print('player interacting')
     if pickup_item != null:  # pick up items
         # pick up weapon
         if pickup_item.get_groups().has('weapon'):

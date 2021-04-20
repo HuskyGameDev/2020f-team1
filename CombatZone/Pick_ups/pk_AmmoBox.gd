@@ -11,3 +11,4 @@ func _ready() -> void:
 func take_effect(player):
     if player.get_groups().has('player'):
         player.refill_ammo(refill_clips)
+        queue_free()
