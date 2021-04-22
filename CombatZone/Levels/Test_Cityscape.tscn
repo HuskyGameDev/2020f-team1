@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Environment/cityscape.tres" type="TileSet" id=1]
 [ext_resource path="res://weapons/hand_gun/magnum.tscn" type="PackedScene" id=2]
@@ -38,12 +38,17 @@
 [ext_resource path="res://Pick_ups/pk_AmmoBox.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Levels/Objectives/Spawnpoint.gd" type="Script" id=37]
 [ext_resource path="res://Assets/guideArrow.png" type="Texture" id=38]
+[ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=39]
 
 [node name="Level_01" type="Node2D"]
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="PauseMenu" instance=ExtResource( 39 )]
 
 [node name="Objectives" type="Node" parent="."]
 
