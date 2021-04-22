@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Assets/CZtitle.png" type="Texture" id=1]
+[ext_resource path="res://Assets/NewLogo.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Menu/MenuBackground.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Audio/Menu_Music_Moser.wav" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Menu/DebugButtonSelected.png" type="Texture" id=4]
