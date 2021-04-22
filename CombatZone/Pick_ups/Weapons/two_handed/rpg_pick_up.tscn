@@ -7,8 +7,8 @@
 absorbent = true
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 18.5901
-height = 90.527
+radius = 23.6903
+height = 133.079
 
 [node name="rpg_pick_up" type="RigidBody2D"]
 collision_layer = 16
@@ -23,7 +23,7 @@ weap_name = "rpg"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 29.6081, -2.05953 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

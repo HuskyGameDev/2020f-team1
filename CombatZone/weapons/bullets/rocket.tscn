@@ -15,9 +15,11 @@ damage = 25
 lifetime = 6.0
 
 [node name="Sprite" parent="." index="0"]
+rotation = 1.5708
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, 4 )
 
 [node name="CollisionShape2D" parent="." index="1"]
+rotation = 1.5708
 shape = SubResource( 1 )
