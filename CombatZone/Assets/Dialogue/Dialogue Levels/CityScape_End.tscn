@@ -18,7 +18,7 @@
 [ext_resource path="res://Assets/Menu/StartButtonSelected.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Menu/DebugButtonSelected.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Audio/Typewriter_11_Moser.wav" type="AudioStream" id=18]
-[ext_resource path="res://Assets/Audio/Background_Music_Moser.wav" type="AudioStream" id=19]
+[ext_resource path="res://Assets/Audio/Background vox.2_Moser.wav" type="AudioStream" id=19]
 [ext_resource path="res://Assets/Audio/Typewriter_1_Moser.wav" type="AudioStream" id=20]
 [ext_resource path="res://Assets/Audio/Typewriter_8_Moser.wav" type="AudioStream" id=21]
 
@@ -230,5 +230,6 @@ volume_db = -12.0
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
 autoplay = true
+
 [connection signal="pressed" from="Continue" to="Continue" method="_on_Continue_pressed"]
 [connection signal="pressed" from="Skip" to="Continue" method="_on_Skip_pressed"]
