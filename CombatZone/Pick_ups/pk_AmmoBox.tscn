@@ -5,13 +5,13 @@
 [ext_resource path="res://assets/AmmoBox.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 22.9291, 11.263 )
+extents = Vector2( 45.8667, 21.405 )
 
 [node name="pk_AmmoBox" instance=ExtResource( 1 )]
-scale = Vector2( 4, 4 )
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 offset = Vector2( -1, 1 )
 

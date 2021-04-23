@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Environment/cityscape.tres" type="TileSet" id=1]
 [ext_resource path="res://Environment/grass.tres" type="TileSet" id=2]
@@ -25,6 +25,8 @@
 [ext_resource path="res://character/ReverseClock.tscn" type="PackedScene" id=23]
 [ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Assets/Audio/Background_Music_Moser.wav" type="AudioStream" id=25]
+[ext_resource path="res://Pick_ups/pk_AmmoBox.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Pick_ups/Weapons/two_handed/rpg_pick_up.tscn" type="PackedScene" id=27]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 19 )
@@ -67,7 +69,7 @@ format = 1
 tile_data = PoolIntArray( -1638415, 0, 7, -1638411, 0, 8, -1376271, 0, 65543, -1376267, 0, 65544, -786414, 0, 7, -786410, 0, 8, -524270, 0, 65543, -524266, 0, 65544, 1638425, 0, 7, 1638429, 0, 8, 1900569, 0, 65543, 1900573, 0, 65544 )
 
 [node name="player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 111.776, -203.777 )
+position = Vector2( 273.691, 193.073 )
 default_weapon = ExtResource( 17 )
 holstered_weap = null
 
@@ -79,12 +81,6 @@ position = Vector2( 767.72, 671.348 )
 rotation = 1.5708
 scale = Vector2( 1.84757, 1.784 )
 armor_amount = 100
-
-[node name="PK_health" parent="." instance=ExtResource( 5 )]
-position = Vector2( 770.029, 762.206 )
-rotation = 1.5708
-scale = Vector2( 1.84757, 1.784 )
-heal_amount = 100
 
 [node name="PK_Armor2" parent="." instance=ExtResource( 9 )]
 position = Vector2( -2079.59, 642.839 )
@@ -106,31 +102,73 @@ position = Vector2( -1852.92, -1595.41 )
 scale = Vector2( 1.84757, 1.784 )
 armor_amount = 100
 
+[node name="PK_Armor6" parent="." instance=ExtResource( 9 )]
+position = Vector2( 2432.74, 1205 )
+rotation = 2.14152
+
+[node name="PK_health" parent="." instance=ExtResource( 5 )]
+position = Vector2( 770.029, 762.206 )
+rotation = 1.5708
+scale = Vector2( 1.84757, 1.784 )
+heal_amount = 300
+
 [node name="PK_health2" parent="." instance=ExtResource( 5 )]
 position = Vector2( -1979.28, 642.826 )
 scale = Vector2( 1.84757, 1.784 )
-heal_amount = 100
+heal_amount = 300
 
 [node name="PK_health4" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1621.06, -1599 )
+position = Vector2( -1579.44, -1600.19 )
 scale = Vector2( 1.84757, 1.784 )
-heal_amount = 100
+heal_amount = 300
 
 [node name="PK_health3" parent="." instance=ExtResource( 5 )]
 position = Vector2( -2091.99, 958.718 )
 scale = Vector2( 1.84757, 1.784 )
-heal_amount = 100
+heal_amount = 300
 
-[node name="sawn_off_broomstick_pick_up" parent="." instance=ExtResource( 15 )]
-position = Vector2( -2010.96, 943.338 )
-rotation = 0.586761
-scale = Vector2( 0.901393, 0.914622 )
+[node name="PK_health5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2337.76, 1317.71 )
+rotation = 0.71384
+
+[node name="pk_AmmoBox2" parent="." instance=ExtResource( 26 )]
+position = Vector2( -1681.37, -1599.1 )
+refill_clips = 9
+
+[node name="pk_AmmoBox" parent="." instance=ExtResource( 26 )]
+position = Vector2( 871.755, 730.238 )
+rotation = -1.5708
+refill_clips = 9
+
+[node name="pk_AmmoBox3" parent="." instance=ExtResource( 26 )]
+position = Vector2( 2626.96, -799.094 )
+refill_clips = 9
+
+[node name="pk_AmmoBox4" parent="." instance=ExtResource( 26 )]
+position = Vector2( -2031.59, 538.439 )
+rotation = -3.14159
+refill_clips = 9
 
 [node name="pickUp_magnum" parent="." instance=ExtResource( 16 )]
 position = Vector2( 684.432, 759.609 )
 rotation = 0.586761
 scale = Vector2( 0.901393, 0.914622 )
 ammo_count = 36
+
+[node name="sawn_off_broomstick_pick_up" parent="." instance=ExtResource( 15 )]
+position = Vector2( -2010.96, 943.338 )
+rotation = 0.586761
+scale = Vector2( 0.901393, 0.914622 )
+
+[node name="rpg_pick_up" parent="." instance=ExtResource( 27 )]
+position = Vector2( 2556.92, -1680.5 )
+rotation = 0.286234
+scale = Vector2( 1, 1 )
+
+[node name="pickUp_weapon_mac10" parent="." instance=ExtResource( 18 )]
+position = Vector2( -1482.95, -1589.24 )
+rotation = 1.00007
+ammo_count = 240
 
 [node name="Roofs" type="Node2D" parent="."]
 
@@ -955,11 +993,6 @@ texture = ExtResource( 11 )
 [node name="jeep_1" parent="." instance=ExtResource( 7 )]
 position = Vector2( -677.177, -158.901 )
 
-[node name="pickUp_weapon_mac10" parent="." instance=ExtResource( 18 )]
-position = Vector2( -1482.95, -1589.24 )
-rotation = 1.00007
-ammo_count = 240
-
 [node name="AR1" parent="." instance=ExtResource( 8 )]
 script = ExtResource( 21 )
 id = "AR1"
@@ -1002,8 +1035,8 @@ wait_time = 5.967
 stream = ExtResource( 25 )
 autoplay = true
 
-[connection signal="timeout" from="AR1/Spawnpoint/AvailabilityTimer" to="AR1/Spawnpoint" method="_on_AvailabilityTimer_timeout"]
 [connection signal="timeout" from="AR1/Spawnpoint/AvailabilityTimer" to="AR1" method="_on_AvailabilityTimer_timeout"]
+[connection signal="timeout" from="AR1/Spawnpoint/AvailabilityTimer" to="AR1/Spawnpoint" method="_on_AvailabilityTimer_timeout"]
 [connection signal="timeout" from="AR1/Spawnpoint2/AvailabilityTimer" to="AR1/Spawnpoint2" method="_on_AvailabilityTimer_timeout"]
 [connection signal="timeout" from="AR1/Spawnpoint3/AvailabilityTimer" to="AR1/Spawnpoint3" method="_on_AvailabilityTimer_timeout"]
 [connection signal="timeout" from="AR1/Spawnpoint4/AvailabilityTimer" to="AR1/Spawnpoint4" method="_on_AvailabilityTimer_timeout"]
