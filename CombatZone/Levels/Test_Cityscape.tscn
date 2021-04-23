@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Environment/cityscape.tres" type="TileSet" id=1]
 [ext_resource path="res://weapons/hand_gun/magnum.tscn" type="PackedScene" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://Levels/Objectives/Spawnpoint.gd" type="Script" id=37]
 [ext_resource path="res://Assets/guideArrow.png" type="Texture" id=38]
 [ext_resource path="res://PauseMenu.tscn" type="PackedScene" id=39]
+[ext_resource path="res://Assets/Audio/Background_Music_Moser.wav" type="AudioStream" id=40]
 
 [node name="Level_01" type="Node2D"]
 script = ExtResource( 4 )
@@ -2595,3 +2596,7 @@ position = Vector2( 2928.63, -6199.42 )
 rotation = 0.785398
 scale = Vector2( 2, 2 )
 texture = ExtResource( 38 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 40 )
+autoplay = true

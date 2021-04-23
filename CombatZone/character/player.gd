@@ -52,13 +52,13 @@ func get_input():
     if Input.is_action_pressed("player_reload"):    # displays round in clip
         start_r = start_r + 1
         #print("check ammo ", start_r)
-        print("round in clip: ", hand.get_child(0).bullet_in_mag)
+        #print("round in clip: ", hand.get_child(0).bullet_in_mag)
         if start_r > 30:
             var words = " %d rounds left" % hand.get_child(0).bullet_in_mag
             player_speaks(words)
     if Input.is_action_just_released("player_reload"):  # reload weapon on release of buttom under 30 frame (maybe?)
         if(start_r <= 30):
-            print("reload")
+            #print("reload")
             reload_weapon()
         start_r = 0
                 
@@ -291,7 +291,11 @@ func take_damage(pos, damage_amount) -> void:
     $Armor_bar.show()
     
     if(armor > 0):
-        armor -= damage_amount
+        if (damage_amount > armor):
+            health -= (damage_amount - armor)
+            armor = 0
+        else:
+            armor -= damage_amount
     else:
         health -= damage_amount
         
@@ -338,16 +342,16 @@ func _update_objectives(new_text:String, offset:int, status:int, priority:int):
     
     #Special case, don't print secret objective if we haven't done it yet.
     if (priority == 2 && status == 0):
-        print(offset)
-        print("Hidden!")
+        #print(offset)
+        #print("Hidden!")
         return false
             
     var img = Sprite.new()
     
     #Firstly some transformative stuff, making sure it allings properly.
-    print(offset)
-    print("offset")
-    print(((offset*80) -679.99))
+    #print(offset)
+    #print("offset")
+    #print(((offset*80) -679.99))
     img.position = Vector2(-1239.411, ((offset*80) -679.99)) #Precise numbers needed to display multiple of these and their associated statuses/priorities
     img.scale = Vector2(1, 1)
     
@@ -357,14 +361,14 @@ func _update_objectives(new_text:String, offset:int, status:int, priority:int):
                 0:
                     img.texture = load("res://Assets/primaryObjective.png")
                     #Ongoing
-                    print("loaded00")
+                    #print("loaded00")
                 1:
                     img.texture = load("res://Assets/primaryObjectivePassed.png")
                     #We succeeded!
-                    print("loaded01")
+                    #print("loaded01")
                 2:
                     img.texture = load("res://Assets/primaryObjectiveFailed.png")
-                    print("loaded02")
+                    #print("loaded02")
                     #We failed...
     else:
             #Hidden/Secondary
@@ -373,15 +377,15 @@ func _update_objectives(new_text:String, offset:int, status:int, priority:int):
                 0:
                     #Ongoing, only used for secondary objectives (hopefully)
                     img.texture = load("res://Assets/secondaryObjective.png")
-                    print("loaded10")
+                    #print("loaded10")
                 1:
                     #We succeeded!
                     img.texture = load("res://Assets/secondaryObjectivePassed.png")
-                    print("loaded11/21")
+                    #print("loaded11/21")
                 2:
                     #We failed...
                     img.texture = load("res://Assets/secondaryObjectiveFailed.png")
-                    print("loaded12/22")
+                    #print("loaded12/22")
     
     obj_priority_display.insert(offset, img)
     self.add_child(img)
@@ -442,17 +446,17 @@ func _on_text_box_timer_timeout() -> void:
 # Should prompt for pick up for health or armors
 func _on_pickup_Area2D_body_entered(body: Node) -> void:
     if body.get_groups().has('item_pick_up'):
-        print('pick_up detected')
+#        print('pick_up detected')
         pickup_item = body
         if body.get_groups().has('weapon'):
             # print('weapon pick_up detected')
             weap_to_spawn = body.weap_name
-            print('weapon to spawn is ', weap_to_spawn)
+            #print('weapon to spawn is ', weap_to_spawn)
 
 
 func _on_pickup_Area2D_body_exited(body: Node) -> void:
     if body.get_groups().has('item_pick_up'):
-        print('item exited ', body)
+        #print('item exited ', body)
         if body == pickup_item:
             pickup_item = null
             weap_to_spawn = null

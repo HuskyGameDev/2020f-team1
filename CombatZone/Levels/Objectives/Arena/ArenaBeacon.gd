@@ -1,5 +1,7 @@
 extends "../base_custom_beacon.gd"
 
+var test = false
+
 func _OnReady():
     pass
 
@@ -9,14 +11,19 @@ func _PreProcess():
 func _PostProcess():
     pass
 
+#Actually the cool secret thing.
 func _RadiusEnteredPre():
-    get_tree().change_scene("res://Assets/Dialogue/Dialogue Levels/CityScape_End.tscn")
     pass
 
+#This is only called if the beacon is NOT an approach beacon.
 func _RadiusEnteredPost():
     pass
     
+#On destroy, we should notify our objective to decrement the counter.
 func _PreDestroy():
+    var objective = Global.get_objectives()._get_objective(objective_id) 
+    objective.curCount = objective.curCount - 1
+    print("Destroyed")
     pass
     
 func _PostDestroy():
@@ -25,8 +32,5 @@ func _PostDestroy():
 func _PreTimerExpire():
     pass
     
-#Should we even explain? If the timer expires, the missiles go off, and you die!
 func _PostTimerExpire():
-    #TODO: Fancier shit
-    Global.get_player().die()
     pass

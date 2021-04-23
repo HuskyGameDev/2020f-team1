@@ -30,6 +30,7 @@ func _PreFail():
     pass
     
 func _PreCompletion():
+    return true
     pass
 
 func _OnRevealed():
@@ -67,6 +68,7 @@ func _OnRevealed():
         
         #Now please acquire the player.
         newEnemy.ai.accqu_player(Global.get_player())
+        newEnemy.ai.last_known_location = Global.get_player().global_position
         newEnemy.show()
         
         #We need to also assing a beacon to them, 

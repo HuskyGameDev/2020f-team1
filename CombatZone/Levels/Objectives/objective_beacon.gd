@@ -124,6 +124,9 @@ func _on_obj_radius_body_entered(body):
     #If we are not colliding with a player, do nothing at all.
     if (body.get_name() != "player" && collide_with_player):
         return
+        
+    if Global.get_objectives()._get_objective(objective_id).priority != Global.get_objectives()._get_objective(objective_id).realPriority:
+        return            
     
     #Run some custom functions before and after this code.
     _RadiusEnteredPre()

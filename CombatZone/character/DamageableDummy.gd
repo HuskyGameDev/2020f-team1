@@ -33,11 +33,11 @@ func _ready() -> void:          # enemy don't  need holster for storing weapons 
             $upper_body/upperbody_sprite.texture = load("res://Assets/Character(s)/Enemies/BasicEnemyHeavy_Idle.png")
             theLegs = "walkHeavy"
     
-    print($upper_body/hand.get_child_count())
+    #print($upper_body/hand.get_child_count())
     player = Global.get_player()
     if default_weapon != null:
         $upper_body/hand.add_child(weapon)
-        print($upper_body/hand.get_child_count())
+        #print($upper_body/hand.get_child_count())
         
         
 func _process(delta):
@@ -64,7 +64,7 @@ func go_after_player() -> void:
         if(path.size() < 1 && player != null):
             player_pos = player.position
             path= get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)
-            print("path assigned")
+            #print("path assigned")
             
             #Once enemy goes after player, play animation (doesn't stop);
             $upper_body/upperbody_sprite/ShoulderAnimation.play("Shoulder Movement")
@@ -81,8 +81,8 @@ func take_damage(pos, damage_amount) -> void:
         health = 0
     $health_bars/HealthG.scale.x = (health / totalHealth)
     Global.spill_blood(pos)
-    print("HP percent: %f" % ((health / 100)))
-    print("Damage, remaining health: %d" % health)
+#    print("HP percent: %f" % ((health / 100)))
+#    print("Damage, remaining health: %d" % health)
 
 func get_input():
     dodge = Vector2.ZERO

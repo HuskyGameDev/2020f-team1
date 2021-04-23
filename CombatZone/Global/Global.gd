@@ -1,5 +1,12 @@
 extends Node
 
+enum GAME_STATE {
+        TYPE_NULL = -1,
+        MENU,
+        STORY,
+        ENDLESS 
+   }
+
 # Global script will be used to store persistent game info
 
 # Game Settings
@@ -10,6 +17,8 @@ var current_scene = null
 var new_scene = null
 var level: = 0
 var player
+
+var game_state = GAME_STATE.MENU
 
 # Navigation
 var nav2D :Navigation2D = null

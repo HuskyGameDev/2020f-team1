@@ -13,6 +13,7 @@ func _PreFail():
     pass
     
 func _PreCompletion():
+    return true
     pass
 
 #Typically a clock is activated right as soon as the scene starts, this script makes it

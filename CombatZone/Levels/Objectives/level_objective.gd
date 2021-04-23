@@ -66,8 +66,9 @@ func _ready():
         queue_free()
         return
     
+    realPriority = priority
+    
     if (objective_requirement.empty() == false):
-        realPriority = priority
         priority = OBJECTIVE_PRIORITY.PRIORITY_HIDDEN
     
     var current_scene = get_tree().get_current_scene()
@@ -111,7 +112,8 @@ func RootChildren(node, rootType):
 func _OnCompleted():
     if (status == OBJECTIVE_STATUS.STATUS_SUCCESS):
         return
-    _PreCompletion()
+    if _PreCompletion() == false:
+        return
     var objectives = Global.get_objectives()
     status = OBJECTIVE_STATUS.STATUS_SUCCESS #For later use, not needed to remove, but to add to the player's percentage score.
     #TODO: Apply a checkmark and don't remove.
@@ -209,6 +211,7 @@ func _PreFail():
     pass
     
 func _PreCompletion():
+    return true
     pass
 
 func _OnRevealed():

@@ -1,6 +1,6 @@
 extends "res://weapons/fire_arm_basic.gd"
 
-export var maxSpread = 0.5
+export var maxSpread = 0.1
 export var minSpread = 0.08
 export var spreadInterval = 0.01
 var timerOngoing

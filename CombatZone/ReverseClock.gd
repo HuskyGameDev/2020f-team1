@@ -13,7 +13,7 @@ var totalMinutes = 0
 var totalSeconds = 0
 
 var objID #Stores the objective id for when we need to tell the objective that the timer has stopped.
-var objText
+export var objText = ''
 var beaconName
 
 var delay = 1 #A one second delay between updating a display.
@@ -27,27 +27,19 @@ var beacon_obj = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
     premature = false
+    _Initialize()
     pass # Replace with function body.
 
-func _Initialize(beacon):
-    
-    beacon_obj = beacon
-    
-    #For a timer, we want to display it like a traditional clock. Minutes before seconds.
-    #To get minutes, divide the time by 60, to get the seconds, divide the time but get the remainder.
-    totalMinutes = floor(beacon_obj.timer_length / 60) #Be sure to floor here, we don't want this to round up in any case.
-    totalSeconds = int(beacon_obj.timer_length) % 60
-    
+func _Initialize():
 #    print("Total Minutes:")
 #    print(totalMinutes)
-    
-    objID = beacon_obj.objective_id
-    objText = beacon_obj.timer_text
-    beaconName = beacon_obj.name
     
     #TODO: Conditional: Either text or id depending on DEBUG MODE ENABLED
     $MissionDisplay.text = objText
     _updateDisplay()
+    
+    position = Vector2(1000, ((-500)+(-180*0)))
+    scale = Vector2(5, 5)
     
     ongoing = true
     
@@ -57,28 +49,16 @@ func _Initialize(beacon):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
     
-    #Break the loop, end this timer
-    if (ongoing == false):
-        Global.get_objectives()._removeClock(objID)
-        pass
-    
     internalTimer += delta
     if (internalTimer > delay):
             internalTimer = 0
             
-            match totalSeconds:
-                0:
-                    if (totalMinutes == 0):
-                            ongoing = false
-                            return
-                    else:    
-                        totalMinutes = totalMinutes - 1
-                        totalSeconds = 59
-                        _updateDisplay()
-                        return        
-                _:
-                    totalSeconds = totalSeconds - 1
-                    _updateDisplay()
+            if (totalSeconds == 60):
+                totalMinutes = totalMinutes + 1
+                totalSeconds = 0
+            else:
+                totalSeconds = totalSeconds + 1
+            _updateDisplay()
         
     pass
     

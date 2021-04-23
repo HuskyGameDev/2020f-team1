@@ -17,6 +17,8 @@ var can_shoot = true
 var player 
 var player_found = false
 
+signal on_death(body)
+
 export var toRandom = false #Whether to spawn random enemies (toggle in level)
 var random = RandomNumberGenerator.new() #For producing random number for enemy variety
 var theLegs = "walkLight" #Specifies which legs to use in randomizer, walkLight is Default for light enemy
@@ -52,6 +54,7 @@ func _ready() -> void:
 func _process(delta):
     # dies when not health left
     if(health <= 1):
+        emit_signal("on_death", self)
         queue_free()
 
 # called when no weapon in hand
@@ -64,7 +67,7 @@ func go_after_player() -> void:
         if(path.size() < 1 && player != null):
             player_pos = player.position
             path= get_parent().get_node("Navigation2D").get_simple_path(position, player_pos)
-            print("path assigned")
+            #print("path assigned")
             
             #Once enemy goes after player, play animation (doesn't stop);
             $upper_body/upperbody_sprite/ShoulderAnimation.play("Shoulder Movement")
@@ -81,8 +84,8 @@ func take_damage(pos, damage_amount) -> void:
         health = 0
     $health_bars/HealthG.scale.x = (health / totalHealth)
     Global.spill_blood(pos)
-    print("HP percent: %f" % ((health / 100)))
-    print("Damage, remaining health: %d" % health)
+    #print("HP percent: %f" % ((health / 100)))
+    #print("Damage, remaining health: %d" % health)
 
 func get_input():
     dodge = Vector2.ZERO

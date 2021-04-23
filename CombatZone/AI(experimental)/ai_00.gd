@@ -84,9 +84,11 @@ func initialize(mySelf, grip):
     if grip.get_child_count()>0:    # hand has weapon, set weapon
         weapon = grip.get_child(0)  # first weapon is weapon
         if Global.debug:
-            print('AI weapon set')
+            #print('AI weapon set')
+            pass
     else:
-        print("enemy has no weapon in hand")
+        #print("enemy has no weapon in hand")
+        pass
 
 func _process(delta: float) -> void:
     # align detection triangle with body
@@ -118,7 +120,7 @@ func _process(delta: float) -> void:
                     
                 elif $Patrol_timer.is_stopped():
                     $Patrol_timer.start(patrol_stand_timeout)   # actor wait at patrol point till timeout
-                    print('patrol time start: ', patrol_stand_timeout)
+                #    print('patrol time start: ', patrol_stand_timeout)
                     
             State.ENGAGE:
                 if player != null and weapon != null:
@@ -140,24 +142,25 @@ func _process(delta: float) -> void:
                             last_known_location = player.global_position    # record location for search state
                             $Engage_timer.start(engage_timeout)         
                 else:
-                    print('In the engage state but no weapon/player')
+                 #   print('In the engage state but no weapon/player')
+                    pass
             State.SEARCH:
                 # go to last know location
                 if not search_location_reached: # actor not reach search point yet
                     if not search_path.empty(): # as long as there are waypoints, move
-                        print(' has search waypoints come first')
+                  #      print(' has search waypoints come first')
                         actor.direction = actor.global_position.direction_to(search_path[0])    # get waypoint to first waypoint
                         upperBody.rotation = lerp(upperBody.rotation, upperBody.global_position.direction_to(search_path[0]).angle(),agility)
                         if actor.global_position.distance_to(search_path[0]) < 5:
                             search_path.remove(0)
                     else:   # no waypoint left
                         actor.direction = Vector2.ZERO
-                        print(' out of search waypoint come later')
+                   #     print(' out of search waypoint come later')
                 else:   # if location reached, then yes start checking out
                     set_state(State.CHECKOUT)
                     
                 search_location_reached =  actor.global_position.distance_to(last_known_location) < 5
-                print('searching')
+                #print('searching')
             State.CHECKOUT:
                 actor.direction = Vector2.ZERO  # stop walking from other state
                 
@@ -171,14 +174,16 @@ func _process(delta: float) -> void:
                 if sight.get_collider() == body_spotted: # target not behind wall
                     player = body_spotted       # body spotted is not nulled since only one target (player) is available
                     if Global.debug:
-                        print('AI added player, will engage')
+                 #       print('AI added player, will engage')
+                        pass
                     set_state(State.ENGAGE)
                 if new_angle == 0:
-                    print("dont't find player, back to patrol")
+                  #  print("dont't find player, back to patrol")
                     set_state(State.PATROL)
 
             var new_emu:
-                print("Error: found a state for our enemy that should not exist: ", new_emu)
+               # print("Error: found a state for our enemy that should not exist: ", new_emu)
+                pass
     else:
         current_state = State.PATROL
 
@@ -193,17 +198,17 @@ func next_patrol_point():
     var randx = rand_range(-patrol_range, +patrol_range)
     var randy = rand_range(-patrol_range, +patrol_range)
     patrol_location = Vector2(randx ,randy) + origin_location
-    print('patrol location is x: ', randx)
-    print('y: ', randy)
+  #  print('patrol location is x: ', randx)
+   # print('y: ', randy)
 
 func aiAttack()-> void:
     if !weapon.shoot(): # if gun shooting returns false, clip empty
-        print('ai reloading')
+    #    print('ai reloading')
         weapon.add_ammo(weapon.get_clip_size())
         var time_returned = weapon.reload_weap()
-        print('after reload magazine clip full is : ', weapon.clip_full())
+     #   print('after reload magazine clip full is : ', weapon.clip_full())
         actor.i_cant_shoot()
-        print('reload takes: ', time_returned)
+      #  print('reload takes: ', time_returned)
         actor.get_node('action_timer').start(time_returned)
     
 # Stops all state timers
@@ -248,7 +253,7 @@ func changeWeap(weapName):
     
 
 func accquire_path_to( target):
-    if navi2D != null:  # check navi2D availabilities
+    if is_instance_valid(navi2D):  # check navi2D availabilities
         path = navi2D.get_simple_path(global_position, target) # accquire path from my location
     else:
         accquire_Nav2D() # reaccquire navigation
@@ -256,27 +261,27 @@ func accquire_path_to( target):
         get_parent().get_parent().pathVisualize(path) # path visualize
 
 func get_search_path():
-    if navi2D != null:
+    if is_instance_valid(navi2D):
         search_path = navi2D.get_simple_path(global_position, last_known_location)  # path to LKL of player
-        print(' search path accquired')
+       # print(' search path accquired')
     else:
         accquire_Nav2D()
     if get_parent().get_parent().has_node('Line2D'):
         get_parent().get_parent().pathVisualize(path) # path visualize
 
 func set_state(new_state: int):
-    print('setting ai state: ', new_state)
+   # print('setting ai state: ', new_state)
     if new_state == current_state:
         return        
     current_state = new_state
     stop_timers()
-    print('ai now in state: ', current_state)
+    #print('ai now in state: ', current_state)
     emit_signal('state_change', current_state)
 
 # called when detected beody entering, check if target behind wall
 # return bool
 func checkout_target(target) -> bool:
-    print('checking out body')
+   # print('checking out body')
     var old_rotation = aim.rotation # old rotation for reset after target check
     var see_target = false  # return value
     # scan toward target direction
@@ -324,7 +329,7 @@ func _on_Engage_timer_timeout() -> void:
 
 # upon time out move to next patrol waypoint
 func _on_Patrol_timer_timeout() -> void:
-    print('patrol timer timedout')
+    #print('patrol timer timedout')
     if current_state == State.PATROL:
         # accquire next point
         next_patrol_point()
